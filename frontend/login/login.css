@@ -1,0 +1,145 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    background-color: #DDDDDD;
+}
+
+#form-login {
+    background-color: #ffffff;
+    position: absolute;
+    display: flex;
+    width: 25rem;
+    height: 40rem;
+    border: solid 0px #030303;
+    border-radius: 2%;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#componentes-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+}
+
+#componentes-lgn {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+#comp-nome,
+#comp-sen {
+    display: flex;
+    flex-direction: column;
+}
+
+#comp-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input {
+    width: 15rem;
+    border: solid 1.5px #9e9e9e;
+    border-radius: 1rem;
+    background: none;
+    padding: 1rem;
+    font-size: 1rem;
+    color: #000000;
+    transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.user-label {
+    position: absolute;
+    left: 12px;
+    color: #070707;
+    pointer-events: none;
+    transform: translateY(1rem);
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input:focus,
+input:valid {
+    outline: none;
+    border: 1.5px solid #1a73e8;
+}
+
+.input:focus~label,
+input:valid~label {
+    transform: translateY(-50%) scale(0.8);
+    background-color: #ffffff;
+    padding: 0 .2em;
+    color: #000000;
+}
+
+
+.buttons {
+    font-family: sans-serif;
+    padding: 17px 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: hsla(261, 96%, 45%, 0.096);
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all 0.5s ease;
+}
+
+.buttons:hover {
+    letter-spacing: 3px;
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
+
+.buttons:active {
+    letter-spacing: 3px;
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+}
+
+
+.buttons2 {
+    font-family: sans-serif;
+    padding: 17px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: hsla(261, 96%, 45%, 0.096);
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all 0.5s ease;
+}
+
+.buttons2:hover {
+    letter-spacing: 3px;
+    background-color: hsl(244, 65%, 40%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
+
+.buttons2:active {
+    letter-spacing: 3px;
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+}

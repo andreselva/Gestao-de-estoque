@@ -1,0 +1,16 @@
+{
+    "name": "andre/gestao-de-estoque",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Andre\\GestaoDeEstoque\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "André Saraiva Selva",
+            "email": "121300349+andreselva@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
