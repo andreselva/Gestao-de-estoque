@@ -7,10 +7,12 @@ use Andre\GestaoDeEstoque\Controllers\UserController;
 use Andre\GestaoDeEstoque\Database\DatabaseManager;
 use Andre\GestaoDeEstoque\Services\UserService;
 use Andre\GestaoDeEstoque\Database\MySQLDatabase;
+use Andre\GestaoDeEstoque\Repository\UserRepository;
 
 $databaseInterface = new MySQLDatabase();
 $databaseManager = new DatabaseManager($databaseInterface);
-$userService = new UserService($databaseManager);
+$userRepository = new UserRepository($databaseManager);
+$userService = new UserService($userRepository);
 $userController = new UserController($userService);
 $handleRequest = new HandleRequest($userController);
 $handleRequest->processRequest();

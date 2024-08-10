@@ -6,16 +6,20 @@ use Andre\GestaoDeEstoque\Database\DatabaseInterface;
 
 class DatabaseManager
 {
-    private $database;
+    private $connection;
 
-    public function __construct(DatabaseInterface $database)
+    public function __construct(DatabaseInterface $databaseInterface)
     {
-        $this->database = $database;
-        $this->database->connect();
+        $databaseInterface->connect();
+        $this->connection = $databaseInterface->getConnection();
+    }
+    public function prepare($sql)
+    {
+        return $this->connection->prepare($sql);
     }
 
-    public function getDatabaseConnection()
+    public function getConnection()
     {
-        return $this->database->getConnection();
+        return $this->connection;
     }
 }

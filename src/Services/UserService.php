@@ -2,39 +2,33 @@
 
 namespace Andre\GestaoDeEstoque\Services;
 
-use Andre\GestaoDeEstoque\Database\DatabaseManager;
-use Exception;
+use Andre\GestaoDeEstoque\Repository\UserRepositoryInterface;
+use Andre\GestaoDeEstoque\Entity\User;
 
 class UserService
 {
-    private $connection;
+    private $userRepository;
 
-    public function __construct(DatabaseManager $connection)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->connection = $connection->getDatabaseConnection();
+        $this->userRepository = $userRepository;
     }
 
     public function registerUser($email, $password, $username)
     {
-        try {
-            $cleanedEmail = preg_replace('/[^a-zA-Z0-9._@-]/', '', $email);
-            $cleanedUsername = preg_replace('/[^a-zA-z0-9._@-]/', '', $username);
-            $hashedPassword = password_hash($password, PASSWORD_ARGON2ID);
+        $values = [$email, $password, $username];
 
-            $sql = "INSERT INTO users (email, password, username) VALUES (?, ?, ?)";
-
-            $stmt = $this->connection->prepare($sql);
-            $stmt->bindValue(1, $cleanedEmail);
-            $stmt->bindValue(2, $hashedPassword);
-            $stmt->bindValue(3, $cleanedUsername);
-            $res = $stmt->execute();
-
-            if ($res) {
-                echo json_encode(["status" => "success", "message" => "Cadastro bem sucedido"]);
-            }
-        } catch (Exception $e) {
-            $msg = $e->getMessage();
-            echo json_encode(["status" => "error", "message" => $msg]);
+        if (in_array("", array_map('trim', $values))) {
+            http_response_code(400);
+            echo json_encode(["status" => "error", "message" => "Campos vazios. Verifique!"]);
+            return;
         }
+
+        $cleanedEmail = preg_replace('/[^a-zA-Z0-9._@-]/', '', $email);
+        $cleanedUsername = preg_replace('/[^a-zA-z0-9._@-]/', '', $username);
+        $hashedPassword = password_hash($password, PASSWORD_ARGON2ID);
+
+        $user = new User($cleanedEmail, $hashedPassword, $cleanedUsername);
+        $this->userRepository->save($user);
     }
 }
