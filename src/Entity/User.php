@@ -8,16 +8,16 @@ class User
     private $password;
     private $username;
 
-    public function __construct($email, $password, $username)
+    public function __construct($username, $password, $email = '')
     {
-        $this->email = $email;
-        $this->password = $password;
         $this->username = $username;
+        $this->password = $password;
+        $this->email = $email;
     }
 
-    public function getEmail()
+    public function getUsername()
     {
-        return $this->email;
+        return $this->username;
     }
 
     public function getPassword()
@@ -25,8 +25,8 @@ class User
         return $this->password;
     }
 
-    public function getUsername()
+    public function getEmail()
     {
-        return $this->username;
+        return $this->email;
     }
 }

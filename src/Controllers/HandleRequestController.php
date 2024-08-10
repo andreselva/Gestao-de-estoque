@@ -1,6 +1,7 @@
 <?php
 
 namespace Andre\GestaoDeEstoque\Controllers\HandleRequestController;
+
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use Andre\GestaoDeEstoque\Controllers\UserController;
@@ -40,6 +41,7 @@ class HandleRequest
 
                 switch ($action) {
                     case 'cadastrar-usuario':
+                    case 'autenticar-usuario':
                         return $this->userController->processRequest($data);
                     default:
                         // Resposta para ações não reconhecidas
@@ -56,6 +58,4 @@ class HandleRequest
             echo json_encode(['error' => 'Método HTTP não suportado.']);
         }
     }
-
-    
 }

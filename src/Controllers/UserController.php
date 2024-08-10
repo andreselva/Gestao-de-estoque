@@ -16,14 +16,24 @@ class UserController
     public function processRequest(array $request)
     {
         $action = $request['action'];
-        $email = $request['email'];
-        $password = $request['password'];
-        $username = $request['username'];
+
+        if (isset($request['email'])) {
+            $email = $request['email'];
+            $password = $request['password'];
+            $username = $request['username'];
+        } else {
+            $password = $request['password'];
+            $username = $request['username'];
+        }
 
         switch ($action) {
             case 'cadastrar-usuario':
                 $this->userService->registerUser($email, $password, $username);
                 break;
+            case 'autenticar-usuario':
+                $this->userService->getUserForAuthentication($username, $password);
+                break;
+
             default:
                 return;
         }

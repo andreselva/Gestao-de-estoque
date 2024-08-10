@@ -14,7 +14,7 @@
     </header>
     <main>
         <div id="form-login">
-            <form>
+            <form id="login-form">
                 <div id="componentes-form">
 
                     <div>
@@ -23,16 +23,16 @@
 
                     <div id="componentes-lgn">
                         <div id="comp-nome" class="input-group">
-                            <input required="" type="text" name="text" autocomplete="off" class="input">
+                            <input required="" type="text" name="username" autocomplete="off" class="input">
                             <label class="user-label">Nome de usuário</label>
                         </div>
                         <div id="comp-sen" class="input-group">
-                            <input required="" type="password" name="text" autocomplete="off" class="input">
+                            <input required="" type="password" name="password" autocomplete="off" class="input">
                             <label class="user-label">Senha</label>
                         </div>
                         <div id="comp-btn">
                             <div>
-                                <button id="btn-entrar" class="buttons">Entrar</button>
+                                <button id="btn-entrar" class="buttons" onclick="autenticarUsuario(event)">Entrar</button>
                             </div>
                         </div>
                     </div>
