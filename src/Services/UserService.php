@@ -28,7 +28,7 @@ class UserService
         $cleanedUsername = preg_replace('/[^a-zA-z0-9._@-]/', '', $username);
         $hashedPassword = password_hash($password, PASSWORD_ARGON2ID);
 
-        $user = new User($cleanedEmail, $hashedPassword, $cleanedUsername);
+        $user = new User($cleanedUsername, $hashedPassword, $cleanedEmail);
         $this->userRepository->save($user);
     }
 

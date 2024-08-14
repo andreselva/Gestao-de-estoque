@@ -1,60 +1,39 @@
 <?php
 
-namespace Andre\GestaoDeEstoque\Controllers\HandleRequestController;
+namespace Andre\GestaoDeEstoque\Controllers;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+use Andre\GestaoDeEstoque\Containers\ServiceContainer;
 
-use Andre\GestaoDeEstoque\Controllers\UserController;
-use Andre\GestaoDeEstoque\Database\DatabaseManager;
-use Andre\GestaoDeEstoque\Services\UserService;
-use Andre\GestaoDeEstoque\Database\MySQLDatabase;
-use Andre\GestaoDeEstoque\Repository\UserRepository;
-
-$databaseInterface = new MySQLDatabase();
-$databaseManager = new DatabaseManager($databaseInterface);
-$userRepository = new UserRepository($databaseManager);
-$userService = new UserService($userRepository);
-$userController = new UserController($userService);
-$handleRequest = new HandleRequest($userController);
-$handleRequest->processRequest();
-
-class HandleRequest
+class HandleRequestController
 {
-    private $userController;
+    private $serviceContainer;
 
-    public function __construct(UserController $userController)
+    public function __construct(ServiceContainer $serviceContainer)
     {
-        $this->userController = $userController;
+        $this->serviceContainer = $serviceContainer;
     }
 
     public function processRequest()
     {
-
         if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-            header('Content-Type: application/json');
             $json_data = file_get_contents("php://input");
-            error_log("Recebido: " . $json_data);
             $data = json_decode($json_data, true);
 
             if (isset($data['action'])) {
-                $action = $data['action'];
+                $action = $this->serviceContainer->get($data['action']);
 
-                switch ($action) {
-                    case 'cadastrar-usuario':
-                    case 'autenticar-usuario':
-                        return $this->userController->processRequest($data);
-                    default:
-                        // Resposta para ações não reconhecidas
-                        http_response_code(400);
-                        echo json_encode(['error' => 'Ação inválida.']);
-                        break;
+                if ($action) {
+                    return $action->execute($data);
+                } else {
+                    http_response_code(400);
+                    echo json_encode(['error' => 'Ação inválida.']);
                 }
             } else {
                 http_response_code(400);
                 echo json_encode(['error' => 'Ação não especificada.']);
             }
         } else {
-            http_response_code(405); // Method Not Allowed
+            http_response_code(405);
             echo json_encode(['error' => 'Método HTTP não suportado.']);
         }
     }

@@ -18,7 +18,7 @@ async function autenticarUsuario(event) {
             data[key] = value;
         });
 
-        const response = await fetch('../../src/Controllers/HandleRequestController.php', {
+        const response = await fetch('../../src/index.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
