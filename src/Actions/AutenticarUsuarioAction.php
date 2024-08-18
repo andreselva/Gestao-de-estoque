@@ -2,21 +2,21 @@
 
 namespace Andre\GestaoDeEstoque\Actions;
 
-use Andre\GestaoDeEstoque\Controllers\UserController;
+use Andre\GestaoDeEstoque\Auth\Controllers\AuthController;
 use Andre\GestaoDeEstoque\Containers\ServiceContainer;
 
 class AutenticarUsuarioAction implements ActionInterface
 {
-    private $userController;
+    private $authController;
 
-    public function __construct(ServiceContainer $container, UserController $userController)
+    public function __construct(ServiceContainer $container, AuthController $authController)
     {
         $container->register('autenticar-usuario', $this);
-        $this->userController = $userController;
+        $this->authController = $authController;
     }
 
     public function execute(array $data)
     {
-        return $this->userController->processRequest($data);
+        return $this->authController->getDataForAuth($data);
     }
 }

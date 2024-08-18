@@ -16,26 +16,23 @@ class UserController
     public function processRequest(array $request)
     {
         $action = $request['action'];
+        $email = $request['email'];
+        $password = $request['password'];
+        $username = $request['username'];
 
-        if (isset($request['email'])) {
-            $email = $request['email'];
-            $password = $request['password'];
-            $username = $request['username'];
-        } else {
-            $password = $request['password'];
-            $username = $request['username'];
-        }
 
         switch ($action) {
             case 'cadastrar-usuario':
+                $values = [$email, $password, $username];
+                if (in_array("", array_map('trim', $values))) {
+                    http_response_code(400);
+                    echo json_encode(["status" => "error", "message" => "Campos vazios. Verifique!"]);
+                    return;
+                }
                 $this->userService->registerUser($email, $password, $username);
                 break;
-            case 'autenticar-usuario':
-                $this->userService->getUserForAuthentication($username, $password);
-                break;
-
             default:
-                return;
+                http_response_code(405);
         }
     }
 }

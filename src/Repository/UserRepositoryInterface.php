@@ -7,6 +7,4 @@ use Andre\GestaoDeEstoque\Entity\User;
 interface UserRepositoryInterface
 {
     public function save(User $user);
-
-    public function authenticateUser(User $user);
 }

@@ -16,14 +16,6 @@ class UserService
 
     public function registerUser($email, $password, $username)
     {
-        $values = [$email, $password, $username];
-
-        if (in_array("", array_map('trim', $values))) {
-            http_response_code(400);
-            echo json_encode(["status" => "error", "message" => "Campos vazios. Verifique!"]);
-            return;
-        }
-
         $cleanedEmail = preg_replace('/[^a-zA-Z0-9._@-]/', '', $email);
         $cleanedUsername = preg_replace('/[^a-zA-z0-9._@-]/', '', $username);
         $hashedPassword = password_hash($password, PASSWORD_ARGON2ID);
@@ -31,21 +23,5 @@ class UserService
         $user = new User($cleanedUsername, $hashedPassword, $cleanedEmail);
         $this->userRepository->save($user);
     }
-
-    public function getUserForAuthentication($username, $password)
-    {
-        $values = [$username, $password];
-
-        if (in_array("", array_map('trim', $values))) {
-            http_response_code(400);
-            echo json_encode(["status" => "error", "message" => "Valores vazios!"]);
-            return;
-        }
-
-        $cleanedUsername = preg_replace('/[^a-zA-Z0-9._@-]/', '', $username);
-        $cleanedPassword = preg_replace('/[^a-zA-Z0-9._@-]/', '', $password);
-
-        $user = new User( $cleanedUsername, $cleanedPassword);
-        $this->userRepository->authenticateUser($user);
-    }
+ 
 }

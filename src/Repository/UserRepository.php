@@ -1,7 +1,6 @@
 <?php
 
 namespace Andre\GestaoDeEstoque\Repository;
-
 use Andre\GestaoDeEstoque\Entity\User;
 use Exception;
 
@@ -34,38 +33,5 @@ class UserRepository implements UserRepositoryInterface
         }
     }
 
-    public function authenticateUser(User $user)
-    {
-        try {
-            $sql = "SELECT * FROM users WHERE username=?";
-            $stmt = $this->connection->prepare($sql);
-            $stmt->bindValue(1, $user->getUsername());
-            $stmt->execute();
 
-            $userData = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-            if (empty($userData)) {
-                http_response_code(401);
-                echo json_encode(["status" => "Verifique os dados informados!"]);
-                return;
-            }
-
-            $passwordVerified = password_verify($user->getPassword(), $userData['password']);
-
-            if (!$passwordVerified) {
-                http_response_code(401);
-                echo json_encode(["status" => "Verifique os dados informados!"]);
-                return;
-            } else {
-                $_SERVER['logado'] = true;
-                echo json_encode(["status" => "sucess"]);
-                header('Location: /index.php');
-                exit();
-            }
-        } catch (Exception $e) {
-            http_response_code(405);
-            $msg = $e->getMessage();
-            echo json_encode(["status" => "error"]);
-        }
-    }
 }
