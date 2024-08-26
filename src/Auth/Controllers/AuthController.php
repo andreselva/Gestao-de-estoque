@@ -1,6 +1,8 @@
 <?php
 
 namespace Andre\GestaoDeEstoque\Auth\Controllers;
+
+use Andre\GestaoDeEstoque\Auth\Entity\Auth;
 use Andre\GestaoDeEstoque\Auth\Services\AuthService;
 
 class AuthController
@@ -12,7 +14,7 @@ class AuthController
         $this->authService = $authService;
     }
 
-    public function getDataForAuth(array $data)
+    public function login(array $data): void
     {
         $action = $data['action'];
         $username = $data['username'];
@@ -20,7 +22,11 @@ class AuthController
 
         if (isset($action)) {
             if ($action === 'autenticar-usuario') {
-                $this->authService->AuthUser($username, $password);
+                $user = new Auth($username, $password);
+                $result = $this->authService->authenticate($user);
+                header('Content-Type: application/json');
+                echo json_encode($result);
+                exit;
             }
         }
     }

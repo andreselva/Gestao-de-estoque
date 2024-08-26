@@ -15,9 +15,22 @@ class AuthService
         $this->authUserRepository = $authUserRepository;
     }
 
-    public function AuthUser($username, $password)
+    public function authenticate(Auth $authUser): array
     {
-        $authUser = new Auth($username, $password);
-        $this->authUserRepository->AuthUser($authUser);
+        $userData = $this->authUserRepository->findUserByUsername($authUser->getUsername());
+        if (!$userData || !password_verify($authUser->getPassword(), $userData['password'])) {
+            return ["status" => "error", "message" => "Falha durante a autenticação!"];
+        };
+        $result = $this->buildConn($userData['id'], $userData['username']);
+        return ["status" => "success", "data" => $result];
+    }
+
+    private function buildConn($userId, $username): array
+    {
+        return [
+            'connected' => true,
+            'userId' => $userId,
+            'username' => $username
+        ];
     }
 }

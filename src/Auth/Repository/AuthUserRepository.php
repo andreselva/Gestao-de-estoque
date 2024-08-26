@@ -4,7 +4,8 @@ namespace Andre\GestaoDeEstoque\Auth\Repository;
 
 use Andre\GestaoDeEstoque\Auth\Repository\AuthUserRepositoryInterface;
 use Andre\GestaoDeEstoque\Auth\Entity\Auth;
-use Exception;
+use PDOException;
+use PDO;
 
 class AuthUserRepository implements AuthUserRepositoryInterface
 {
@@ -16,11 +17,12 @@ class AuthUserRepository implements AuthUserRepositoryInterface
         $this->connection = $connection;
     }
 
-    public function AuthUser(Auth $authUser)
+    public function findUserByUsername(string $username): ?array
     {
         $sql = "SELECT * FROM users WHERE username=?";
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindValue(1, $authUser->getUsername());
+        $stmt->bindValue(1, $username);
         $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 }

@@ -27,17 +27,30 @@ async function autenticarUsuario(event) {
         });
 
         const responseText = await response.text();
-        console.log('Resposta bruta do servidor:', responseText);
 
         if (responseText) {
-            const responseData = JSON.parse(responseText);
-            console.log('Cadastro realizado com sucesso:', responseData);
+            try {
+                const responseData = JSON.parse(responseText);
+                console.log('Resposta JSON analisada:', responseData);
+        
+                if (responseData.status === "success") {
+                    const data = responseData.data;
+                    localStorage.setItem('connected', data.connected);
+                    localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('username', data.username);
+                } else {
+                    console.error('Falha durante a autenticação:', responseData.message);
+                    alert(responseData.message);
+                }
+            } catch (error) {
+                console.error('Erro ao analisar o JSON:', error);
+            }
         } else {
             console.error('Resposta vazia recebida do servidor');
             alert('O servidor retornou uma resposta vazia.');
         }
     } catch (error) {
-        console.error('Erro ao realizar o cadastro:', error);
-        alert('Ocorreu um erro ao realizar o cadastro. Tente novamente.');
+        console.error('Erro ao realizar a autenticação:', error);
+        alert('Ocorreu um erro ao realizar a autenticação. Tente novamente.');
     }
 }
