@@ -1,8 +1,8 @@
 <?php
 
-namespace Andre\GestaoDeEstoque\Controllers;
+namespace Andre\GestaoDeEstoque\Users\Controllers;
 
-use Andre\GestaoDeEstoque\Services\UserService;
+use Andre\GestaoDeEstoque\Users\Services\UserService;
 
 class UserController
 {

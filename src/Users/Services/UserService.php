@@ -1,9 +1,9 @@
 <?php
 
-namespace Andre\GestaoDeEstoque\Services;
+namespace Andre\GestaoDeEstoque\Users\Services;
 
-use Andre\GestaoDeEstoque\Repository\UserRepositoryInterface;
-use Andre\GestaoDeEstoque\Entity\User;
+use Andre\GestaoDeEstoque\Users\Repository\UserRepositoryInterface;
+use Andre\GestaoDeEstoque\Users\Entity\User;
 
 class UserService
 {

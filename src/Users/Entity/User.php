@@ -1,6 +1,6 @@
 <?php
 
-namespace Andre\GestaoDeEstoque\Entity;
+namespace Andre\GestaoDeEstoque\Users\Entity;
 
 class User
 {

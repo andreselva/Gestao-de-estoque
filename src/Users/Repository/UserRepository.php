@@ -1,7 +1,8 @@
 <?php
 
-namespace Andre\GestaoDeEstoque\Repository;
-use Andre\GestaoDeEstoque\Entity\User;
+namespace Andre\GestaoDeEstoque\Users\Repository;
+
+use Andre\GestaoDeEstoque\Users\Entity\User;
 use Exception;
 
 class UserRepository implements UserRepositoryInterface
@@ -13,7 +14,7 @@ class UserRepository implements UserRepositoryInterface
         $this->connection = $connection;
     }
 
-    public function save(User $user)
+    public function save(User $user): void
     {
         try {
             $sql = "INSERT INTO users (email, password, username) VALUES (?, ?, ?)";
@@ -32,6 +33,4 @@ class UserRepository implements UserRepositoryInterface
             echo json_encode(["status" => "error", "message" => $msg]);
         }
     }
-
-
 }

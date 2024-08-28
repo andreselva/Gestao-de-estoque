@@ -4,13 +4,13 @@ namespace Andre\GestaoDeEstoque\Auth\Services;
 
 use Andre\GestaoDeEstoque\Auth\Repository\AuthUserRepository;
 use Andre\GestaoDeEstoque\Auth\Entity\Auth;
-
+use Andre\GestaoDeEstoque\Auth\Repository\AuthUserRepositoryInterface;
 
 class AuthService
 {
     private $authUserRepository;
 
-    public function __construct(AuthUserRepository $authUserRepository)
+    public function __construct(AuthUserRepositoryInterface $authUserRepository)
     {
         $this->authUserRepository = $authUserRepository;
     }
@@ -18,7 +18,7 @@ class AuthService
     public function authenticate(Auth $authUser): array
     {
         $userData = $this->authUserRepository->findUserByUsername($authUser->getUsername());
-        
+
         if (!$userData || !password_verify($authUser->getPassword(), $userData['password'])) {
             return ["status" => "error", "message" => "Falha durante a autenticação!"];
         };

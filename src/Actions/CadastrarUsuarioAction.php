@@ -2,7 +2,7 @@
 
 namespace Andre\GestaoDeEstoque\Actions;
 
-use Andre\GestaoDeEstoque\Controllers\UserController;
+use Andre\GestaoDeEstoque\Users\Controllers\UserController;
 use Andre\GestaoDeEstoque\Containers\ServiceContainer;
 
 class CadastrarUsuarioAction implements ActionInterface
