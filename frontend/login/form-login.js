@@ -33,15 +33,6 @@ async function autenticarUsuario(event) {
                 const responseData = JSON.parse(responseText);
                 console.log('Resposta JSON analisada:', responseData);
         
-                if (responseData.status === "success") {
-                    const data = responseData.data;
-                    localStorage.setItem('connected', data.connected);
-                    localStorage.setItem('userId', data.userId);
-                    localStorage.setItem('username', data.username);
-                } else {
-                    console.error('Falha durante a autenticação:', responseData.message);
-                    alert(responseData.message);
-                }
             } catch (error) {
                 console.error('Erro ao analisar o JSON:', error);
             }
