@@ -1,6 +1,6 @@
 function cadastrarNovoUsuario(event) {
     event.preventDefault();
-    window.location.href = './../cadastro/cadastro.html'
+    window.location.href = './../cadastro/cadastro.php'
 }
 
 
@@ -26,20 +26,14 @@ async function autenticarUsuario(event) {
             body: JSON.stringify(data)
         });
 
-        const responseText = await response.text();
+        const responseData = await response.json();
 
-        if (responseText) {
-            try {
-                const responseData = JSON.parse(responseText);
-                console.log('Resposta JSON analisada:', responseData);
-        
-            } catch (error) {
-                console.error('Erro ao analisar o JSON:', error);
-            }
+        if (responseData.status === "success") {
+            window.location.href = "./../src/index.php";
         } else {
-            console.error('Resposta vazia recebida do servidor');
-            alert('O servidor retornou uma resposta vazia.');
+            window.location.href = "login.php?error=true";
         }
+
     } catch (error) {
         console.error('Erro ao realizar a autenticação:', error);
         alert('Ocorreu um erro ao realizar a autenticação. Tente novamente.');

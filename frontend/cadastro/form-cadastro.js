@@ -1,6 +1,6 @@
     function retornaLogin(event) {
         event.preventDefault();
-        window.location.href = '../login/login.html';
+        window.location.href = '../login/login.php';
     }
 
     async function realizaCadastro(event) {

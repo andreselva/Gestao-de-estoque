@@ -2,9 +2,9 @@
 
 namespace Andre\GestaoDeEstoque\Auth\Services;
 
-use Andre\GestaoDeEstoque\Auth\Repository\AuthUserRepository;
 use Andre\GestaoDeEstoque\Auth\Entity\Auth;
 use Andre\GestaoDeEstoque\Auth\Repository\AuthUserRepositoryInterface;
+use Andre\GestaoDeEstoque\Auth\Session\Session;
 
 class AuthService
 {
@@ -23,16 +23,9 @@ class AuthService
             return ["status" => "error", "message" => "Falha durante a autenticação!"];
         };
 
-        $result = $this->buildConn($userData['id'], $userData['username']);
-        return ["status" => "success", "data" => $result];
-    }
-
-    private function buildConn($userId, $username): array
-    {
-        return [
-            'connected' => true,
-            'userId' => $userId,
-            'username' => $username
-        ];
+        $session = Session::getInstance();
+        $session->initSession();
+        $session->buildConn($userData);
+        return ["status" => "success"];
     }
 }
