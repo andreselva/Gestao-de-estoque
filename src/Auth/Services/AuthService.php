@@ -18,9 +18,11 @@ class AuthService
     public function authenticate(Auth $authUser): array
     {
         $userData = $this->authUserRepository->findUserByUsername($authUser->getUsername());
+        
         if (!$userData || !password_verify($authUser->getPassword(), $userData['password'])) {
             return ["status" => "error", "message" => "Falha durante a autenticação!"];
         };
+
         $result = $this->buildConn($userData['id'], $userData['username']);
         return ["status" => "success", "data" => $result];
     }
