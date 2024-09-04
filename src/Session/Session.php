@@ -1,6 +1,6 @@
 <?php
 
-namespace Andre\GestaoDeEstoque\Auth\Session;
+namespace Andre\GestaoDeEstoque\Session;
 
 class Session
 {
@@ -57,6 +57,17 @@ class Session
         }
 
         return false; // A sessão já foi iniciada
+    }
+
+    /**
+     * Regenera o cookie de sessão após inicialização da primeira
+     * 
+     * 
+     */
+
+    public function regenerateCookieSession()
+    {
+        return session_regenerate_id(true);
     }
 
     /**

@@ -4,7 +4,7 @@ namespace Andre\GestaoDeEstoque\Auth\Services;
 
 use Andre\GestaoDeEstoque\Auth\Entity\Auth;
 use Andre\GestaoDeEstoque\Auth\Repository\AuthUserRepositoryInterface;
-use Andre\GestaoDeEstoque\Auth\Session\Session;
+use Andre\GestaoDeEstoque\Session\Session;
 
 class AuthService
 {
@@ -25,6 +25,7 @@ class AuthService
 
         $session = Session::getInstance();
         $session->initSession();
+        $session->regenerateCookieSession();
         $session->buildConn($userData);
         return ["status" => "success"];
     }
