@@ -23,6 +23,8 @@ class Session
 
     /**
      * Configura os parâmetros do cookie de sessão.
+     * 
+     * 
      */
     private function configureSession()
     {
@@ -64,7 +66,6 @@ class Session
      * 
      * 
      */
-
     public function regenerateCookieSession()
     {
         return session_regenerate_id(true);
@@ -132,8 +133,12 @@ class Session
     {
         return $this->get('user_connected') === true;
     }
-
-    // Redireciona se o usuário não estiver autenticado
+    
+    /**
+     * Verifica autenticação do usuário e redireciona caso não estiver
+     * 
+     * 
+     */
     public function checkAuthentication()
     {
         $authorization = $this->isAuthenticated();
@@ -143,6 +148,11 @@ class Session
         }
     }
 
+    /**
+     * Seta as informações necessárias na autenticação. Essas informações serão usadas para autorização do usuário durante a sessão
+     *
+     * 
+     */
     public function buildConn(?array $userData): void
     {
         $this->set('user_connected', true);
