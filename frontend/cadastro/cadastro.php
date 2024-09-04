@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar</title>
-    <link rel="stylesheet" href="cadastro.css">
+    <link rel="stylesheet" href="./../css/cadastro.css">
 </head>
 
 <body>
@@ -58,7 +58,7 @@
     <footer>
 
     </footer>
-    <script src="form-cadastro.js"></script>
+    <script src="./../js/form-cadastro.js"></script>
 </body>
 
 </html>
