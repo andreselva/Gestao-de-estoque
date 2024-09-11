@@ -15,7 +15,7 @@ class AuthController
     {
         $this->authService = $authService;
     }
-    
+
     public function login(array $data): void
     {
         $username = $data['username'];
@@ -23,11 +23,11 @@ class AuthController
 
         try {
             $this->authService->authenticate($username, $password);
-            $this->sendJsonResponse(['message => success'], 200);
+            $this->sendJsonResponse(['status' => 'success'], 200);
         } catch (InvalidArgumentException $e) {
-            $this->sendJsonResponse(['message => error', $e->getMessage()], 400);
+            $this->sendJsonResponse(['status' => 'error', 'error-msg' => $e->getMessage()], 400);
         } catch (Exception $e) {
-            $this->sendJsonResponse(['message => error'], 500);
+            $this->sendJsonResponse(['status' => 'error'], 500);
         }
     }
 
