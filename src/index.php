@@ -25,14 +25,14 @@ $databaseInterface = new MySQLDatabase();
 $databaseManager = new DatabaseManager($databaseInterface);
 
 //PARA USUARIOS
-$securityPass = new PasswordHasher(); //COMPONENTE DE 
+$securityPass = new PasswordHasher();
 $userRepository = new UserRepository($databaseManager);
 $userService = new UserService($userRepository, $dataSanitizer, $securityPass);
 $userController = new UserController($userService);
 
 //PARA AUTENTICAÇÃO
 $authUserRepository = new AuthUserRepository($databaseManager);
-$authService = new AuthService($authUserRepository);
+$authService = new AuthService($authUserRepository, $dataSanitizer);
 $authController = new AuthController($authService);
 
 
