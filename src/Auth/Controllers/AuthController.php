@@ -4,42 +4,37 @@ namespace Andre\GestaoDeEstoque\Auth\Controllers;
 
 use Andre\GestaoDeEstoque\Auth\Entity\Auth;
 use Andre\GestaoDeEstoque\Auth\Services\AuthService;
+use Exception;
+use InvalidArgumentException;
 
 class AuthController
 {
     private $authService;
-    private const ACTION_AUTHENTICATE = 'autenticar-usuario';
 
     public function __construct(AuthService $authService)
     {
         $this->authService = $authService;
     }
-
+    
     public function login(array $data): void
     {
-        $action = $data['action'] ?? null;
-        $username = $data['username'] ?? null;
-        $password = $data['password'] ?? null;
+        $username = $data['username'];
+        $password = $data['password'];
 
-        if (!$this->isValidLogin($action, $username, $password)) {
-            $this->sendJsonResponse(["status" => "error", "message" => "Falha ao realizar login!"]);
-            return;
+        try {
+            $this->authService->authenticate($username, $password);
+            $this->sendJsonResponse(['message => success'], 200);
+        } catch (InvalidArgumentException $e) {
+            $this->sendJsonResponse(['message => error', $e->getMessage()], 400);
+        } catch (Exception $e) {
+            $this->sendJsonResponse(['message => error'], 500);
         }
-
-        $user = new Auth($username, $password);
-        $result = $this->authService->authenticate($user);
-        $this->sendJsonResponse($result);
     }
 
 
-    private function isValidLogin(?string $action, ?string $username, ?string $password): ?bool
+    private function sendJsonResponse(array $response, int $code): void
     {
-        return $action === self::ACTION_AUTHENTICATE && !empty($username) && !empty($password);
-    }
-
-
-    private function sendJsonResponse(array $response): void
-    {
+        http_response_code($code);
         header('Content-Type: application/json');
         echo json_encode($response);
         exit;

@@ -4,24 +4,29 @@ namespace Andre\GestaoDeEstoque\Users\Services;
 
 use Andre\GestaoDeEstoque\Users\Repository\UserRepositoryInterface;
 use Andre\GestaoDeEstoque\Users\Entity\User;
+use Andre\GestaoDeEstoque\Users\Security\PasswordHasher;
+use Andre\GestaoDeEstoque\Validation\DataSanitizer;
 
 class UserService
 {
     private $userRepository;
+    private $sanitizer;
+    private $hasher;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository, DataSanitizer $sanitizer, PasswordHasher $hasher)
     {
         $this->userRepository = $userRepository;
+        $this->sanitizer = $sanitizer;
+        $this->hasher = $hasher;
     }
 
     public function registerUser($email, $password, $username)
     {
-        $cleanedEmail = preg_replace('/[^a-zA-Z0-9._@-]/', '', $email);
-        $cleanedUsername = preg_replace('/[^a-zA-z0-9._@-]/', '', $username);
-        $hashedPassword = password_hash($password, PASSWORD_ARGON2ID);
+        $cleanedUsername = $this->sanitizer->sanitize($username);
+        $cleanedEmail = $this->sanitizer->sanitize($email);
+        $hashedPassword = $this->hasher->VerifyAndHashPass($password);
 
         $user = new User($cleanedUsername, $hashedPassword, $cleanedEmail);
         $this->userRepository->save($user);
     }
- 
 }
