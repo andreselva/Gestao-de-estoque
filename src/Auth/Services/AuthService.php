@@ -6,6 +6,7 @@ use Andre\GestaoDeEstoque\Auth\Entity\Auth;
 use Andre\GestaoDeEstoque\Auth\Repository\AuthUserRepositoryInterface;
 use Andre\GestaoDeEstoque\Session\Session;
 use Andre\GestaoDeEstoque\Validation\DataSanitizer;
+use InvalidArgumentException;
 
 class AuthService
 {
@@ -24,9 +25,10 @@ class AuthService
         $cleanedPass = $this->sanitizer->sanitize($password);
         $authUser = new Auth($cleanedUsername, $cleanedPass);
         $userData = $this->authUserRepository->findUserByUsername($authUser->getUsername());
+        $passVerified = password_verify($authUser->getPassword(), $userData['password']);
 
-        if (!$userData || !password_verify($authUser->getPassword(), $userData['password'])) {
-            return;
+        if (!$userData || !$passVerified) {
+            throw new \InvalidArgumentException('Invalid username or password.');
         };
 
         $session = Session::getInstance();
