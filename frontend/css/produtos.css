@@ -1,0 +1,198 @@
+#listagem-produto {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 4em;
+    width: 100rem;
+    height: 100vh;
+    border: solid 0px #030303;
+    top: 50%;
+    left: 56.3%;
+    transform: translate(-50%, -50%);
+}
+
+#cadastro-produto {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100rem;
+    height: 100vh;
+    padding: 12em;
+    border: solid 0px #030303;
+    top: 50%;
+    left: 56.3%;
+    transform: translate(-50%, -50%);
+}
+
+#table-produtos table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #333;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+#table-produtos th,
+#table-produtos td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #555;
+}
+
+#table-produtos th {
+    background-color: #444;
+    text-transform: uppercase;
+}
+
+#table-produtos tr:nth-child(even) {
+    background-color: #3d3d3d;
+}
+
+#table-produtos tr:hover {
+    background-color: #555;
+}
+
+#table-produtos input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+#btn-psq-cadastro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.minimal-button {
+    background-color: #ffffff; /* Fundo branco */
+    color: #333333; /* Texto cinza escuro */
+    border: 1px solid #cccccc; /* Borda cinza clara */
+    padding: 10px 20px; /* Espaçamento interno */
+    font-size: 16px; /* Tamanho da fonte */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de ponteiro ao passar por cima */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.minimal-button:hover {
+    background-color: #f0f0f0; /* Fundo levemente mais escuro ao passar o mouse */
+    color: #000000; /* Texto fica preto ao passar o mouse */
+}
+
+
+.minimal-search {
+    width: 100%; /* Largura total */
+    padding: 10px 15px; /* Espaçamento interno */
+    font-size: 16px; /* Tamanho da fonte */
+    border: 1px solid #cccccc; /* Borda cinza clara */
+    border-radius: 5px; /* Bordas arredondadas */
+    outline: none; /* Remove o contorno ao focar */
+    transition: border-color 0.3s ease;
+    background-color: transparent;
+}
+
+.minimal-search:focus {
+    border-color: #999999; /* Cor da borda ao focar */
+}
+
+
+/* Definindo as larguras dos inputs */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.small-input input {
+    width: 30%;
+}
+
+.medium-input input {
+    width: 50%;
+}
+
+.large-input input {
+    width: 100%;
+}
+
+/* Estilização geral do formulário */
+.styled-form {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo dos grupos de inputs */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Estilo dos labels */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Estilo dos inputs */
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    background-color: transparent;
+}
+
+.form-group input:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo para diferentes tamanhos de inputs */
+.small-input input {
+    width: 30%;
+}
+
+.medium-input input {
+    width: 15rem;
+}
+
+.large-input input {
+    width: 30rem;
+}
+
+/* Placeholder */
+input::placeholder {
+    color: #aaa;
+}
+
+#input-group-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttons {
+    display: flex;
+    gap: 2em;
+}
+
+/* Design responsivo para dispositivos menores */
+@media (max-width: 768px) {
+    .small-input input,
+    .medium-input input,
+    .large-input input {
+        width: 100%;
+    }
+}

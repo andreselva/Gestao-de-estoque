@@ -9,34 +9,56 @@ require_once __DIR__ . '../../auth.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
+    <link rel="stylesheet" href="../css/produtos.css">
 </head>
 
 <body>
     <?php
-    require_once __DIR__ . '../../src/header.php';
+    require_once __DIR__ . '../../src/sidebar.php';
     ?>
 
     <main>
-        <form>
-            <div>
-                <button>
-                    Cadastrar
-                </button>
+        <form id="listagem-produto">
+            <div id="btn-psq-cadastro">
+                <div>
+                    <button class="minimal-button" onclick="goAddProducts(event)">
+                        Cadastrar
+                    </button>
+                </div>
+                <div id="search-field">
+                    <input type="text" class="minimal-search" placeholder="Pesquisar...">
+                </div>
             </div>
-            <div>
+
+            <div id="table-produtos">
                 <table>
                     <thead>
                         <tr>
-                            <th>Checkbox</th>
+                            <th><input type="checkbox"></th>
                             <th>Produto</th>
                             <th>Estoque</th>
                             <th>#</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Produto 1</td>
+                            <td>50</td>
+                            <td>Editar</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Produto 2</td>
+                            <td>30</td>
+                            <td>Editar</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </form>
     </main>
-
-
+    <script src="../js/produto-cadastro.js"></script>
 </body>
+
+</html>

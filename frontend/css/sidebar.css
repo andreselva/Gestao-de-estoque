@@ -5,7 +5,7 @@
 body {
     margin: 0;
     font-family: sans-serif;
-    background-color: #121212;
+    background-color: #424242;
     color: #FFF;
 }
 
@@ -79,12 +79,12 @@ nav {
         width: 72px;
     }
 
-    .sidebar button > span {
+    .sidebar button>span {
         width: 50px;
     }
 
-    .sidebar button > span > span {
+    .sidebar button>span>span {
         opacity: 0;
-        visibility: hidden; 
+        visibility: hidden;
     }
 }
