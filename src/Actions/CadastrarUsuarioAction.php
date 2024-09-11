@@ -17,6 +17,6 @@ class CadastrarUsuarioAction implements ActionInterface
 
     public function execute(array $data)
     {
-        return $this->userController->processRequest($data);
+        return $this->userController->getUserForRegister($data);
     }
 }

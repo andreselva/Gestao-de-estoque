@@ -10,6 +10,9 @@ class User
 
     public function __construct($username, $password, $email = '')
     {
+        if (empty($username) || empty($password) || empty($email)) {
+            throw new \InvalidArgumentException('Username, password or email cannot be empty');
+        }
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
