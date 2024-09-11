@@ -4,8 +4,9 @@
     flex-direction: column;
     gap: 2em;
     padding: 4em;
-    width: 100rem;
+    width: 100%;
     height: 100vh;
+    max-width: 1200px; /* Defina um valor máximo para a largura */
     border: solid 0px #030303;
     top: 50%;
     left: 56.3%;
@@ -16,9 +17,10 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 100rem;
+    width: 100%;
+    max-width: 1300px;
     height: 100vh;
-    padding: 12em;
+    padding: 8em;
     border: solid 0px #030303;
     top: 50%;
     left: 56.3%;
@@ -194,5 +196,35 @@ input::placeholder {
     .medium-input input,
     .large-input input {
         width: 100%;
+    }
+}
+
+/* Telas pequenas */
+@media (max-width: 600px) {
+    #listagem-produto {
+        padding: 2em;
+        width: 90%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Telas médias */
+@media (min-width: 601px) and (max-width: 1024px) {
+    #listagem-produto {
+        padding: 3em;
+        width: 80%;
+        max-width: 900px;
+    }
+}   
+
+
+/* Telas grandes */
+@media (min-width: 1025px) {
+    #listagem-produto {
+        padding: 4em;
+        width: 70%;
+        max-width: 1200px;
     }
 }
