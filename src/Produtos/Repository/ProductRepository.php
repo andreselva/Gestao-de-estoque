@@ -12,7 +12,7 @@ class ProductRepository implements ProductRepositoryInterface {
         $this->connection = $connection;
     }
 
-    public function saveDatabase(Product $product)
+    public function persist(Product $product)
     {
         
     }

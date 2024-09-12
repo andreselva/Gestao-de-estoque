@@ -6,5 +6,5 @@ use Andre\GestaoDeEstoque\Produtos\Entity\Product;
 
 interface ProductRepositoryInterface
 {
-    public function saveDatabase(Product $product);
+    public function persist(Product $product);
 }

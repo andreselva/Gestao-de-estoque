@@ -30,7 +30,7 @@ require_once __DIR__ . '../../auth.php';
                 </div>
                 <div class="form-group medium-input">
                     <label>Data e hora da criação</label>
-                    <input type="text" name="dataCriacao">
+                    <input type="text" readonly>
                 </div>
             </div>
             <div id="input-group-1">

@@ -41,7 +41,7 @@ $authController = new AuthController($authService);
 
 //PARA CADASTRAR PRODUTOS
 $productRepository = new ProductRepository($databaseManager);
-$productService = new ProductService($productRepository);
+$productService = new ProductService($productRepository, $dataSanitizer);
 $productController = new ProductsController($productService);
 
 
