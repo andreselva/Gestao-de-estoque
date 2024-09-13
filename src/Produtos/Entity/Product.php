@@ -2,6 +2,8 @@
 
 namespace Andre\GestaoDeEstoque\Produtos\Entity;
 
+use DateTime;
+
 class Product
 {
     private $name;
@@ -13,8 +15,16 @@ class Product
     private $pesoLiquido;
     private $gtin;
 
-    public function __construct($name, $code, $dataCriacao, $precoVenda, $un, $pesoBruto, $pesoLiquido, $gtin)
-    {
+    public function __construct(
+        string $name,
+        string $code,
+        string $dataCriacao,
+        float $precoVenda,
+        ?string $un,
+        ?float $pesoBruto,
+        ?float $pesoLiquido,
+        ?string $gtin
+    ) {
         $this->name = $name;
         $this->code = $code;
         $this->dataCriacao = $dataCriacao;
@@ -25,42 +35,42 @@ class Product
         $this->gtin = $gtin;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getCode()
+    public function getCode(): string
     {
         return $this->code;
     }
 
-    public function getDataCriacao()
+    public function getDataCriacao(): string
     {
         return $this->dataCriacao;
     }
 
-    public function getPrecoVenda()
+    public function getPrecoVenda(): float
     {
         return $this->precoVenda;
     }
 
-    public function getUn()
+    public function getUn(): string
     {
         return $this->un;
     }
 
-    public function getPesoBruto()
+    public function getPesoBruto(): ?float
     {
         return $this->pesoBruto;
     }
 
-    public function getPesoLiquido()
+    public function getPesoLiquido(): ?float
     {
         return $this->pesoLiquido;
     }
 
-    public function getGtin()
+    public function getGtin(): ?string
     {
         return $this->gtin;
     }

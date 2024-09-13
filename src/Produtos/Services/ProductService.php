@@ -18,7 +18,7 @@ class ProductService implements ProductServiceInterface
         $this->sanitizer = $sanitizer;
     }
 
-    public function save(array $data)
+    public function save(array $data): void
     {
         $name = $this->sanitizer->sanitizeName($data['name']);
         $codigo = $this->sanitizer->sanitize($data['codigo']);

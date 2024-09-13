@@ -3,8 +3,10 @@
 namespace Andre\GestaoDeEstoque\Produtos\Repository;
 
 use Andre\GestaoDeEstoque\Produtos\Entity\Product;
+use Exception;
 
-class ProductRepository implements ProductRepositoryInterface {
+class ProductRepository implements ProductRepositoryInterface
+{
     private $connection;
 
     public function __construct($connection)
@@ -12,8 +14,10 @@ class ProductRepository implements ProductRepositoryInterface {
         $this->connection = $connection;
     }
 
-    public function persist(Product $product)
+    public function persist(Product $product): void
     {
-        
+        try {
+        } catch (Exception $e) {
+        }
     }
 }

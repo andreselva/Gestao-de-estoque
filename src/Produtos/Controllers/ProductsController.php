@@ -14,7 +14,7 @@ class ProductsController
         $this->productService = $productService;
     }
 
-    public function getProduct(array $data)
+    public function getProduct(array $data): void
     {
         try {
             $this->productService->save($data);

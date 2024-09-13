@@ -2,6 +2,7 @@
 
 namespace Andre\GestaoDeEstoque\Produtos\Services;
 
-interface ProductServiceInterface {
+interface ProductServiceInterface
+{
     public function save(array $data);
 }
