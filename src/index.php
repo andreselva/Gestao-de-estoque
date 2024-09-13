@@ -8,6 +8,7 @@ use Andre\GestaoDeEstoque\Database\DatabaseManager;
 use Andre\GestaoDeEstoque\Controllers\HandleRequestController;
 use Andre\GestaoDeEstoque\Actions\CadastrarUsuarioAction;
 use Andre\GestaoDeEstoque\Actions\AutenticarUsuarioAction;
+use Andre\GestaoDeEstoque\Actions\BuscarProdutoAction;
 use Andre\GestaoDeEstoque\Actions\CadastrarProdutosAction;
 use Andre\GestaoDeEstoque\Actions\ListarProdutosAction;
 use Andre\GestaoDeEstoque\Users\Controllers\UserController;
@@ -51,6 +52,7 @@ new CadastrarUsuarioAction($container, $userController);
 new AutenticarUsuarioAction($container, $authController);
 new CadastrarProdutosAction($container, $productController);
 new ListarProdutosAction($container, $productController);
+new BuscarProdutoAction($container, $productController);
 
 $handleRequest = new HandleRequestController($container);
 $handleRequest->processRequest();

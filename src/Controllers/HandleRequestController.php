@@ -15,25 +15,49 @@ class HandleRequestController
 
     public function processRequest()
     {
-        if ($_SERVER["REQUEST_METHOD"] === 'POST' || $_SERVER["REQUEST_METHOD"] === 'GET') {
-            $json_data = file_get_contents("php://input");
-            $data = json_decode($json_data, true) ?? null;
-
-            if (isset($data['action'])) {
-                $action = $this->serviceContainer->get($data['action']);
-            } else if (isset($_GET['action'])) {
-                $action = $this->serviceContainer->get($_GET['action']);
-            }
-
-            if ($action) {
-                return $action->execute($data);
-            } else {
-                http_response_code(400);
-                echo json_encode(['error' => 'Ação inválida.']);
-            }
-        } else {
+        if (!in_array($_SERVER['REQUEST_METHOD'], ['POST', 'GET'])) {
             http_response_code(405);
-            echo json_encode(['error' => 'Método HTTP não suportado.']);
+            return $this->sendError('Método HTTP não suportado.');
         }
+
+        $data = $this->getRequestData();
+
+        if (isset($data['action'])) {
+            $action = $this->serviceContainer->get($data['action']);
+        } elseif (isset($_GET['action'])) {
+            $action = $this->serviceContainer->get($_GET['action']);
+        }
+
+        if ($action) {
+            return $action->execute($data);
+        }
+
+        http_response_code(400);
+        return $this->sendError('Ação inválida.');
+    }
+
+    private function getRequestData(): array
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            return json_decode(file_get_contents("php://input"), true) ?? [];
+        }
+
+        $data = [];
+        if (isset($_GET['action']) && $_GET['action'] === 'buscar-produto') {
+            $idProduto = $_GET['id'] ?? null;
+            if ($idProduto) {
+                $data['idProduto'] = $idProduto;
+            } else {
+                $this->sendError('ID do produto não fornecido.');
+            }
+        }
+
+        return $data;
+    }
+
+    private function sendError(string $message)
+    {
+        echo json_encode(['error' => $message]);
+        exit;
     }
 }

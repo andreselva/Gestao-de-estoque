@@ -14,7 +14,7 @@ class ProductsController
         $this->productService = $productService;
     }
 
-    public function getProduct(array $data): void
+    public function saveProduct(array $data): void
     {
         try {
             $this->productService->save($data);
@@ -36,8 +36,19 @@ class ProductsController
         }
     }
 
+    public function loadProduct($data)
+    {
+        try {
+            $result = $this->productService->searchOneProduct($data);
+            $this->sendJsonResponse($result, 200);
+        } catch (Exception $e) {
+            $this->sendJsonResponse(['status' => 'error', 'error-msg' => $e->getMessage()], 500);
+        }
+    }
+
     private function sendJsonResponse(array $array, $code)
     {
+        header('Content-Type: application/json');
         http_response_code($code);
         echo json_encode($array);
         exit;

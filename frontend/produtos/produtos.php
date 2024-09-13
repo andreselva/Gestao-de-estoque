@@ -47,7 +47,7 @@ require_once __DIR__ . '../../auth.php';
             </div>
         </form>
     </main>
-    <script src="../js/produto-cadastro.js"></script>
+    <script src="../js/produto-listagem.js"></script>
 </body>
 
 </html>

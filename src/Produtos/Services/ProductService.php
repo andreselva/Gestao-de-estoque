@@ -47,4 +47,11 @@ class ProductService implements ProductServiceInterface
         $result = $this->productRepository->search();
         return $result;
     }
+
+    public function searchOneProduct(array $data): array
+    {
+        $idProduto = $data['idProduto'];
+        $result = $this->productRepository->searchProduct($idProduto);
+        return $result;
+    }
 }

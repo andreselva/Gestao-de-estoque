@@ -4,12 +4,12 @@
     flex-direction: column;
     gap: 2em;
     padding: 4em;
-    width: 100%;
+    width: 1400px;
     height: 100vh;
-    max-width: 1200px; /* Defina um valor máximo para a largura */
+    max-width: 1400px; 
     border: solid 0px #030303;
     top: 50%;
-    left: 56.3%;
+    left: 52.3%;
     transform: translate(-50%, -50%);
 }
 
@@ -28,8 +28,8 @@
 }
 
 #table-produtos table {
-    width: 100%;
-    border-collapse: collapse;
+    width: 1200px;
+    border-collapse: collapse;  
     background-color: #333;
     color: #fff;
     font-family: Arial, sans-serif;
@@ -60,6 +60,7 @@
 }
 
 #btn-psq-cadastro {
+    width: 1200px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -189,6 +190,12 @@ input::placeholder {
     display: flex;
     gap: 2em;
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
 
 /* Design responsivo para dispositivos menores */
 @media (max-width: 768px) {
