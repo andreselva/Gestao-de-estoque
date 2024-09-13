@@ -26,6 +26,16 @@ class ProductsController
         }
     }
 
+    public function getProducts()
+    {
+        try {
+            $result = $this->productService->searchProducts();
+            $this->sendJsonResponse($result, 200);
+        } catch (Exception $e) {
+            $this->sendJsonResponse(['status' => 'error', 'error-msg' => $e->getMessage()], 500);
+        }
+    }
+
     private function sendJsonResponse(array $array, $code)
     {
         http_response_code($code);

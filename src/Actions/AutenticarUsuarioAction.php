@@ -15,7 +15,7 @@ class AutenticarUsuarioAction implements ActionInterface
         $this->authController = $authController;
     }
 
-    public function execute(array $data)
+    public function execute(?array $data)
     {
         return $this->authController->login($data);
     }

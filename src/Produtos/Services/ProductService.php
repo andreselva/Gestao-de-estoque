@@ -41,4 +41,10 @@ class ProductService implements ProductServiceInterface
         $product = new Product($name, $codigo, $dataCriacao, $precoVenda, $un, $pesoBruto, $pesoLiquido, $gtin);
         $this->productRepository->persist($product);
     }
+
+    public function searchProducts(): array
+    {
+        $result = $this->productRepository->search();
+        return $result;
+    }
 }

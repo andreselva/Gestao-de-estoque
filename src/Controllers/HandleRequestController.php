@@ -15,22 +15,21 @@ class HandleRequestController
 
     public function processRequest()
     {
-        if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' || $_SERVER["REQUEST_METHOD"] === 'GET') {
             $json_data = file_get_contents("php://input");
-            $data = json_decode($json_data, true);
+            $data = json_decode($json_data, true) ?? null;
 
             if (isset($data['action'])) {
                 $action = $this->serviceContainer->get($data['action']);
+            } else if (isset($_GET['action'])) {
+                $action = $this->serviceContainer->get($_GET['action']);
+            }
 
-                if ($action) {
-                    return $action->execute($data);
-                } else {
-                    http_response_code(400);
-                    echo json_encode(['error' => 'Ação inválida.']);
-                }
+            if ($action) {
+                return $action->execute($data);
             } else {
                 http_response_code(400);
-                echo json_encode(['error' => 'Ação não especificada.']);
+                echo json_encode(['error' => 'Ação inválida.']);
             }
         } else {
             http_response_code(405);

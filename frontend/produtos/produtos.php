@@ -40,19 +40,8 @@ require_once __DIR__ . '../../auth.php';
                             <th>#</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>Produto 1</td>
-                            <td>50</td>
-                            <td>Editar</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>Produto 2</td>
-                            <td>30</td>
-                            <td>Editar</td>
-                        </tr>
+                    <tbody id="produtos-list">
+                       
                     </tbody>
                 </table>
             </div>

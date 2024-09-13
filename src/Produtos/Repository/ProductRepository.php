@@ -33,4 +33,23 @@ class ProductRepository implements ProductRepositoryInterface
             throw new Exception("An error ocurred:" . $e->getMessage());
         }
     }
+
+    public function search(): array
+    {
+        try {
+            $sql = "SELECT * FROM products";
+            $stmt =  $this->connection->prepare($sql);
+
+            if ($stmt->execute()) {
+                // Busque todos os resultados em um array associativo
+                $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                return $results;
+            } else {
+                // Em caso de erro, você pode lidar com isso aqui
+                return [];
+            }
+        } catch (Exception $e) {
+            throw new Exception("An error ocurred" . $e->getMessage());
+        }
+    }
 }
