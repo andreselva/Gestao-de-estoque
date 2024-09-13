@@ -33,10 +33,50 @@ async function carregarProduto(id) {
     }
 }
 
+async function editarProduto(event) {
+    event.preventDefault();
+    form = document.querySelector('#editar-produto');
+    const id = produtoId;
+
+    try {
+        const formData = new FormData(form);
+        formData.append('action', 'editar-produto');
+        formData.append('idProduto', id);
+        const data = {};
+
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+        const response = await fetch('../../src/index.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        const responseText = await response.text();
+        console.log('Resposta bruta do servidor:', responseText);
+
+        if (responseText) {
+            const responseData = JSON.parse(responseText);
+            console.log('Cadastro realizado com sucesso:', responseData);
+        } else {
+            console.error('Resposta vazia recebida do servidor');
+            alert('O servidor retornou uma resposta vazia.');
+        }
+    } catch (error) {
+        console.error('Erro ao realizar o cadastro:', error);
+        alert('Ocorreu um erro ao realizar o cadastro. Tente novamente.');
+    }
+}
+
+let produtoId = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     // Capturar o ID do produto da URL
     const urlParams = new URLSearchParams(window.location.search);
-    const produtoId = urlParams.get('id');
+    produtoId = urlParams.get('id');
 
     if (produtoId) {
         // Chama a função carregarProduto com o ID do produto

@@ -18,7 +18,7 @@ require_once __DIR__ . '../../auth.php';
     ?>
 
     <main>
-        <form id="cadastro-produto">
+        <form id="editar-produto">
             <div id="input-group-1">
                 <div class="form-group large-input">
                     <label>Nome do produto</label>
@@ -59,7 +59,7 @@ require_once __DIR__ . '../../auth.php';
             </div>
             <div class="buttons">
                 <div>
-                    <button class="minimal-button" onclick="editProduto(event)">
+                    <button class="minimal-button" onclick="editarProduto(event)">
                         Salvar
                     </button>
                 </div>
