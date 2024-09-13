@@ -6,6 +6,7 @@ use DateTime;
 
 class Product
 {
+    private $id;
     private $name;
     private $code;
     private $dataCriacao;
@@ -23,7 +24,8 @@ class Product
         ?string $un,
         ?float $pesoBruto,
         ?float $pesoLiquido,
-        ?string $gtin
+        ?string $gtin,
+        ?string $id = ''
     ) {
         $this->name = $name;
         $this->code = $code;
@@ -33,6 +35,12 @@ class Product
         $this->pesoBruto = $pesoBruto;
         $this->pesoLiquido = $pesoLiquido;
         $this->gtin = $gtin;
+        $this->id = $id;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getName(): string

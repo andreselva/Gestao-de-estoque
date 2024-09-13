@@ -14,7 +14,7 @@ class ProductRepository implements ProductRepositoryInterface
         $this->connection = $connection;
     }
 
-    public function persist(Product $product): void
+    public function saveProduct(Product $product): void
     {
         try {
             $sql = "INSERT INTO products (name, codigo, dataCriacao, precoVenda, un, pesoBruto, pesoLiquido, gtin) 
@@ -34,7 +34,7 @@ class ProductRepository implements ProductRepositoryInterface
         }
     }
 
-    public function search(): array
+    public function getAllProducts(): array
     {
         try {
             $sql = "SELECT * FROM products";
@@ -53,7 +53,7 @@ class ProductRepository implements ProductRepositoryInterface
         }
     }
 
-    public function searchProduct(string $id): array
+    public function findProductById(string $id): array
     {
         try {
             $sql = "SELECT * FROM products WHERE id=?";
@@ -67,6 +67,25 @@ class ProductRepository implements ProductRepositoryInterface
             return [];
         } catch (Exception $e) {
             throw new Exception("An error occurred " . $e->getMessage());
+        }
+    }
+
+    public function saveProductEdit(Product $product): void
+    {
+        try {
+            $sql = "UPDATE products SET name=?, codigo=?, precoVenda=?, un=?, pesoBruto=?, pesoLiquido=?, gtin=? WHERE id=?";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(1, $product->getName());
+            $stmt->bindValue(2, $product->getCode());
+            $stmt->bindValue(3, $product->getPrecoVenda());
+            $stmt->bindValue(4, $product->getUn());
+            $stmt->bindValue(5, $product->getPesoBruto());
+            $stmt->bindValue(6, $product->getPesoLiquido());
+            $stmt->bindValue(7, $product->getGtin());
+            $stmt->bindValue(8, $product->getId());
+            $stmt->execute();
+        } catch (Exception $e) {
+            throw new Exception("An error ocurred " . $e->getMessage());
         }
     }
 }

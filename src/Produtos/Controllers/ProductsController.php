@@ -8,6 +8,7 @@ use Exception;
 class ProductsController
 {
     private $productService;
+    private const GOOD_REPONSE = ['status' => 'success'];
 
     public function __construct(ProductServiceInterface $productService)
     {
@@ -18,7 +19,7 @@ class ProductsController
     {
         try {
             $this->productService->save($data);
-            $this->sendJsonResponse(['status' => 'success'], 200);
+            $this->sendJsonResponse(self::GOOD_REPONSE, 200);
         } catch (\InvalidArgumentException $e) {
             $this->sendJsonResponse(['status' => 'error', 'error-msg' => $e->getMessage()], 400);
         } catch (Exception $e) {
@@ -26,7 +27,7 @@ class ProductsController
         }
     }
 
-    public function getProducts()
+    public function getProducts(): void
     {
         try {
             $result = $this->productService->searchProducts();
@@ -36,7 +37,7 @@ class ProductsController
         }
     }
 
-    public function loadProduct($data)
+    public function loadProduct($data): void
     {
         try {
             $result = $this->productService->searchOneProduct($data);
@@ -46,7 +47,16 @@ class ProductsController
         }
     }
 
-    private function sendJsonResponse(array $array, $code)
+    public function editProduct($data): void {
+        try {
+            $this->productService->sendProductForEdition($data);
+            $this->sendJsonResponse(self::GOOD_REPONSE, 200);
+        } catch (Exception $e) {
+            $this->sendJsonResponse(['status' => 'error', 'error-msg' => $e->getMessage()], 500);
+        }
+    }
+
+    private function sendJsonResponse(array $array, $code): void
     {
         header('Content-Type: application/json');
         http_response_code($code);

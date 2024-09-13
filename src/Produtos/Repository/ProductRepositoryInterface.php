@@ -6,7 +6,8 @@ use Andre\GestaoDeEstoque\Produtos\Entity\Product;
 
 interface ProductRepositoryInterface
 {
-    public function persist(Product $product);
-    public function search(): array;
-    public function searchProduct(string $id): array;
+    public function saveProduct(Product $product);
+    public function getAllProducts(): array;
+    public function findProductById(string $id): array;
+    public function saveProductEdit(Product $product): void;
 }
