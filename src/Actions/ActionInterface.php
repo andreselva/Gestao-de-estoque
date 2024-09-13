@@ -4,5 +4,5 @@ namespace Andre\GestaoDeEstoque\Actions;
 
 interface ActionInterface
 {
-    public function execute(array $data);
+    public function execute(?array $data);
 }

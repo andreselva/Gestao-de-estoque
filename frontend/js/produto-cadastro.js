@@ -1,8 +1,3 @@
-function goAddProducts(event) {
-    event.preventDefault();
-    window.location.href = "produtos-add.php";
-}
-
 function cancel(event) {
     event.preventDefault();
     window.location.href = "produtos.php";
@@ -27,16 +22,15 @@ async function cadastrarProduto(event) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        })  
-        const responseText = await response.text();
-        console.log('Resposta bruta do servidor:', responseText);
+        })
+        const responseData = await response.json();
 
-        if (responseText) {
-            const responseData = JSON.parse(responseText);
-            console.log('Cadastro realizado com sucesso:', responseData);
-        } else {
-            console.error('Resposta vazia recebida do servidor');
-            alert('O servidor retornou uma resposta vazia.');
+        if (responseData.status === 'success') {
+            alert("Produto cadastrado com sucesso.");
+            window.location.href = 'produtos.php';
+        } else if (responseData.status === 'error') {
+            alert(`Ocorreu um erro ao cadastrar produto. Erro: ${responseData.errorMsg}`);
+            window.location.reload();
         }
 
     } catch (error) {
