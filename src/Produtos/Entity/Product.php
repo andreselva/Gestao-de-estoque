@@ -38,11 +38,6 @@ class Product
         $this->id = $id;
     }
 
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
     public function getName(): string
     {
         return $this->name;
@@ -81,5 +76,10 @@ class Product
     public function getGtin(): ?string
     {
         return $this->gtin;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 }
