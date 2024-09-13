@@ -64,7 +64,7 @@ require_once __DIR__ . '../../auth.php';
                     </button>
                 </div>
                 <div>
-                    <button class="minimal-button" onclick="cancel(event)">
+                    <button class="minimal-button" onclick="cancelEdit(event)">
                         Cancelar
                     </button>
                 </div>

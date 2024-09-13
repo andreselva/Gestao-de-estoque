@@ -1,3 +1,8 @@
+function cancelEdit(event) {
+    event.preventDefault();
+    window.location.href = "produtos.php";
+}
+
 async function carregarProduto(id) {
     try {
         // Parâmetros de consulta
@@ -55,21 +60,23 @@ async function editarProduto(event) {
             body: JSON.stringify(data)
         })
 
-        const responseText = await response.text();
-        console.log('Resposta bruta do servidor:', responseText);
+        const responseData = await response.json();
 
-        if (responseText) {
-            const responseData = JSON.parse(responseText);
-            console.log('Cadastro realizado com sucesso:', responseData);
-        } else {
-            console.error('Resposta vazia recebida do servidor');
-            alert('O servidor retornou uma resposta vazia.');
+        if (responseData.status === 'success') {
+            window.location.href = 'produtos.php';
+        } else if (responseData.status === 'error') {
+            alert(`Ocorreu um erro ao cadastrar produto. Erro: ${responseData.errorMsg}`);
+            window.location.reload();
         }
+
     } catch (error) {
         console.error('Erro ao realizar o cadastro:', error);
         alert('Ocorreu um erro ao realizar o cadastro. Tente novamente.');
     }
 }
+
+
+
 
 let produtoId = null;
 

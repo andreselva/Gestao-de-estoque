@@ -21,9 +21,9 @@ class ProductsController
             $this->productService->save($data);
             $this->sendJsonResponse(self::GOOD_REPONSE, 200);
         } catch (\InvalidArgumentException $e) {
-            $this->sendJsonResponse(['status' => 'error', 'error-msg' => $e->getMessage()], 400);
+            $this->sendJsonResponse(['status' => 'error', 'errorMsg' => $e->getMessage()], 400);
         } catch (Exception $e) {
-            $this->sendJsonResponse(['status' => 'error', 'error-msg' => $e->getMessage()], 500);
+            $this->sendJsonResponse(['status' => 'error', 'errorMsg' => $e->getMessage()], 500);
         }
     }
 
@@ -33,7 +33,7 @@ class ProductsController
             $result = $this->productService->searchProducts();
             $this->sendJsonResponse($result, 200);
         } catch (Exception $e) {
-            $this->sendJsonResponse(['status' => 'error', 'error-msg' => $e->getMessage()], 500);
+            $this->sendJsonResponse(['status' => 'error', 'errorMsg' => $e->getMessage()], 500);
         }
     }
 
@@ -43,7 +43,7 @@ class ProductsController
             $result = $this->productService->searchOneProduct($data);
             $this->sendJsonResponse($result, 200);
         } catch (Exception $e) {
-            $this->sendJsonResponse(['status' => 'error', 'error-msg' => $e->getMessage()], 500);
+            $this->sendJsonResponse(['status' => 'error', 'errorMsg' => $e->getMessage()], 500);
         }
     }
 
@@ -52,7 +52,7 @@ class ProductsController
             $this->productService->sendProductForEdition($data);
             $this->sendJsonResponse(self::GOOD_REPONSE, 200);
         } catch (Exception $e) {
-            $this->sendJsonResponse(['status' => 'error', 'error-msg' => $e->getMessage()], 500);
+            $this->sendJsonResponse(['status' => 'error', 'errorMsg' => $e->getMessage()], 500);
         }
     }
 

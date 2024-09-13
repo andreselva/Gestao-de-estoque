@@ -3,6 +3,14 @@ function goAddProducts(event) {
     window.location.href = "produtos-add.php";
 }
 
+function goToEdit(event) {
+    event.preventDefault();
+    const button = event.target;
+    const id = button.getAttribute('data-id');
+    window.location.href = `produtos-edit.php?id=${id}`;
+}
+
+
 async function listarProdutos() {
     try {
         // Parâmetros de consulta
@@ -31,7 +39,7 @@ async function listarProdutos() {
                 <td><input type="checkbox"></td>
                 <td><a href="produtos-edit.php?id=${produto.id}">${produto.name}</a></td>
                 <td>${produto.estoque}</td>
-                <td><button class="minimal-button" onclick="editarProduto(${produto.id})">Editar</button></td>
+                <td><button class="minimal-button" data-id="${produto.id}" onclick="goToEdit(event)">Editar</button></td>
             `;
 
             tbody.appendChild(tr);
