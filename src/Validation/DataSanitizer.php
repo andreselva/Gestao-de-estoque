@@ -43,7 +43,7 @@ class DataSanitizer
      * @param string $data
      * @return string
      */
-    private function sanitize($data): string
+    public function sanitize($data): string
     {
         if (empty($data)) {
             throw new \InvalidArgumentException($data . ' cannot be empty.');
@@ -52,7 +52,7 @@ class DataSanitizer
         return preg_replace('/[^a-zA-Z0-9._@-]/', '', $data);
     }
 
-    private function sanitizeName($name): string
+    public function sanitizeName($name): string
     {
         if (empty($name)) {
             throw new \InvalidArgumentException($name . 'cannot be empty.');
@@ -61,7 +61,7 @@ class DataSanitizer
         return preg_replace('/[^a-zA-ZÀ-ÿ0-9 ]/', '', $name);
     }
 
-    private function sanitizeDecimal(string $data): string
+    public function sanitizeDecimal(string $data): string
     {
         // Remove qualquer caractere que não seja número, ponto ou vírgula
         $sanitizedData = preg_replace('/[^0-9.,-]/', '', $data);

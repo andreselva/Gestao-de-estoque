@@ -6,7 +6,6 @@ use Andre\GestaoDeEstoque\Auth\Entity\Auth;
 use Andre\GestaoDeEstoque\Auth\Repository\AuthUserRepositoryInterface;
 use Andre\GestaoDeEstoque\Session\Session;
 use Andre\GestaoDeEstoque\Validation\DataSanitizer;
-use InvalidArgumentException;
 
 class AuthService
 {
