@@ -47,7 +47,7 @@ async function listarProdutos() {
                         <div class="dropdown-content">
                             <a href="produtos-edit.php?id=${produto.id}">Editar</a>
                             <a href="#" data-id="${produto.id}" onclick="confirmDelete(event)">Excluir</a>
-                            <a href="#" data-id="${produto.id}" id="open-modal">Lançar estoque</a>
+                            <a href="#" data-id="${produto.id}" class="open-modal">Lançar estoque</a>
                         </div>
                     </div>
                 </td>
@@ -64,40 +64,25 @@ function toggleDropdown(event) {
     event.stopPropagation(); // Evita que o clique se propague para outros elementos
     event.preventDefault();
 
-    // Encontra o botão de dropdown (considerando que o target pode ser um ícone dentro do botão)
     const button = event.currentTarget;
     const dropdown = button.nextElementSibling;
-    const isVisible = dropdown.classList.contains('show');
 
     // Fecha todos os dropdowns abertos
     document.querySelectorAll('.dropdown-content').forEach(content => {
-        content.classList.remove('show');
+        if (content !== dropdown) {
+            content.classList.remove('show');
+        }
     });
 
     // Alterna a visibilidade do dropdown atual
-    if (!isVisible) {
-        dropdown.classList.add('show');
-    }
+    dropdown.classList.toggle('show');
 }
 
 // Fecha os dropdowns ao clicar fora deles
-window.onclick = function(event) {
-    if (!event.target.closest('.dropdown') && !event.target.closest('#modal')) {
+window.addEventListener('click', (event) => {
+    if (!event.target.closest('.dropdown')) {
         document.querySelectorAll('.dropdown-content').forEach(content => {
             content.classList.remove('show');
         });
     }
-}
-
-// Configura eventos ao carregar o DOM
-document.addEventListener('DOMContentLoaded', () => {
-    listarProdutos();
-
-    // Delegação de eventos para links que abrem e fecham o modal
-    document.querySelector('#produtos-list').addEventListener('click', (event) => {
-        if (event.target && event.target.matches('a[id="open-modal"]')) {
-            event.preventDefault();
-            toggleModal(); // Abre o modal
-        }
-    });
 });
