@@ -1,5 +1,33 @@
 let modal, fade;
 
+async function lancarEstoque(event) {
+    event.preventDefault();
+    const form = document.querySelector('#lcto-estoque');
+
+    try {
+        const formData = new FormData(form);
+        formData.append('action', 'lancar-estoque');
+        const data = {};
+
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        const response = await fetch('../../src/index.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const responseData = await response.json();
+        
+    } catch (erro) {
+
+    }
+}
+
 const toggleModal = (event) => {
     if (event) {
         event.preventDefault();

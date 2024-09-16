@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div id="div-btn-lcto">
-                <button id="btn-lcto-estoque" type="submit">Lançar</button>
+                <button id="btn-lcto-estoque" onclick="lancarEstoque(event)">Lançar</button>
             </div>
         </form>
     </div>
