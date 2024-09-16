@@ -47,7 +47,7 @@ async function listarProdutos() {
                         <div class="dropdown-content">
                             <a href="produtos-edit.php?id=${produto.id}">Editar</a>
                             <a href="#" data-id="${produto.id}" onclick="confirmDelete(event)">Excluir</a>
-                            <a href="#" data-id="${produto.id}" class="open-modal">Lançar estoque</a>
+                            <a href="#" data-id="${produto.id}" id="open-modal">Lançar estoque</a>
                         </div>
                     </div>
                 </td>
