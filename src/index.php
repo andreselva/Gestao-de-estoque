@@ -53,7 +53,7 @@ $productController = new ProductsController($productService);
 
 //PARA LANCAMENTO DE ESTOQUE
 $stockRepository = new StockRepository($databaseManager);
-$stockService = new StockService($stockRepository);
+$stockService = new StockService($stockRepository, $dataSanitizer);
 $stockController = new StockController($stockService);
 
 

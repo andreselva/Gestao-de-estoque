@@ -37,6 +37,27 @@ class DataSanitizer
         return $sanitizedData;
     }
 
+    public function StockSanitizer(array $data): array {
+
+        if (in_array($data['idProduto'], ['', 0])) {
+            throw new InvalidArgumentException('The product identifier cannot by empty or zero.');
+        }
+
+        if ($data['custo-lcto'] === '' || $data['custo-lcto'] < 0) {
+            $data['custo-lcto'] = 0;
+        }
+
+        if ($data['quantidade'] === '' || $data['quantidade'] < 0) {
+            throw new InvalidArgumentException('The quantity cannot by empty or zero.');
+        }
+
+        return [
+            'idProduto' => $this->sanitizeInt($data['idProduto']),
+            'custoLcto' => $this->sanitizeDecimal($data['custo-lcto']),
+            'quantidade' => $this->sanitizeInt($data['quantidade'])
+        ];
+    }
+
     /**
      * Realiza a limpeza dos dados
      * 
@@ -71,5 +92,9 @@ class DataSanitizer
 
         // Retorna o valor como string, pois decimal pode ter alta precisão (mantém o formato)
         return number_format((float)$sanitizedData, 2, '.', '');
+    }
+
+    private function sanitizeInt(string $data) : int {
+        return (int) $data;
     }
 }
