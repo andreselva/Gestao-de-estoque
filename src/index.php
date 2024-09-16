@@ -11,6 +11,7 @@ use Andre\GestaoDeEstoque\Actions\AutenticarUsuarioAction;
 use Andre\GestaoDeEstoque\Actions\BuscarProdutoAction;
 use Andre\GestaoDeEstoque\Actions\CadastrarProdutosAction;
 use Andre\GestaoDeEstoque\Actions\EditarProdutoAction;
+use Andre\GestaoDeEstoque\Actions\LancarEstoqueAction;
 use Andre\GestaoDeEstoque\Actions\ListarProdutosAction;
 use Andre\GestaoDeEstoque\Users\Controllers\UserController;
 use Andre\GestaoDeEstoque\Users\Repository\UserRepository;
@@ -21,6 +22,9 @@ use Andre\GestaoDeEstoque\Auth\Services\AuthService;
 use Andre\GestaoDeEstoque\Produtos\Controllers\ProductsController;
 use Andre\GestaoDeEstoque\Produtos\Repository\ProductRepository;
 use Andre\GestaoDeEstoque\Produtos\Services\ProductService;
+use Andre\GestaoDeEstoque\Stock\Controllers\StockController;
+use Andre\GestaoDeEstoque\Stock\Repository\StockRepository;
+use Andre\GestaoDeEstoque\Stock\Services\StockService;
 use Andre\GestaoDeEstoque\Validation\DataSanitizer;
 use Andre\GestaoDeEstoque\Users\Security\PasswordHasher;
 
@@ -47,6 +51,11 @@ $productRepository = new ProductRepository($databaseManager);
 $productService = new ProductService($productRepository, $dataSanitizer);
 $productController = new ProductsController($productService);
 
+//PARA LANCAMENTO DE ESTOQUE
+$stockRepository = new StockRepository($databaseManager);
+$stockService = new StockService($stockRepository);
+$stockController = new StockController($stockService);
+
 
 $container = new ServiceContainer();
 new CadastrarUsuarioAction($container, $userController);
@@ -55,6 +64,7 @@ new CadastrarProdutosAction($container, $productController);
 new ListarProdutosAction($container, $productController);
 new BuscarProdutoAction($container, $productController);
 new EditarProdutoAction($container, $productController);
+new LancarEstoqueAction($container, $stockController);
 
 $handleRequest = new HandleRequestController($container);
 $handleRequest->processRequest();
