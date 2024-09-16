@@ -21,15 +21,16 @@ class HandleRequestController
         }
 
         $data = $this->getRequestData();
+        $actionName = $data['action'] ?? $_GET['action'] ?? null;
 
-        if (isset($data['action'])) {
-            $action = $this->serviceContainer->get($data['action']);
-        } elseif (isset($_GET['action'])) {
-            $action = $this->serviceContainer->get($_GET['action']);
-        }
-
-        if ($action) {
-            return $action->execute($data);
+        if ($actionName) {
+            try {
+                $action = $this->serviceContainer->get($actionName);
+                return $action->execute($data);
+            } catch (\Exception $e) {
+                http_response_code(500);
+                return $this->sendError('Erro ao processar ação: ' . $e->getMessage());
+            }
         }
 
         http_response_code(400);
