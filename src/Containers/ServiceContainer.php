@@ -92,6 +92,25 @@ class ServiceContainer
         $this->services['ProductRepository'] = function () {
             return new \Andre\GestaoDeEstoque\Produtos\Repository\ProductRepository($this->get('DatabaseManager'));
         };
+
+        $this->services['lancar-estoque'] = function () {
+            return new \Andre\GestaoDeEstoque\Actions\LancarEstoqueAction($this, $this->get('StockController'));
+        };
+
+        $this->services['StockController'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Controllers\StockController($this->get('StockService'));
+        };
+
+        $this->services['StockService'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Services\StockService(
+                $this->get('StockRepository'), 
+                $this->get('DataSanitizer')
+            );
+        };
+
+        $this->services['StockRepository'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Repository\StockRepository($this->get('DatabaseManager'));
+        };
     }
 
       public function register($name, $callback)

@@ -6,7 +6,13 @@ use Andre\GestaoDeEstoque\Stock\Entity\Stock;
 
 class StockRepository implements StockRepositoryInterface
 {
-    public function __construct() {}
+
+    private $connection;
+
+    public function __construct($connection) 
+    {
+        $this->connection = $connection;
+    }
 
     public function SaveStockMovement(Stock $launch) {}
 }
