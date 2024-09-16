@@ -26,7 +26,7 @@
                 </span>
             </button>
 
-            <button>
+            <button onclick="goToStock(event)">
                 <span>
                     <i class="material-symbols-outlined"> inventory_2 </i>
                     <span>Suprimentos</span>

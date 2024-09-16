@@ -1,8 +1,10 @@
+// Função para redirecionar para a página de adição de produtos
 function goAddProducts(event) {
     event.preventDefault();
     window.location.href = "produtos-add.php";
 }
 
+// Função para redirecionar para a página de edição de um produto
 function goToEdit(event) {
     event.preventDefault();
     const button = event.target;
@@ -10,10 +12,10 @@ function goToEdit(event) {
     window.location.href = `produtos-edit.php?id=${id}`;
 }
 
-
+// Função assíncrona para listar produtos e atualizar a tabela
 async function listarProdutos() {
     try {
-        // Parâmetros de consulta
+        // Parâmetros de consulta para listar produtos
         const params = new URLSearchParams({
             action: 'listar-produtos'
         });
@@ -28,7 +30,7 @@ async function listarProdutos() {
         // Converter a resposta para JSON
         const produtos = await response.json();
 
-        // Atualizar a tabela
+        // Atualizar a tabela com produtos
         const tbody = document.querySelector('#produtos-list');
         tbody.innerHTML = ''; // Limpa o conteúdo atual da tabela
 
@@ -39,9 +41,17 @@ async function listarProdutos() {
                 <td><input type="checkbox"></td>
                 <td><a href="produtos-edit.php?id=${produto.id}">${produto.name}</a></td>
                 <td>${produto.estoque}</td>
-                <td><button class="minimal-button" data-id="${produto.id}" onclick="goToEdit(event)">Editar</button></td>
+                <td>
+                    <div class="dropdown">
+                        <button class="dropbtn" onclick="toggleDropdown(event)"><ion-icon name="ellipsis-horizontal-outline"></ion-icon></button>
+                        <div class="dropdown-content">
+                            <a href="produtos-edit.php?id=${produto.id}">Editar</a>
+                            <a href="#" data-id="${produto.id}" onclick="confirmDelete(event)">Excluir</a>
+                            <a href="#" data-id="${produto.id}" id="open-modal">Lançar estoque</a>
+                        </div>
+                    </div>
+                </td>
             `;
-
             tbody.appendChild(tr);
         });
     } catch (error) {
@@ -49,5 +59,45 @@ async function listarProdutos() {
     }
 }
 
-// Chama a função listarProdutos ao carregar a página
-document.addEventListener('DOMContentLoaded', listarProdutos);
+// Função para alternar a visibilidade do dropdown
+function toggleDropdown(event) {
+    event.stopPropagation(); // Evita que o clique se propague para outros elementos
+    event.preventDefault();
+
+    // Encontra o botão de dropdown (considerando que o target pode ser um ícone dentro do botão)
+    const button = event.currentTarget;
+    const dropdown = button.nextElementSibling;
+    const isVisible = dropdown.classList.contains('show');
+
+    // Fecha todos os dropdowns abertos
+    document.querySelectorAll('.dropdown-content').forEach(content => {
+        content.classList.remove('show');
+    });
+
+    // Alterna a visibilidade do dropdown atual
+    if (!isVisible) {
+        dropdown.classList.add('show');
+    }
+}
+
+// Fecha os dropdowns ao clicar fora deles
+window.onclick = function(event) {
+    if (!event.target.closest('.dropdown') && !event.target.closest('#modal')) {
+        document.querySelectorAll('.dropdown-content').forEach(content => {
+            content.classList.remove('show');
+        });
+    }
+}
+
+// Configura eventos ao carregar o DOM
+document.addEventListener('DOMContentLoaded', () => {
+    listarProdutos();
+
+    // Delegação de eventos para links que abrem e fecham o modal
+    document.querySelector('#produtos-list').addEventListener('click', (event) => {
+        if (event.target && event.target.matches('a[id="open-modal"]')) {
+            event.preventDefault();
+            toggleModal(); // Abre o modal
+        }
+    });
+});
