@@ -5,7 +5,7 @@ namespace Andre\GestaoDeEstoque\Stock\Services;
 use Andre\GestaoDeEstoque\Stock\Factorys\StockFactory;
 use Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryInterface;
 use Andre\GestaoDeEstoque\Validation\DataSanitizer;
-use Andre\GestaoDeEstoque\Validation\StockValidator;
+use Andre\GestaoDeEstoque\Stock\Validator\StockValidator;
 use Exception;
 use InvalidArgumentException;
 
@@ -29,20 +29,32 @@ class StockService implements StockServiceInterface
             $this->sanitizer->StockSanitizer($data);
             $this->validator->validate($data);
 
-            if ($data['type'] === 'S') {
-                $data['quantity'] *= -1;
-            }
-
             if ($data['cost'] === '') {
                 $data['cost'] = 0;
             }
 
             $StockMovement = StockFactory::create($data);
-            $this->stockRepository->SaveStockMovement($StockMovement);
+            $result = $this->stockRepository->SaveStockMovement($StockMovement);
+
+            if ($result) {
+                $dateBalance = $this->stockRepository->getLastDateBalance($StockMovement->getId());
+                $lastBalance = $this->stockRepository->getLastBalance($StockMovement->getId(), $dateBalance);
+                $entrances = $this->stockRepository->getAllEntrances($StockMovement->getId(), $dateBalance);
+                $exits = $this->stockRepository->getAllExits($StockMovement->getId(), $dateBalance);
+
+                $newStock = $this->calculateNewStock($lastBalance, $entrances, $exits);
+                $this->stockRepository->updateStock($StockMovement->getId(), $newStock);
+            }
         } catch (\InvalidArgumentException $e) {
             throw new InvalidArgumentException('An error occurred while moving stock', 0, $e);
         } catch (\Exception $e) {
             throw new Exception('An error occurred when trying to insert movement', 0, $e);
         }
+    }
+
+    private function calculateNewStock($lastBalance, $entrances, $exits)
+    {
+        $stock = ($lastBalance + $entrances) - $exits;
+        return $stock > 0 ? $stock : 0;
     }
 }

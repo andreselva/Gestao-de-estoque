@@ -114,7 +114,7 @@ class ServiceContainer
         };
 
         $this->services['StockValidator'] = function () {
-            return new \Andre\GestaoDeEstoque\Validation\StockValidator();
+            return new \Andre\GestaoDeEstoque\Stock\Validator\StockValidator();
         };
     }
 

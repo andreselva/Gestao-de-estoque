@@ -1,6 +1,6 @@
 <?php
 
-namespace Andre\GestaoDeEstoque\Validation;
+namespace Andre\GestaoDeEstoque\Stock\Validator;
 
 use InvalidArgumentException;
 
@@ -21,7 +21,7 @@ class StockValidator
         }
 
         // Verifica o tipo
-        if (!in_array($data['type'], ['S', 'E'], true)) {
+        if (!in_array($data['type'], ['S', 'E', 'B'], true)) {
             throw new InvalidArgumentException('The movement type is not valid.');
         }
 

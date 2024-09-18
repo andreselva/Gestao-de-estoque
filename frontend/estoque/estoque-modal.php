@@ -16,6 +16,7 @@
                         <option value="">Selecione...</option>
                         <option value="E">Entrada</option>
                         <option value="S">Saída</option>
+                        <option value="B">Balanço</option>
                     </select>
                 </div>
                 <div class="session-label-inpt">
