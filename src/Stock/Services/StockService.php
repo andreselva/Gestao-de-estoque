@@ -2,6 +2,7 @@
 
 namespace Andre\GestaoDeEstoque\Stock\Services;
 
+use Andre\GestaoDeEstoque\Parameters\ParametersRepositoryInterface;
 use Andre\GestaoDeEstoque\Stock\Factorys\StockFactory;
 use Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryInterface;
 use Exception;
@@ -11,10 +12,12 @@ class StockService implements StockServiceInterface
 {
 
     private $stockRepository;
+    private $parameters;
 
-    public function __construct(StockRepositoryInterface $stockRepository)
+    public function __construct(StockRepositoryInterface $stockRepository, ParametersRepositoryInterface $parameters)
     {
         $this->stockRepository = $stockRepository;
+        $this->parameters = $parameters;
 
         set_error_handler(function ($severity, $message, $file, $line) {
             // Lançar uma exceção com os detalhes do erro
