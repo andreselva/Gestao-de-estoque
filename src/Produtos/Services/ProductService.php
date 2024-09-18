@@ -51,7 +51,7 @@ class ProductService implements ProductServiceInterface
 
     public function sendProductForEdition($data): void
     {
-        $sanitizedData = $this->sanitizer->ProductSanitizer($data);
+        $sanitizedData = $this->sanitizer->productSanitizer($data);
 
         $product = new Product(
             $sanitizedData['name'],

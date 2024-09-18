@@ -26,7 +26,7 @@ class StockService implements StockServiceInterface
     public function processStockMovement(array $data): void
     {
         try {
-            $this->sanitizer->StockSanitizer($data);
+            $this->sanitizer->stockSanitizer($data);
             $this->validator->validate($data);
 
             if ($data['cost'] === '') {
@@ -55,6 +55,6 @@ class StockService implements StockServiceInterface
     private function calculateNewStock($lastBalance, $entrances, $exits)
     {
         $stock = ($lastBalance + $entrances) - $exits;
-        return $stock > 0 ? $stock : 0;
+        return $stock !== '' ? $stock : 0;
     }
 }

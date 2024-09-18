@@ -15,7 +15,7 @@ class StockRepository implements StockRepositoryInterface
         $this->connection = $connection;
     }
 
-    public function SaveStockMovement(Stock $launch): bool
+    public function saveStockMovement(Stock $launch): bool
     {
         try {
             $sql = "INSERT INTO stock (idProduto, type, quantity, cost, date) VALUES (?, ?, ?, ?, ?)";

@@ -9,7 +9,7 @@ class DataSanitizer
 {
     public function __construct() {}
 
-    public function ProductSanitizer(array $data): array
+    public function productSanitizer(array $data): array
     {
         $sanitizedData = [
             'name' => $this->sanitizeName($data['name']),
@@ -37,7 +37,7 @@ class DataSanitizer
         return $sanitizedData;
     }
 
-    public function StockSanitizer(array $data): array
+    public function stockSanitizer(array $data): array
     {
         return [
             'id' => $this->sanitizeInt($data['idProduto']),
