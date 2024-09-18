@@ -24,7 +24,8 @@
 #second-session {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
 }
 
 #div-btn-lcto {
@@ -139,22 +140,30 @@ button:hover {
     transform: translate(-50%, -50%) scale(1);
 }
 
-input[type="text"], select {
-    padding: 0.75rem; /* Preenchimento interno */
-    border: 1px solid #ddd; /* Borda leve */
-    border-radius: 4px; /* Bordas arredondadas */
-    font-size: 1rem; /* Tamanho da fonte */
-    width: 100%; /* Ocupa a largura disponível */
-    box-sizing: border-box; /* Inclui bordas e padding na largura total */
-    transition: border-color 0.3s ease; /* Transição suave para mudanças na borda */
+input[type="text"],
+select {
+    padding: 0.75rem;
+    /* Preenchimento interno */
+    border: 1px solid #ddd;
+    /* Borda leve */
+    border-radius: 4px;
+    /* Bordas arredondadas */
+    font-size: 1rem;
+    /* Tamanho da fonte */
+    width: 100%;
+    /* Ocupa a largura disponível */
+    box-sizing: border-box;
+    /* Inclui bordas e padding na largura total */
+    transition: border-color 0.3s ease;
+    /* Transição suave para mudanças na borda */
 }
 
-input[type="text"]:focus, select:focus {
-    border-color: #0056b3; /* Cor da borda quando em foco */
-    outline: none; /* Remove o contorno padrão do navegador */
-    box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2); /* Sombra leve ao redor do input */
-}
-
-#quantidade {
-    max-width: 100px;
+input[type="text"]:focus,
+select:focus {
+    border-color: #0056b3;
+    /* Cor da borda quando em foco */
+    outline: none;
+    /* Remove o contorno padrão do navegador */
+    box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2);
+    /* Sombra leve ao redor do input */
 }

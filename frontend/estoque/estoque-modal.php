@@ -29,6 +29,10 @@
                     <label>Quantidade</label>
                     <input type="text" id="quantidade" name="quantity">
                 </div>
+                <div class="session-label-inpt">
+                    <label>Preço unitário</label>
+                    <input type="text" id="price" name="price-un">
+                </div>
             </div>
             <div id="div-btn-lcto">
                 <button id="btn-lcto-estoque" onclick="lancarEstoque(event)">Lançar</button>
