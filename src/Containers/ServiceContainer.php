@@ -17,7 +17,7 @@ class ServiceContainer
         $this->services['DatabaseManager'] = function () {
             return new \Andre\GestaoDeEstoque\Database\DatabaseManager($this->get('MySQLDatabase'));
         };
-        
+
         $this->services['DataSanitizer'] = function () {
             return new \Andre\GestaoDeEstoque\Validation\DataSanitizer();
         };
@@ -54,12 +54,12 @@ class ServiceContainer
             return new \Andre\GestaoDeEstoque\Users\Services\UserService(
                 $this->get('UserRepository'),
                 $this->get('DataSanitizer'),
-                $this->get('PasswordHasher')
-            ,);
+                $this->get('PasswordHasher'),
+            );
         };
 
         $this->services['UserRepository'] = function () {
-            return new \Andre\GestaoDeEstoque\Users\Repository\UserRepository($this->get('DatabaseManager'));   
+            return new \Andre\GestaoDeEstoque\Users\Repository\UserRepository($this->get('DatabaseManager'));
         };
 
         $this->services['cadastrar-produto'] = function () {
@@ -84,7 +84,7 @@ class ServiceContainer
 
         $this->services['ProductService'] = function () {
             return new \Andre\GestaoDeEstoque\Produtos\Services\ProductService(
-                $this->get('ProductRepository'), 
+                $this->get('ProductRepository'),
                 $this->get('DataSanitizer')
             );
         };
@@ -103,17 +103,22 @@ class ServiceContainer
 
         $this->services['StockService'] = function () {
             return new \Andre\GestaoDeEstoque\Stock\Services\StockService(
-                $this->get('StockRepository'), 
-                $this->get('DataSanitizer')
+                $this->get('StockRepository'),
+                $this->get('DataSanitizer'),
+                $this->get('StockValidator')
             );
         };
 
         $this->services['StockRepository'] = function () {
             return new \Andre\GestaoDeEstoque\Stock\Repository\StockRepository($this->get('DatabaseManager'));
         };
+
+        $this->services['StockValidator'] = function () {
+            return new \Andre\GestaoDeEstoque\Validation\StockValidator();
+        };
     }
 
-      public function register($name, $callback)
+    public function register($name, $callback)
     {
         $this->services[$name] = $callback;
     }

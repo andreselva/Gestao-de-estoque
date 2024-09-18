@@ -18,7 +18,7 @@ class StockController
 
     public function getStockMovement(array $data) {
         try {
-            $this->stockService->MoveForwardStockMovement($data);
+            $this->stockService->processStockMovement($data);
             $this->sendJsonResponse(['status' => 'success'], 200);
         } catch (InvalidArgumentException $e) {
             $this->sendJsonResponse(['status' => 'error', 'errorMsg' => $e->getMessage()], 400);

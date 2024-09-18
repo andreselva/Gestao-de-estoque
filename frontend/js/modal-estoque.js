@@ -6,6 +6,13 @@ async function lancarEstoque(event) {
     const form = document.querySelector('#lcto-estoque');
     const idProduto = selectedProductId;
 
+    const type = document.getElementById('tipo');
+
+    if (type.value === '') {
+        alert('Selecione o tipo do lançamento.');
+        return;
+    }
+
     try {
         const formData = new FormData(form);
         formData.append('action', 'lancar-estoque');
@@ -26,7 +33,7 @@ async function lancarEstoque(event) {
         });
 
         const responseData = await response.json();
-        
+
     } catch (erro) {
 
     }
@@ -46,14 +53,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Seleciona todos os botões que abrem o modal e adiciona o event listener
     const openModalButtons = document.querySelectorAll(".open-modal");
-    
+
     openModalButtons.forEach(button => {
         button.addEventListener("click", (event) => {
             event.preventDefault();
-            
+
             // Captura o id do produto diretamente do atributo data-id do botão
             selectedProductId = button.getAttribute("data-id");
-            
+
             // Abre o modal
             toggleModal(event);
         });
@@ -89,5 +96,5 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleModal(); // Abre o modal
         }
     });
-    
+
 });

@@ -12,21 +12,21 @@
             <div id="one-session">
                 <div class="session-label-inpt">
                     <label for="tipo">Tipo</label>
-                    <select id="tipo" name="tipo">
+                    <select id="tipo" name="type">
                         <option value="">Selecione...</option>
-                        <option value="entrada">Entrada</option>
-                        <option value="saida">Saída</option>
+                        <option value="E">Entrada</option>
+                        <option value="S">Saída</option>
                     </select>
                 </div>
                 <div class="session-label-inpt">
                     <label>Custo do lançamento</label>
-                    <input type="text" id="custo-lcto" name="custo-lcto">
+                    <input type="text" id="custo-lcto" name="cost">
                 </div>
             </div>
             <div id="second-session">
                 <div class="session-label-inpt">
                     <label>Quantidade</label>
-                    <input type="text" id="quantidade" name="quantidade">
+                    <input type="text" id="quantidade" name="quantity">
                 </div>
             </div>
             <div id="div-btn-lcto">
