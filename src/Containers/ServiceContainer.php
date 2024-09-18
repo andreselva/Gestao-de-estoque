@@ -154,8 +154,13 @@ class ServiceContainer
         $this->services['StockService'] = function () {
             return new \Andre\GestaoDeEstoque\Stock\Services\StockService(
                 $this->get('StockRepository'),
-                $this->get('ParametersRepository')
+                $this->get('ParametersRepository'),
+                $this->get('CostCalculator')
             );
+        };
+
+        $this->services['CostCalculator'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\CostCalculator\CostCalculator();
         };
 
         $this->services['ParametersRepository'] = function () {

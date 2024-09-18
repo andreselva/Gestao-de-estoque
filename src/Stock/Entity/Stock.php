@@ -50,4 +50,9 @@ class Stock
     {
         return $this->priceUn;
     }
+
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
+    }
 }

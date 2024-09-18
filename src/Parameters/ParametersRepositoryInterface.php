@@ -4,5 +4,5 @@ namespace Andre\GestaoDeEstoque\Parameters;
 
 interface ParametersRepositoryInterface
 {
-    public function getParameters(): array;
+    public function getValueParam(string $nameParam): int;
 }
