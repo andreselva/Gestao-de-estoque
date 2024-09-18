@@ -9,13 +9,15 @@ class Stock
     private float $cost;
     private int $quantity;
     private string $date;
+    private float $priceUn;
 
-    public function __construct($id, $type, $cost, $quantity, $date)
+    public function __construct($id, $type, $cost, $quantity,  $priceUn, $date)
     {
         $this->id = $id;
         $this->type = $type;
         $this->cost = $cost;
         $this->quantity = $quantity;
+        $this->priceUn = $priceUn;
         $this->date = $date;
     }
 
@@ -42,5 +44,10 @@ class Stock
     public function getDate()
     {
         return $this->date;
+    }
+
+    public function getPriceUn()
+    {
+        return $this->priceUn;
     }
 }

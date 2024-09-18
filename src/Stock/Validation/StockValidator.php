@@ -17,7 +17,7 @@ class StockValidator
     public function validate(array $data): void
     {
         // Verifica se as chaves necessárias estão presentes no array
-        if (!isset($data['idProduto'], $data['type'], $data['quantity'], $data['cost'])) {
+        if (!isset($data['idProduto'], $data['type'], $data['quantity'], $data['cost'], $data['priceUn'])) {
             throw new InvalidArgumentException('Missing required fields.');
         }
 
@@ -41,8 +41,16 @@ class StockValidator
             throw new InvalidArgumentException('The cost cannot be less than zero.');
         }
 
+        if (!empty($data['priceUn'] && $data['priceUn'] < 0)) {
+            throw new InvalidArgumentException('The price cannot be less than zero.');
+        }
+
         if ($data['cost'] === '') {
             $data['cost'] = 0;
+        }
+
+        if ($data['priceUn'] === '') {
+            $data['priceUn'] = 0;
         }
 
         $this->stockService->processStockMovement($data);

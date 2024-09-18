@@ -36,13 +36,14 @@ class StockRepository implements StockRepositoryInterface
     public function saveStockMovement(Stock $launch): bool
     {
 
-        $sql = "INSERT INTO stock (idProduto, type, quantity, cost, date) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO stock (idProduto, type, quantity, cost, date, priceUn) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindValue(1, $launch->getId());
         $stmt->bindValue(2, $launch->getType());
         $stmt->bindValue(3, $launch->getQuantity());
         $stmt->bindValue(4, $launch->getCost());
         $stmt->bindValue(5, $launch->getDate());
+        $stmt->bindValue(6, $launch->getPriceUn());
         return $stmt->execute();
     }
 

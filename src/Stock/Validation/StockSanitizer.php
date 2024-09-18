@@ -19,11 +19,11 @@ class StockSanitizer
             'idProduto' => $this->sanitizeInt($data['idProduto']),
             'type' => $this->sanitize($data['type']),
             'cost' => $this->sanitizeDecimal($data['cost']),
-            'quantity' => $this->sanitizeInt($data['quantity'])
+            'quantity' => $this->sanitizeInt($data['quantity']),
+            'priceUn' => $this->sanitizeDecimal($data['price-un'])
         ];
 
         $this->stockValidator->validate($dataSanitize);
-
     }
 
     private function sanitizeInt($data)

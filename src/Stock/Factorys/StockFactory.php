@@ -21,8 +21,8 @@ class StockFactory
             $data['type'],
             $data['cost'],
             $data['quantity'],
+            $data['priceUn'],
             $formattedDate
-
         );
     }
 }
