@@ -98,14 +98,20 @@ class ServiceContainer
         };
 
         $this->services['StockController'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\Controllers\StockController($this->get('StockService'));
+            return new \Andre\GestaoDeEstoque\Stock\Controllers\StockController($this->get('StockSanitizer'));
+        };
+
+        $this->services['StockSanitizer'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Validation\StockSanitizer($this->get('StockValidator'));
+        };
+
+        $this->services['StockValidator'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Validation\StockValidator($this->get('StockService'));
         };
 
         $this->services['StockService'] = function () {
             return new \Andre\GestaoDeEstoque\Stock\Services\StockService(
-                $this->get('StockRepository'),
-                $this->get('DataSanitizer'),
-                $this->get('StockValidator')
+                $this->get('StockRepository')
             );
         };
 
@@ -113,9 +119,6 @@ class ServiceContainer
             return new \Andre\GestaoDeEstoque\Stock\Repository\StockRepository($this->get('DatabaseManager'));
         };
 
-        $this->services['StockValidator'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\Validator\StockValidator();
-        };
     }
 
     public function register($name, $callback)

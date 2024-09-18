@@ -1,12 +1,18 @@
 <?php
 
-namespace Andre\GestaoDeEstoque\Stock\Validator;
+namespace Andre\GestaoDeEstoque\Stock\Validation;
 
+use Andre\GestaoDeEstoque\Stock\Services\StockServiceInterface;
 use InvalidArgumentException;
 
 class StockValidator
 {
-    public function __construct() {}
+    private $stockService;
+
+    public function __construct(StockServiceInterface $stockService)
+    {
+        $this->stockService =  $stockService;
+    }
 
     public function validate(array $data): void
     {
@@ -34,5 +40,11 @@ class StockValidator
         if (!empty($data['cost']) && $data['cost'] < 0) {
             throw new InvalidArgumentException('The cost cannot be less than zero.');
         }
+
+        if ($data['cost'] === '') {
+            $data['cost'] = 0;
+        }
+
+        $this->stockService->processStockMovement($data);
     }
 }

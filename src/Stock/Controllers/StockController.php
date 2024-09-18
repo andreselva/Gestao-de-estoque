@@ -2,23 +2,23 @@
 
 namespace Andre\GestaoDeEstoque\Stock\Controllers;
 
-use Andre\GestaoDeEstoque\Stock\Services\StockServiceInterface;
+use Andre\GestaoDeEstoque\Stock\Validation\StockSanitizer;
 use Exception;
 use InvalidArgumentException;
 
 class StockController
 {
 
-    private $stockService;
+    private $dataSanitizer;
 
-    public function __construct(StockServiceInterface $stockService)
+    public function __construct(StockSanitizer $dataSanitizer)
     {
-        $this->stockService = $stockService;
+        $this->dataSanitizer = $dataSanitizer;
     }
 
     public function getStockMovement(array $data) {
         try {
-            $this->stockService->processStockMovement($data);
+            $this->dataSanitizer->sanitizer($data);
             $this->sendJsonResponse(['status' => 'success'], 200);
         } catch (InvalidArgumentException $e) {
             $this->sendJsonResponse(['status' => 'error', 'errorMsg' => $e->getMessage()], 400);

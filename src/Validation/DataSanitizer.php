@@ -7,8 +7,6 @@ use InvalidArgumentException;
 
 class DataSanitizer
 {
-    public function __construct() {}
-
     public function productSanitizer(array $data): array
     {
         $sanitizedData = [
@@ -35,16 +33,6 @@ class DataSanitizer
         }
 
         return $sanitizedData;
-    }
-
-    public function stockSanitizer(array $data): array
-    {
-        return [
-            'id' => $this->sanitizeInt($data['idProduto']),
-            'type' => $this->sanitize($data['type']),
-            'cost' => $this->sanitizeDecimal($data['cost']),
-            'quantity' => $this->sanitizeInt($data['quantity'])
-        ];
     }
 
     /**
@@ -83,8 +71,4 @@ class DataSanitizer
         return number_format((float)$sanitizedData, 2, '.', '');
     }
 
-    private function sanitizeInt(string $data): int
-    {
-        return (int) $data;
-    }
 }

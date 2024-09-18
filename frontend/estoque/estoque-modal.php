@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="../css/modal-estoque.css">
-<script src="../js/modal-estoque.js" defer></script>
+<link rel="stylesheet" href="../estoque/modal-estoque.css">
+<script src="../estoque/modal-estoque.js" defer></script>
 
 <div id="fade" class="hide"></div>
 <div id="modal" class="hide">

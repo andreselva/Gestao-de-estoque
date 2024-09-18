@@ -4,8 +4,6 @@ namespace Andre\GestaoDeEstoque\Stock\Services;
 
 use Andre\GestaoDeEstoque\Stock\Factorys\StockFactory;
 use Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryInterface;
-use Andre\GestaoDeEstoque\Validation\DataSanitizer;
-use Andre\GestaoDeEstoque\Stock\Validator\StockValidator;
 use Exception;
 use InvalidArgumentException;
 
@@ -13,14 +11,10 @@ class StockService implements StockServiceInterface
 {
 
     private $stockRepository;
-    private $sanitizer;
-    private $validator;
 
-    public function __construct(StockRepositoryInterface $stockRepository, DataSanitizer $sanitizer, StockValidator $validator)
+    public function __construct(StockRepositoryInterface $stockRepository)
     {
         $this->stockRepository = $stockRepository;
-        $this->sanitizer = $sanitizer;
-        $this->validator = $validator;
 
         set_error_handler(function ($severity, $message, $file, $line) {
             // Lançar uma exceção com os detalhes do erro
@@ -31,13 +25,6 @@ class StockService implements StockServiceInterface
     public function processStockMovement(array $data): void
     {
         try {
-            $this->sanitizer->stockSanitizer($data);
-            $this->validator->validate($data);
-
-            if ($data['cost'] === '') {
-                $data['cost'] = 0;
-            }
-
             $StockMovement = StockFactory::create($data);
             $this->stockRepository->executeTransaction(function () use ($StockMovement) {
                 // Salvar movimento de estoque

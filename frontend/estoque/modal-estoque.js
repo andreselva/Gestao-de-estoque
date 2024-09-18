@@ -34,6 +34,13 @@ async function lancarEstoque(event) {
 
         const responseData = await response.json();
 
+        if (responseData.status === 'success') {
+            alert("Lançamento efetuado com sucesso!")
+            window.location.reload();
+        } else {
+            alert("Houve um problema no lançamento. O estoque não foi lançado.")
+        }
+        
     } catch (erro) {
 
     }

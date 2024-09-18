@@ -1,19 +1,29 @@
 <?php
 
-namespace Andre\GestaoDeEstoque\Stock\Sanitizer;
+namespace Andre\GestaoDeEstoque\Stock\Validation;
 
-use Andre\GestaoDeEstoque\Stock\Services\StockServiceInterface;
+use Andre\GestaoDeEstoque\Stock\Validation\StockValidator;
 
-class StockSanitizer implements StockSanitizerInterface
+class StockSanitizer
 {
-    public function sanitizer(array $data): array
+    private $stockValidator;
+
+    public function __construct(StockValidator $stockValidator)
     {
-        return [
-            'id' => $this->sanitizeInt($data['idProduto']),
+        $this->stockValidator = $stockValidator;
+    }
+
+    public function sanitizer(array $data): void
+    {
+        $dataSanitize = [
+            'idProduto' => $this->sanitizeInt($data['idProduto']),
             'type' => $this->sanitize($data['type']),
             'cost' => $this->sanitizeDecimal($data['cost']),
             'quantity' => $this->sanitizeInt($data['quantity'])
         ];
+
+        $this->stockValidator->validate($dataSanitize);
+
     }
 
     private function sanitizeInt($data)

@@ -2,8 +2,6 @@
 
 namespace Andre\GestaoDeEstoque\Stock\Entity;
 
-use DateTime;
-
 class Stock
 {
     private int $id;
