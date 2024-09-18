@@ -2,8 +2,6 @@
 
 namespace Andre\GestaoDeEstoque\Containers;
 
-use Andre\GestaoDeEstoque\Auth\Repository\AuthUserRepository;
-
 class ServiceContainer
 {
     private $services = [];
@@ -15,7 +13,9 @@ class ServiceContainer
         };
 
         $this->services['DatabaseManager'] = function () {
-            return new \Andre\GestaoDeEstoque\Database\DatabaseManager($this->get('MySQLDatabase'));
+            return new \Andre\GestaoDeEstoque\Database\DatabaseManager(
+                $this->get('MySQLDatabase')
+            );
         };
 
         $this->services['DataSanitizer'] = function () {
@@ -27,27 +27,42 @@ class ServiceContainer
         };
 
         $this->services['AuthController'] = function () {
-            return new \Andre\GestaoDeEstoque\Auth\Controllers\AuthController($this->get('AuthService'));
+            return new \Andre\GestaoDeEstoque\Auth\Controllers\AuthController(
+                $this->get('AuthService')
+            );
         };
 
         $this->services['AuthService'] = function () {
-            return new \Andre\GestaoDeEstoque\Auth\Services\AuthService($this->get('AuthUserRepository'), $this->get('DataSanitizer'));
+            return new \Andre\GestaoDeEstoque\Auth\Services\AuthService(
+                $this->get('AuthUserRepository'),
+                $this->get('DataSanitizer')
+            );
         };
 
         $this->services['AuthUserRepository'] = function () {
-            return new \Andre\GestaoDeEstoque\Auth\Repository\AuthUserRepository($this->get('DatabaseManager'));
+            return new \Andre\GestaoDeEstoque\Auth\Repository\AuthUserRepository(
+                $this->get('DatabaseManager')
+            );
         };
 
         $this->services['autenticar-usuario'] = function () {
-            return new \Andre\GestaoDeEstoque\Actions\AutenticarUsuarioAction($this, $this->get('AuthController'));
+            return new \Andre\GestaoDeEstoque\Actions\AutenticarUsuarioAction(
+                $this,
+                $this->get('AuthController')
+            );
         };
 
         $this->services['cadastrar-usuario'] = function () {
-            return new \Andre\GestaoDeEstoque\Actions\CadastrarUsuarioAction($this, $this->get('UserController'));
+            return new \Andre\GestaoDeEstoque\Actions\CadastrarUsuarioAction(
+                $this,
+                $this->get('UserController')
+            );
         };
 
         $this->services['UserController'] = function () {
-            return new \Andre\GestaoDeEstoque\Users\Controllers\UserController($this->get('UserService'));
+            return new \Andre\GestaoDeEstoque\Users\Controllers\UserController(
+                $this->get('UserService')
+            );
         };
 
         $this->services['UserService'] = function () {
@@ -59,27 +74,43 @@ class ServiceContainer
         };
 
         $this->services['UserRepository'] = function () {
-            return new \Andre\GestaoDeEstoque\Users\Repository\UserRepository($this->get('DatabaseManager'));
+            return new \Andre\GestaoDeEstoque\Users\Repository\UserRepository(
+                $this->get('DatabaseManager')
+            );
         };
 
         $this->services['cadastrar-produto'] = function () {
-            return new \Andre\GestaoDeEstoque\Actions\CadastrarProdutosAction($this, $this->get('ProductsController'));
+            return new \Andre\GestaoDeEstoque\Actions\CadastrarProdutosAction(
+                $this,
+                $this->get('ProductsController')
+            );
         };
 
         $this->services['listar-produtos'] = function () {
-            return new \Andre\GestaoDeEstoque\Actions\ListarProdutosAction($this, $this->get('ProductsController'));
+            return new \Andre\GestaoDeEstoque\Actions\ListarProdutosAction(
+                $this,
+                $this->get('ProductsController')
+            );
         };
 
         $this->services['buscar-produto'] = function () {
-            return new \Andre\GestaoDeEstoque\Actions\BuscarProdutoAction($this, $this->get('ProductsController'));
+            return new \Andre\GestaoDeEstoque\Actions\BuscarProdutoAction(
+                $this,
+                $this->get('ProductsController')
+            );
         };
 
         $this->services['editar-produto'] = function () {
-            return new \Andre\GestaoDeEstoque\Actions\EditarProdutoAction($this, $this->get('ProductsController'));
+            return new \Andre\GestaoDeEstoque\Actions\EditarProdutoAction(
+                $this,
+                $this->get('ProductsController')
+            );
         };
 
         $this->services['ProductsController'] = function () {
-            return new \Andre\GestaoDeEstoque\Produtos\Controllers\ProductsController($this->get('ProductService'));
+            return new \Andre\GestaoDeEstoque\Produtos\Controllers\ProductsController(
+                $this->get('ProductService')
+            );
         };
 
         $this->services['ProductService'] = function () {
@@ -90,23 +121,34 @@ class ServiceContainer
         };
 
         $this->services['ProductRepository'] = function () {
-            return new \Andre\GestaoDeEstoque\Produtos\Repository\ProductRepository($this->get('DatabaseManager'));
+            return new \Andre\GestaoDeEstoque\Produtos\Repository\ProductRepository(
+                $this->get('DatabaseManager')
+            );
         };
 
         $this->services['lancar-estoque'] = function () {
-            return new \Andre\GestaoDeEstoque\Actions\LancarEstoqueAction($this, $this->get('StockController'));
+            return new \Andre\GestaoDeEstoque\Actions\LancarEstoqueAction(
+                $this,
+                $this->get('StockController')
+            );
         };
 
         $this->services['StockController'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\Controllers\StockController($this->get('StockSanitizer'));
+            return new \Andre\GestaoDeEstoque\Stock\Controllers\StockController(
+                $this->get('StockSanitizer')
+            );
         };
 
         $this->services['StockSanitizer'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\Validation\StockSanitizer($this->get('StockValidator'));
+            return new \Andre\GestaoDeEstoque\Stock\Validation\StockSanitizer(
+                $this->get('StockValidator')
+            );
         };
 
         $this->services['StockValidator'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\Validation\StockValidator($this->get('StockService'));
+            return new \Andre\GestaoDeEstoque\Stock\Validation\StockValidator(
+                $this->get('StockService')
+            );
         };
 
         $this->services['StockService'] = function () {
@@ -116,9 +158,10 @@ class ServiceContainer
         };
 
         $this->services['StockRepository'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\Repository\StockRepository($this->get('DatabaseManager'));
+            return new \Andre\GestaoDeEstoque\Stock\Repository\StockRepository(
+                $this->get('DatabaseManager')
+            );
         };
-
     }
 
     public function register($name, $callback)
