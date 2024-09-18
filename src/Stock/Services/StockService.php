@@ -31,13 +31,14 @@ class StockService implements StockServiceInterface
     public function processStockMovement(array $data): void
     {
         try {
-
-
             $StockMovement = StockFactory::create($data);
             $this->stockRepository->executeTransaction(function () use ($StockMovement) {
-                
+
+                // Verifica se é tipo entrada. Se for, verifica o valor do parâmetro. 
+                // Se for 1, verifica se o custo já não foi informado no lançamento, se não foi, calcula.
                 if ($StockMovement->getType() === 'E') {
-                    if ($this->parameters->getValueParam('controlaCusto') === 1) {
+                    $calculateCost = $this->parameters->getValueParam('controlaCusto');
+                    if ($calculateCost === 1) {
                         if ($StockMovement->getCost() == '' || $StockMovement->getCost() == 0) {
                             $cost = $this->costCalculator->calculateByItem(
                                 $StockMovement->getId(),
@@ -54,15 +55,26 @@ class StockService implements StockServiceInterface
                 // Obter dados para o cálculo do novo estoque
                 $dateBalance = $this->stockRepository->getLastDateBalance($StockMovement->getId());
                 $lastBalance = $this->stockRepository->getLastBalance($StockMovement->getId(), $dateBalance);
-                $entrances = $this->stockRepository->getAllEntrances($StockMovement->getId(), $dateBalance);
+                $entries = $this->stockRepository->getAllEntries($StockMovement->getId(), $dateBalance);
                 $exits = $this->stockRepository->getAllExits($StockMovement->getId(), $dateBalance);
 
                 // Calcular o novo estoque e atualizar
-                $newStock = $this->calculateNewStock($lastBalance, $entrances, $exits);
-
-
-
+                $newStock = $this->calculateNewStock($lastBalance, $entries, $exits);
                 $this->stockRepository->updateStock($StockMovement->getId(), $newStock);
+
+                if ($calculateCost === 1) {
+                    $allEntries = 0;
+                    $allCosts = 0;
+                    $entriesForCost = $this->stockRepository->getAllEntriesForCost($StockMovement->getId(), $dateBalance);
+
+                    foreach ($entriesForCost as $e) {
+                        $allEntries += $e['quantity'];
+                        $allCosts += $e['cost'];
+                    }
+
+                    $newCostProduct = $this->costCalculator->updateCostProduct($allEntries, $allCosts, $cost);
+                    $this->stockRepository->updateCostProduct($newCostProduct, $StockMovement->getId(),);
+                }
             });
         } catch (\InvalidArgumentException $e) {
             throw new InvalidArgumentException('An error occurred while moving stock', 0, $e);

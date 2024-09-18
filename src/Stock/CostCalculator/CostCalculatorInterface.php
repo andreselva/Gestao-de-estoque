@@ -7,5 +7,5 @@ use Andre\GestaoDeEstoque\Stock\Entity\Stock;
 interface CostCalculatorInterface
 {
     public function calculateByItem($idProduto, $entrance, $precoUn);
-    public function updateRegister();
+    public function updateCostProduct(int $allEntries, float $allCosts, float $cost);
 }

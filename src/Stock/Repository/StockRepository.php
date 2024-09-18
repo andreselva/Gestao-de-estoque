@@ -72,7 +72,7 @@ class StockRepository implements StockRepositoryInterface
         }
     }
 
-    public function getAllEntrances($idProduto, $dataBalanco)
+    public function getAllEntries($idProduto, $dataBalanco)
     {
         try {
             $sql = "SELECT COALESCE(SUM(quantity), 0) as entradas FROM stock
@@ -142,5 +142,31 @@ class StockRepository implements StockRepositoryInterface
         $stmt->bindValue(1, $novoEstoque);
         $stmt->bindValue(2, $idProduto);
         return $stmt->execute();
+    }
+
+    public function getAllEntriesForCost($idProduto, $dataBalanco): array
+    {
+        $sql = "SELECT quantity, cost FROM stock WHERE idProduto = ? and date >= ? and type in ('E', 'B')";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(1, $idProduto);
+        $stmt->bindValue(2, $dataBalanco);
+        $stmt->execute();
+
+        $entrances = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($entrances) {
+            return $entrances;
+        }
+    }
+
+    public function updateCostProduct($newCost, $idProduto)
+    {
+        $sql = "UPDATE products SET cost = ? WHERE id = ?";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(1, $newCost);
+        $stmt->bindValue(2, $idProduto);
+        $stmt->execute();
+        $rows = $stmt->rowCount();
+        return $rows;
     }
 }

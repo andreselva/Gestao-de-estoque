@@ -12,5 +12,9 @@ class CostCalculator implements CostCalculatorInterface
         return $costMovement;
     }
 
-    public function updateRegister() {}
+    public function updateCostProduct(int $allEntries, float $allCosts, float $cost)
+    {
+        $newCostProduct = (($allEntries * $allCosts) / $allEntries) + $cost;
+        return $newCostProduct;
+    }
 }
