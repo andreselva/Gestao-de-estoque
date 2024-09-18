@@ -15,23 +15,37 @@ class StockRepository implements StockRepositoryInterface
         $this->connection = $connection;
     }
 
-    public function saveStockMovement(Stock $launch): bool
+    public function executeTransaction(callable $operations)
     {
         try {
-            $sql = "INSERT INTO stock (idProduto, type, quantity, cost, date) VALUES (?, ?, ?, ?, ?)";
-            $stmt = $this->connection->prepare($sql);
-            $stmt->bindValue(1, $launch->getId());
-            $stmt->bindValue(2, $launch->getType());
-            $stmt->bindValue(3, $launch->getQuantity());
-            $stmt->bindValue(4, $launch->getCost());
-            $stmt->bindValue(5, $launch->getDate());
-            if ($stmt->execute()) {
-                return true;
-            };
+            // Iniciar transação
+            $this->connection->beginTransaction();
+
+            // Executar as operações passadas na callback
+            $operations();
+
+            // Se tudo deu certo, fazer o commit
+            $this->connection->commit();
         } catch (Exception $e) {
-            throw new Exception('An error occurred while saving the stock movement', 0, $e);
+            // Se houve erro, fazer rollback
+            $this->connection->rollBack();
+            throw $e; // Lançar exceção novamente para ser tratada na camada superior
         }
     }
+
+    public function saveStockMovement(Stock $launch): bool
+    {
+
+        $sql = "INSERT INTO stock (idProduto, type, quantity, cost, date) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(1, $launch->getId());
+        $stmt->bindValue(2, $launch->getType());
+        $stmt->bindValue(3, $launch->getQuantity());
+        $stmt->bindValue(4, $launch->getCost());
+        $stmt->bindValue(5, $launch->getDate());
+        return $stmt->execute();
+    }
+
 
     public function getLastDateBalance($idProduto)
     {
@@ -115,22 +129,17 @@ class StockRepository implements StockRepositoryInterface
             if ($balance) {
                 return $balance;
             }
-
         } catch (Exception $e) {
             throw new Exception('an error.');
         }
     }
 
-    public function updateStock($idProduto, $novoEstoque)
+    public function updateStock($idProduto, $novoEstoque): bool
     {
-        try {
-            $sql = "UPDATE products SET estoque = ? WHERE id = ?";
-            $stmt = $this->connection->prepare($sql);
-            $stmt->bindValue(1, $novoEstoque);
-            $stmt->bindValue(2, $idProduto);
-            $stmt->execute();
-        } catch (Exception $e) {
-            throw new Exception('an error...');
-        }
+        $sql = "UPDATE products SET estoque = ? WHERE id = ?";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(1, $novoEstoque);
+        $stmt->bindValue(2, $idProduto);
+        return $stmt->execute();
     }
 }
