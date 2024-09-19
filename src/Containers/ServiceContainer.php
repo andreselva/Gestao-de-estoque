@@ -26,6 +26,10 @@ class ServiceContainer
             return new \Andre\GestaoDeEstoque\Users\Security\PasswordHasher();
         };
 
+        $this->services['ParamatersRepository'] = function () {
+            return new \Andre\GestaoDeEstoque\Parameters\ParametersRepository('DatabaseManager');
+        };
+
         $this->services['AuthController'] = function () {
             return new \Andre\GestaoDeEstoque\Auth\Controllers\AuthController(
                 $this->get('AuthService')
@@ -153,10 +157,32 @@ class ServiceContainer
 
         $this->services['StockService'] = function () {
             return new \Andre\GestaoDeEstoque\Stock\Services\StockService(
-                $this->get('StockRepository'),
                 $this->get('ParametersRepository'),
-                $this->get('CostCalculator')
+                $this->get('StockTransactionManager'),
+                $this->get('StockMovementProcessor'),
+                $this->get('StockUpdater'),
+                $this->get('CostUpdater')
             );
+        };
+
+        $this->services['StockTransactionManager'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Manager\StockTransactionManager(
+                $this->get('StockRepository')
+            );
+        };
+
+        $this->services['StockMovementProcessor'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Processor\StockMovementProcessor($this->get('CostCalculator'));
+        };
+
+        $this->services['StockUpdater'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Updater\StockUpdater($this->get('StockRepository'));
+        };
+
+        $this->services['CostUpdater'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\CostCalculator\CostUpdater(
+            $this->get('StockRepository'),
+            $this->get('CostCalculator'));
         };
 
         $this->services['CostCalculator'] = function () {
