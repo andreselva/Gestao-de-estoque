@@ -32,7 +32,7 @@ class ProductService implements ProductServiceInterface
             $sanitizedData['pesoLiquido'],
             $sanitizedData['gtin']
         );
-        
+
         $this->productRepository->saveProduct($product);
     }
 
@@ -66,5 +66,12 @@ class ProductService implements ProductServiceInterface
         );
 
         $this->productRepository->saveProductEdit($product);
+    }
+
+    public function searchProductsForDropdown(array $data): array
+    {
+        $searched = $data['searched'];
+        $result = $this->productRepository->getProductsDropdown($searched);
+        return $result;
     }
 }

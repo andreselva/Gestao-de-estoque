@@ -1,0 +1,50 @@
+let searchTimeout; // Variável para armazenar o timeout
+
+document.getElementById('search-input').addEventListener('input', function () {
+    const query = this.value;
+
+    // Limpa o timeout anterior sempre que o usuário continuar digitando
+    clearTimeout(searchTimeout);
+
+    if (query.length < 2) {
+        document.getElementById('dropdownResultEstoque').style.display = 'none';
+        return;
+    }
+
+    const params = new URLSearchParams({
+        action: 'dropdown-produtos',
+        search: `${query}`
+    })
+
+    // Inicia um novo timeout que vai esperar 300ms antes de fazer a requisição
+    searchTimeout = setTimeout(() => {
+        fetch(`../../src/index.php?${params.toString()}`)
+            .then(response => response.json())
+            .then(data => {
+                const dropdown = document.getElementById('dropdownResultEstoque');
+                dropdown.innerHTML = ''; // Limpa os resultados anteriores
+
+                if (data.length === 0) {
+                    dropdown.style.display = 'none';
+                    return;
+                }
+
+                const results = data.slice(0, 10); // Limitar a 10 resultados
+                results.forEach(product => {
+                    const div = document.createElement('div');
+                    div.textContent = `${product.codigo} - ${product.descricao}`;
+                    div.addEventListener('click', function () {
+                        document.getElementById('search-input').value = `${product.codigo} - ${product.descricao}`;
+                        dropdown.style.display = 'none';
+                    });
+
+                    dropdown.appendChild(div); // Adiciona o produto ao dropdown
+                });
+
+                dropdown.style.display = 'block'; // Mostra o dropdown com os resultados
+            })
+            .catch(error => {
+                console.error('Erro ao buscar produtos:', error);
+            });
+    }, 300); // Delay de 300ms
+});

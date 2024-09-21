@@ -27,7 +27,7 @@ class ServiceContainer
         };
 
         $this->services['ParamatersRepository'] = function () {
-            return new \Andre\GestaoDeEstoque\Parameters\ParametersRepository('DatabaseManager');
+            return new \Andre\GestaoDeEstoque\Parameters\ParametersRepository($this->get('DatabaseManager'));
         };
 
         $this->services['AuthController'] = function () {
@@ -111,6 +111,12 @@ class ServiceContainer
             );
         };
 
+        $this->services['dropdown-produtos'] = function () {
+            return new \Andre\GestaoDeEstoque\Produtos\Controllers\ProductsController(
+                $this->get('ProductsController')
+            );
+        };
+
         $this->services['ProductsController'] = function () {
             return new \Andre\GestaoDeEstoque\Produtos\Controllers\ProductsController(
                 $this->get('ProductService')
@@ -181,8 +187,9 @@ class ServiceContainer
 
         $this->services['CostUpdater'] = function () {
             return new \Andre\GestaoDeEstoque\Stock\CostCalculator\CostUpdater(
-            $this->get('StockRepository'),
-            $this->get('CostCalculator'));
+                $this->get('StockRepository'),
+                $this->get('CostCalculator')
+            );
         };
 
         $this->services['CostCalculator'] = function () {

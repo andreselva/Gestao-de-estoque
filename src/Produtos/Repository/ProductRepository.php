@@ -88,4 +88,24 @@ class ProductRepository implements ProductRepositoryInterface
             throw new Exception("An error ocurred " . $e->getMessage());
         }
     }
+
+    public function getProductsDropdown(string $toSearch): array
+    {
+        try {
+            $sql = "SELECT * FROM products WHERE codigo=? or name=?";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(1, $toSearch);
+            $stmt->bindValue(2, $toSearch);
+
+
+            if ($stmt->execute()) {
+                $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                return $results;
+            }
+
+            return [];
+        } catch (Exception $e) {
+            throw new Exception("An error ocurred " . $e->getMessage());
+        }
+    }
 }
