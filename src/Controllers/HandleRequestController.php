@@ -49,7 +49,8 @@ class HandleRequestController
 
             switch ($action) {
                 case 'buscar-produto':
-                    $idProduto = $_GET['id'] ?? null;
+                case 'buscar-lancamentos':
+                    $idProduto = $_GET['idProduto'] ?? null;
                     if ($idProduto) {
                         $data['idProduto'] = $idProduto;
                     } else {
@@ -66,7 +67,7 @@ class HandleRequestController
                     break;
                 case 'listar-produtos':
                     break;
-                default:    
+                default:
                     $this->sendError('Nenhuma ação válida.');
             }
         }

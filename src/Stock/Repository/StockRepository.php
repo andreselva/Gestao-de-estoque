@@ -169,4 +169,22 @@ class StockRepository implements StockRepositoryInterface
         $rows = $stmt->rowCount();
         return $rows;
     }
+
+    public function searchMovements($idProduto): array
+    {
+        try {
+            $sql = "SELECT * FROM stock WHERE idProduto = ?";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(1, $idProduto);
+
+            if ($stmt->execute()) {
+                $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                return $results;
+            }
+
+            return [];
+            
+        } catch (Exception $e) {
+        }
+    }
 }

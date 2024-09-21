@@ -38,6 +38,8 @@ document.getElementById('search-input').addEventListener('input', function () {
                         document.getElementById('search-input').value = `${product.codigo} - ${product.name}`;
                         idProduto = `${product.id}`; // Guarda o id do produto na variável definida anteriormente.
                         dropdown.style.display = 'none';
+
+                        buscarLancamentosEstoque(); // Chama a função para buscar lançamentos
                     });
 
                     dropdown.appendChild(div); // Adiciona o produto ao dropdown
@@ -50,3 +52,41 @@ document.getElementById('search-input').addEventListener('input', function () {
             });
     }, 300); // Delay de 300ms
 });
+
+
+function buscarLancamentosEstoque() {
+    if (!idProduto) return; // Se não houver um idProduto, não faz nada.
+
+    const params = new URLSearchParams({
+        action: 'buscar-lancamentos',
+        idProduto: idProduto
+    });
+
+    fetch(`../../src/index.php?${params.toString()}`)
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById('lancamentosTable').querySelector('tbody');
+            tbody.innerHTML = ''; // Limpa os dados anteriores
+
+            if (data.length === 0) {
+                document.getElementById('lancamentosTable').style.display = 'none'; // Esconde a tabela se não houver dados
+                return;
+            }
+
+            // Preenche a tabela com os dados retornados
+            data.forEach(lancamento => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${lancamento.date}</td>
+                    <td>${lancamento.type}</td>
+                    <td>${lancamento.quantity}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            document.getElementById('lancamentosTable').style.display = 'table'; // Mostra a tabela
+        })
+        .catch(error => {
+            console.error('Erro ao buscar lançamentos de estoque:', error);
+        });
+}

@@ -26,9 +26,23 @@ class StockSanitizer
         $this->stockValidator->validate($dataSanitize);
     }
 
+    public function sanitizeSearchMovements($data)
+    {
+        $dataSanitize = [
+            'idProduto' => $this->sanitizeInt($data['idProduto'])
+        ];
+
+        return $this->stockValidator->validateIdProduct($dataSanitize);
+    }
+
     private function sanitizeInt($data)
     {
-        return (int) $data;
+        // Verifica se é um número antes de converter
+        if (is_numeric($data)) {
+            return (int)$data; // Converte para inteiro
+        }
+
+        return 0; // Retorna 0 se não for numérico
     }
 
     private function sanitize($data)

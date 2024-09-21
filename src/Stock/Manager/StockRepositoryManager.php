@@ -1,9 +1,10 @@
 <?php
+
 namespace Andre\GestaoDeEstoque\Stock\Manager;
 
 use Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryInterface;
 
-class StockTransactionManager
+class StockRepositoryManager
 {
     private $stockRepository;
 
@@ -12,8 +13,13 @@ class StockTransactionManager
         $this->stockRepository = $stockRepository;
     }
 
-    public function execute(callable $transaction)
+    public function executeTransaction(callable $transaction)
     {
         $this->stockRepository->executeTransaction($transaction);
+    }
+
+    public function executeSearch(int $idProduto): array
+    {
+        return $this->stockRepository->searchMovements($idProduto);
     }
 }

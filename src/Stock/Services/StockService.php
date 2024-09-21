@@ -5,7 +5,7 @@ namespace Andre\GestaoDeEstoque\Stock\Services;
 use Andre\GestaoDeEstoque\Parameters\ParametersRepositoryInterface;
 use Andre\GestaoDeEstoque\Stock\CostCalculator\CostUpdater;
 use Andre\GestaoDeEstoque\Stock\Factorys\StockFactory;
-use Andre\GestaoDeEstoque\Stock\Manager\StockTransactionManager;
+use Andre\GestaoDeEstoque\Stock\Manager\StockRepositoryManager;
 use Andre\GestaoDeEstoque\Stock\Processor\StockMovementProcessor;
 use Andre\GestaoDeEstoque\Stock\Updater\StockUpdater;
 use Exception;
@@ -22,12 +22,11 @@ class StockService implements StockServiceInterface
 
     public function __construct(
         ParametersRepositoryInterface $parameters,
-        StockTransactionManager $manager, 
-        StockMovementProcessor $movementProcessor, 
+        StockRepositoryManager $manager,
+        StockMovementProcessor $movementProcessor,
         StockUpdater $stockUpdater,
         CostUpdater $costUpdater
-        )
-    {
+    ) {
         $this->parameters = $parameters;
         $this->manager = $manager;
         $this->movementProcessor = $movementProcessor;
@@ -37,17 +36,17 @@ class StockService implements StockServiceInterface
 
     public function processStockMovement(array $data): void
     {
-        try {    
+        try {
             $StockMovement = StockFactory::create($data);
 
-            $this->manager->execute(function () use ($StockMovement) {
+            $this->manager->executeTransaction(function () use ($StockMovement) {
                 $paramCost = $this->parameters->getValueParam('controlaCusto');
 
                 if ($StockMovement->getType() === self::MOVE_STOCK && $paramCost === 1) {
                     $this->movementProcessor->process($StockMovement);
                     $this->costUpdater->updateProductCost($StockMovement);
                 }
-                
+
                 $this->stockUpdater->saveTransaction($StockMovement);
                 $this->stockUpdater->updateProduct($StockMovement);
             });
@@ -58,4 +57,12 @@ class StockService implements StockServiceInterface
         }
     }
 
+    public function searchMovements($idProduto)
+    {
+        try {
+            return $this->manager->executeSearch($idProduto);
+        } catch (\InvalidArgumentException $e) {
+            throw new InvalidArgumentException('An error ocurred', 0, $e);
+        }
+    }
 }

@@ -144,6 +144,13 @@ class ServiceContainer
             );
         };
 
+        $this->services['buscar-lancamentos'] = function () {
+            return new \Andre\GestaoDeEstoque\Actions\SearchStockMovements(
+                $this,
+                $this->get('StockController')
+            );
+        };
+
         $this->services['StockController'] = function () {
             return new \Andre\GestaoDeEstoque\Stock\Controllers\StockController(
                 $this->get('StockSanitizer')
@@ -165,15 +172,15 @@ class ServiceContainer
         $this->services['StockService'] = function () {
             return new \Andre\GestaoDeEstoque\Stock\Services\StockService(
                 $this->get('ParametersRepository'),
-                $this->get('StockTransactionManager'),
+                $this->get('StockRepositoryManager'),
                 $this->get('StockMovementProcessor'),
                 $this->get('StockUpdater'),
                 $this->get('CostUpdater')
             );
         };
 
-        $this->services['StockTransactionManager'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\Manager\StockTransactionManager(
+        $this->services['StockRepositoryManager'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Manager\StockRepositoryManager(
                 $this->get('StockRepository')
             );
         };

@@ -55,4 +55,15 @@ class StockValidator
 
         $this->stockService->processStockMovement($data);
     }
+
+    public function validateIdProduct($data)
+    {
+        if (!isset($data['idProduto']) || !is_int($data['idProduto']) || $data['idProduto'] <= 0) {
+            throw new InvalidArgumentException('Check product id');
+        }
+
+        $idProduto = $data['idProduto'];
+
+        return $this->stockService->searchMovements($idProduto);
+    }
 }

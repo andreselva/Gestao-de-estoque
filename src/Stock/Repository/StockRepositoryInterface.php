@@ -15,4 +15,5 @@ interface StockRepositoryInterface
     public function updateStock($idProduto, $novoEstoque);
     public function getAllEntriesForCost($idProduto, $dataBalanco);
     public function updateCostProduct($newCost, $idProduto);
+    public function searchMovements($idProduto): array;
 }

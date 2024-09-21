@@ -1,15 +1,13 @@
 #estoque {
-    position: absolute;
+    position: relative; /* Altere para relative para evitar problemas de responsividade */
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 1300px;
-    height: 100vh;
+    height: auto; /* Altere para auto para permitir altura dinâmica */
     padding: 2em;
     border: solid 0px #030303;
-    top: 50%;
-    left: 56.3%;
-    transform: translate(-50%, -50%);
+    margin: 0 auto; /* Centraliza o contêiner */
 }
 
 #container {
@@ -20,50 +18,34 @@
 
 .minimal-button {
     background-color: #ffffff;
-    /* Fundo branco */
     color: #333333;
-    /* Texto cinza escuro */
     border: 1px solid #cccccc;
-    /* Borda cinza clara */
     padding: 10px 20px;
-    /* Espaçamento interno */
     font-size: 12px;
-    /* Tamanho da fonte */
     border-radius: 5px;
-    /* Bordas arredondadas */
     cursor: pointer;
-    /* Cursor de ponteiro ao passar por cima */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .minimal-button:hover {
     background-color: #f0f0f0;
-    /* Fundo levemente mais escuro ao passar o mouse */
     color: #000000;
-    /* Texto fica preto ao passar o mouse */
 }
 
 .minimal-search {
     width: 100%;
-    /* Largura total */
     padding: 10px 15px;
-    /* Espaçamento interno */
     max-width: 400px;
     font-size: 16px;
-    /* Tamanho da fonte */
     border: 1px solid #cccccc;
-    /* Borda cinza clara */
     border-radius: 5px;
-    /* Bordas arredondadas */
     outline: none;
-    /* Remove o contorno ao focar */
     transition: border-color 0.3s ease;
     background-color: transparent;
 }
 
 .minimal-search:focus {
     border-color: #999999;
-    /* Cor da borda ao focar */
 }
 
 #dropdownResultEstoque {
@@ -72,21 +54,52 @@
     overflow-y: auto;
     display: none;
     position: absolute;
-    background-color: white;
-    width: 100%;
-    z-index: 1000;
-    color: #000;
+    background-color: #868282;
+    color:#000000;
     width: 100%;
     max-width: 600px;
+    z-index: 1000;
 }
 
 #dropdownResultEstoque div {
     padding: 10px;
     cursor: pointer;
-    color: #000;
 }
 
-#dropdown div:hover {
+#dropdownResultEstoque div:hover {
     background-color: #f0f0f0;
-    color: #000;
+}
+
+#tabela-lancamentos {
+    width: 80%; /* Ajustado para 80% */
+    margin: 20px auto; /* Centraliza a tabela */
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #a09c9c; /* Fundo para a tabela */
+}
+
+#lancamentosTable {
+    width: 100%; /* 100% para ocupar o espaço disponível */
+    border-collapse: collapse;
+}
+
+#lancamentosTable th,
+#lancamentosTable td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+#lancamentosTable th {
+    background-color: #000000;
+    font-weight: bold;
+}
+
+#lancamentosTable tr:nth-child(even) {
+    background-color: #5e5d5d;
+}
+
+#lancamentosTable tr:hover {
+    background-color: #cecccc;
 }

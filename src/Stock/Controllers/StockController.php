@@ -16,7 +16,8 @@ class StockController
         $this->dataSanitizer = $dataSanitizer;
     }
 
-    public function getStockMovement(array $data) {
+    public function getStockMovement(array $data)
+    {
         try {
             $this->dataSanitizer->sanitizer($data);
             $this->sendJsonResponse(['status' => 'success'], 200);
@@ -27,10 +28,22 @@ class StockController
         }
     }
 
-    private function sendJsonResponse(array $response, int $code): void
+    public function searchMovementsProduct(array $data)
     {
-        http_response_code($code);
+        try {
+            $result = $this->dataSanitizer->sanitizeSearchMovements($data);
+            $this->sendJsonResponse($result, 200);
+        } catch (InvalidArgumentException $e) {
+            $this->sendJsonResponse(['status' => 'error', 'errorMsg' => $e->getMessage()], 400);
+        } catch (Exception $e) {
+            $this->sendJsonResponse(['status' => 'error', 'erroMsg' => $e->getMessage()], 500);
+        }
+    }
+
+    private function sendJsonResponse($response, int $code): void
+    {
         header('Content-Type: application/json');
+        http_response_code($code);
         echo json_encode($response);
         exit;
     }
