@@ -64,9 +64,9 @@ class HandleRequestController
                         $this->sendError('Nenhum valor fornecido para busca.');
                     }
                     break;
-                    case 'listar-produtos':
-                        continue;
-                default:
+                case 'listar-produtos':
+                    break;
+                default:    
                     $this->sendError('Nenhuma ação válida.');
             }
         }

@@ -112,7 +112,8 @@ class ServiceContainer
         };
 
         $this->services['dropdown-produtos'] = function () {
-            return new \Andre\GestaoDeEstoque\Produtos\Controllers\ProductsController(
+            return new \Andre\GestaoDeEstoque\Actions\ListProductsFromDropdownStock(
+                $this,
                 $this->get('ProductsController')
             );
         };

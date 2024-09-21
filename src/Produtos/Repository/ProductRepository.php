@@ -92,11 +92,13 @@ class ProductRepository implements ProductRepositoryInterface
     public function getProductsDropdown(string $toSearch): array
     {
         try {
-            $sql = "SELECT * FROM products WHERE codigo=? or name=?";
+            $sql = "SELECT * FROM products WHERE codigo LIKE ? OR name LIKE ?";
             $stmt = $this->connection->prepare($sql);
-            $stmt->bindValue(1, $toSearch);
-            $stmt->bindValue(2, $toSearch);
 
+            // Adiciona os '%' ao redor do termo de busca
+            $searchTerm = '%' . $toSearch . '%';
+            $stmt->bindValue(1, $searchTerm);
+            $stmt->bindValue(2, $searchTerm);
 
             if ($stmt->execute()) {
                 $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -105,7 +107,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             return [];
         } catch (Exception $e) {
-            throw new Exception("An error ocurred " . $e->getMessage());
+            throw new Exception("An error occurred: " . $e->getMessage());
         }
     }
 }

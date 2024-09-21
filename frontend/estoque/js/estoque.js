@@ -1,4 +1,5 @@
 let searchTimeout; // Variável para armazenar o timeout
+let idProduto; // Variável para armazenar o id do produto clicado
 
 document.getElementById('search-input').addEventListener('input', function () {
     const query = this.value;
@@ -32,9 +33,10 @@ document.getElementById('search-input').addEventListener('input', function () {
                 const results = data.slice(0, 10); // Limitar a 10 resultados
                 results.forEach(product => {
                     const div = document.createElement('div');
-                    div.textContent = `${product.codigo} - ${product.descricao}`;
+                    div.textContent = `${product.codigo} - ${product.name}`;
                     div.addEventListener('click', function () {
-                        document.getElementById('search-input').value = `${product.codigo} - ${product.descricao}`;
+                        document.getElementById('search-input').value = `${product.codigo} - ${product.name}`;
+                        idProduto = `${product.id}`; // Guarda o id do produto na variável definida anteriormente.
                         dropdown.style.display = 'none';
                     });
 
