@@ -16,7 +16,7 @@ class StockService implements StockServiceInterface
     private $parameters;
     private $manager;
     private $movementProcessor;
-    private $updater;
+    private $stockUpdater;
     private $costUpdater;
     private const MOVE_STOCK = 'E';
 
@@ -24,14 +24,14 @@ class StockService implements StockServiceInterface
         ParametersRepositoryInterface $parameters,
         StockTransactionManager $manager, 
         StockMovementProcessor $movementProcessor, 
-        StockUpdater $updater,
+        StockUpdater $stockUpdater,
         CostUpdater $costUpdater
         )
     {
         $this->parameters = $parameters;
         $this->manager = $manager;
         $this->movementProcessor = $movementProcessor;
-        $this->updater = $updater;
+        $this->stockUpdater = $stockUpdater;
         $this->costUpdater = $costUpdater;
     }
 
@@ -48,8 +48,8 @@ class StockService implements StockServiceInterface
                     $this->costUpdater->updateProductCost($StockMovement);
                 }
                 
-                $this->updater->saveTransaction($StockMovement);
-                $this->updater->updateProduct($StockMovement);
+                $this->stockUpdater->saveTransaction($StockMovement);
+                $this->stockUpdater->updateProduct($StockMovement);
             });
         } catch (\InvalidArgumentException $e) {
             throw new InvalidArgumentException('An error occurred while moving stock', 0, $e);
