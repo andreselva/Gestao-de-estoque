@@ -43,7 +43,7 @@ class StockService implements StockServiceInterface
             $this->manager->execute(function () use ($StockMovement) {
                 $paramCost = $this->parameters->getValueParam('controlaCusto');
 
-                if ($StockMovement->getType() == self::MOVE_STOCK && $paramCost == 1) {
+                if ($StockMovement->getType() === self::MOVE_STOCK && $paramCost === 1) {
                     $this->movementProcessor->process($StockMovement);
                     $this->costUpdater->updateProductCost($StockMovement);
                 }
