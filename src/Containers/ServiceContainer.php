@@ -137,6 +137,9 @@ class ServiceContainer
             );
         };
 
+
+        //ESTOQUE
+
         $this->services['lancar-estoque'] = function () {
             return new \Andre\GestaoDeEstoque\Actions\LancarEstoqueAction(
                 $this,
@@ -174,19 +177,58 @@ class ServiceContainer
                 $this->get('ParametersRepository'),
                 $this->get('StockRepositoryManager'),
                 $this->get('StockMovementProcessor'),
-                $this->get('StockUpdater'),
-                $this->get('CostUpdater')
+                $this->get('StockRepositoryEntries'),
+                $this->get('StockRepositoryExits'),
+                $this->get('StockRepositoryBalance'),
+                $this->get('StockServiceCalculator')
+            );
+        };
+
+        $this->services['StockServiceCalculator'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Services\StockServiceCalculator(
+                $this->get('StockRepositoryEntries'),
+                $this->get('StockRepositoryExits'),
+                $this->get('StockRepositoryBalance'),
+                $this->get('StockRepositoryUpdater')
+            );
+        };
+
+        $this->services['StockRepositoryUpdater'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryUpdater(
+                $this->get('DatabaseManager')
+            );
+        };
+
+        $this->services['StockRepositoryEntries'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryEntries(
+                $this->get('DatabaseManager')
+            );
+        };
+
+        $this->services['StockRepositoryExits'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryExits(
+                $this->get('DatabaseManager')
+            );
+        };
+
+        $this->services['StockRepositoryBalance'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryBalance(
+                $this->get('DatabaseManager')
             );
         };
 
         $this->services['StockRepositoryManager'] = function () {
             return new \Andre\GestaoDeEstoque\Stock\Manager\StockRepositoryManager(
-                $this->get('StockRepository')
+                $this->get('DatabaseManager')
             );
         };
 
         $this->services['StockMovementProcessor'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\Processor\StockMovementProcessor($this->get('CostCalculator'));
+            return new \Andre\GestaoDeEstoque\Stock\Processor\StockMovementProcessor($this->get('CostServiceCalculator'));
+        };
+
+        $this->services['CostServiceCalculator'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\CostCalculator\CostServiceCalculator();
         };
 
         $this->services['StockUpdater'] = function () {
@@ -196,12 +238,8 @@ class ServiceContainer
         $this->services['CostUpdater'] = function () {
             return new \Andre\GestaoDeEstoque\Stock\CostCalculator\CostUpdater(
                 $this->get('StockRepository'),
-                $this->get('CostCalculator')
+                $this->get('CostServiceCalculator')
             );
-        };
-
-        $this->services['CostCalculator'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\CostCalculator\CostCalculator();
         };
 
         $this->services['ParametersRepository'] = function () {

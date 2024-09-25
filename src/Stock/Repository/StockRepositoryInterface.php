@@ -6,7 +6,6 @@ use Andre\GestaoDeEstoque\Stock\Entity\Stock;
 
 interface StockRepositoryInterface
 {
-    public function executeTransaction(callable $operations);
     public function saveStockMovement(Stock $launch);
     public function getLastDateBalance($idProduto);
     public function getLastBalance($idProduto, $dataBalanco);

@@ -40,7 +40,7 @@ class StockController
         }
     }
 
-    private function sendJsonResponse($response, int $code): void
+    private function sendJsonResponse(array $response, int $code): void
     {
         header('Content-Type: application/json');
         http_response_code($code);

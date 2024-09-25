@@ -15,23 +15,7 @@ class StockRepository implements StockRepositoryInterface
         $this->connection = $connection;
     }
 
-    public function executeTransaction(callable $operations)
-    {
-        try {
-            // Iniciar transação
-            $this->connection->beginTransaction();
-
-            // Executar as operações passadas na callback
-            $operations();
-
-            // Se tudo deu certo, fazer o commit
-            $this->connection->commit();
-        } catch (Exception $e) {
-            // Se houve erro, fazer rollback
-            $this->connection->rollBack();
-            throw $e; // Lançar exceção novamente para ser tratada na camada superior
-        }
-    }
+    
 
     public function saveStockMovement(Stock $launch): bool
     {
