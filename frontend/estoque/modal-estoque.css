@@ -43,11 +43,6 @@
     /* Isso faz os inputs ocuparem o mesmo espaço na linha */
 }
 
-
-body {
-    padding: 1rem;
-}
-
 h1 {
     margin-bottom: 1rem;
 }
@@ -60,7 +55,7 @@ button {
     border-radius: 0.25rem;
     cursor: pointer;
     opacity: 0.9;
-    font-size: 1rem;
+    /* font-size: 1rem; */
 }
 
 #btn-lcto-estoque {
