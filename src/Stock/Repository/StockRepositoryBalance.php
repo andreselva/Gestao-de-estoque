@@ -19,44 +19,41 @@ class StockRepositoryBalance implements StockRepositoryBalanceInterface
                 VALUES (:idProduct, :type, :quantity, :cost, :date, :priceUn)";
 
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindValue(1, $stockMovement->getId());
-        $stmt->bindValue(2, $stockMovement->getType());
-        $stmt->bindValue(3, $stockMovement->getQuantity());
-        $stmt->bindValue(4, $stockMovement->getCost());
-        $stmt->bindValue(5, $stockMovement->getDate());
-        $stmt->bindValue(6, $stockMovement->getPriceUn());
+        $stmt->bindValue(':idProduct', $stockMovement->getId());
+        $stmt->bindValue(':type', $stockMovement->getType());
+        $stmt->bindValue(':quantity', $stockMovement->getQuantity());
+        $stmt->bindValue(':cost', $stockMovement->getCost());
+        $stmt->bindValue(':date', $stockMovement->getDate());
+        $stmt->bindValue(':priceUn', $stockMovement->getPriceUn());
         $stmt->execute();
     }
 
-    public function getAllBalances(int $idProduct, ?string $dataBalance = null)
+    public function getBalanceValue(int $idProduct)
     {
-        $allBalances = 0;
-
-        $sql = "SELECT quantity FROM stock WHERE idProduto = :idProduct AND type = 'B'";
-
-        if ($dataBalance) {
-            $sql .= " AND date = :dataBalance";
-        }
-
-        $stmt = $this->connection->prepare($sql);
-        $stmt->bindValue(':idProduct', $idProduct, \PDO::PARAM_INT);
+        $balanceValue = 0;
+        $dataBalance = $this->getLastDateBalance($idProduct);
 
         if ($dataBalance) {
+            $sql = "SELECT quantity FROM stock WHERE idProduto = :idProduct AND type = 'B' AND date = :dataBalance";
+
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(':idProduct', $idProduct, \PDO::PARAM_INT);
             $stmt->bindValue(':dataBalance', $dataBalance, \PDO::PARAM_STR);
+            if ($stmt->execute()) {
+                $balanceValue += $stmt->fetchColumn();
+            }
+
+            return $balanceValue;
         }
 
-        if ($stmt->execute()) {
-            $allBalances += $stmt->fetchColumn();
-        }
-
-        return $allBalances;
+        return $balanceValue;
     }
 
     public function getLastDateBalance(int $idProduct)
     {
         $dataBalance = null;
 
-        $sql = "SELECT date FROM stock WHERE idProduto = :idProduct";
+        $sql = "SELECT date FROM stock WHERE idProduto = :idProduct AND type = 'B' ORDER BY date DESC";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindValue(':idProduct', $idProduct);
 

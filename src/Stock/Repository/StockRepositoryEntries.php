@@ -47,9 +47,7 @@ class StockRepositoryEntries implements StockRepositoryEntriesInterface
 
             if ($stmt->execute()) {
                 $entries = $stmt->fetchAll(\PDO::FETCH_ASSOC); // Obtém todos os registros
-                foreach ($entries as $entry) {
-                    $allEntries += $entry['quantity']; // Extrai a quantidade de cada entrada
-                }
+                $allEntries = array_sum(array_column($entries, 'quantity'));
             }
 
             return $allEntries;

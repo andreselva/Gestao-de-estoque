@@ -27,7 +27,9 @@ class ServiceContainer
         };
 
         $this->services['ParamatersRepository'] = function () {
-            return new \Andre\GestaoDeEstoque\Parameters\ParametersRepository($this->get('DatabaseManager'));
+            return new \Andre\GestaoDeEstoque\Parameters\ParametersRepository(
+                $this->get('DatabaseManager')
+            );
         };
 
         $this->services['AuthController'] = function () {
@@ -176,11 +178,11 @@ class ServiceContainer
             return new \Andre\GestaoDeEstoque\Stock\Services\StockService(
                 $this->get('ParametersRepository'),
                 $this->get('StockRepositoryManager'),
-                $this->get('StockMovementProcessor'),
                 $this->get('StockRepositoryEntries'),
                 $this->get('StockRepositoryExits'),
                 $this->get('StockRepositoryBalance'),
-                $this->get('StockServiceCalculator')
+                $this->get('StockServiceCalculator'),
+                $this->get('CostServiceCalculator')
             );
         };
 
@@ -223,22 +225,17 @@ class ServiceContainer
             );
         };
 
-        $this->services['StockMovementProcessor'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\Processor\StockMovementProcessor($this->get('CostServiceCalculator'));
-        };
-
         $this->services['CostServiceCalculator'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\CostCalculator\CostServiceCalculator();
+            return new \Andre\GestaoDeEstoque\Stock\CostCalculator\Services\CostServiceCalculator(
+                $this->get('StockRepositoryEntries'),
+                $this->get('StockRepositoryBalance'),
+                $this->get('CostRepository')
+            );
         };
 
-        $this->services['StockUpdater'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\Updater\StockUpdater($this->get('StockRepository'));
-        };
-
-        $this->services['CostUpdater'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\CostCalculator\CostUpdater(
-                $this->get('StockRepository'),
-                $this->get('CostServiceCalculator')
+        $this->services['CostRepository'] = function () {
+            return new \Andre\GestaoDeEstoque\Stock\CostCalculator\Repository\CostRepository(
+                $this->get('DatabaseManager')
             );
         };
 
