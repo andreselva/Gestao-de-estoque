@@ -87,3 +87,18 @@ window.addEventListener('click', (event) => {
         });
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    listarProdutos();
+
+    // Delegação de eventos para links que abrem e fecham o modal
+    document.querySelector('#produtos-list').addEventListener('click', (event) => {
+        if (event.target && event.target.matches('#open-modal')) {
+            event.preventDefault();
+            selectedProductId = event.target.getAttribute('data-id');
+            toggleModal(); // Abre o modal
+        }
+    });
+
+});

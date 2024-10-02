@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '../../auth.php';
 require_once __DIR__ . '../../sidebar/sidebar.php';
+require_once __DIR__ . '/estoque-modal.php';
 ?>
 
 <!DOCTYPE html>
