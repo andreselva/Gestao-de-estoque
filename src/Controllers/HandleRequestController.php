@@ -50,7 +50,7 @@ class HandleRequestController
             switch ($action) {
                 case 'buscar-produto':
                 case 'buscar-lancamentos':
-                    $idProduto = $_GET['idProduto'] ?? null;
+                    $idProduto = $_GET['id'] ?? null;
                     if ($idProduto) {
                         $data['idProduto'] = $idProduto;
                     } else {
