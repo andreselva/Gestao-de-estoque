@@ -36,7 +36,7 @@ class CostRepository implements CostRepositoryInterface
         if ($stmt->execute()) {
             $costs = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             foreach ($costs as $cost) {
-                $totalCost += ($cost['quantity'] * $cost['priceUn']);
+                $totalCost += ($cost['quantity'] * $cost['cost']);
             }
         }
 
