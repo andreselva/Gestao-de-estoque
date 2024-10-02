@@ -1,6 +1,5 @@
 let modal, fade;
 
-
 async function lancarEstoque(event) {
     event.preventDefault();
     const form = document.querySelector('#lcto-estoque');
@@ -8,6 +7,9 @@ async function lancarEstoque(event) {
     const button = document.getElementById('btn-lcto-estoque');
     const type = document.getElementById('tipo');
     const fields = document.querySelectorAll('#tipo, #custo-lcto, #quantidade, #price')
+
+    button.disabled = true;
+    button.style.backgroundColor = '#75b88f';
 
     if (type.value === '') {
         alert('Selecione o tipo do lançamento.');
@@ -18,9 +20,6 @@ async function lancarEstoque(event) {
         field.readOnly = true;
         field.style.backgroundColor = '#c2c2c277';  // Altera a cor do campo para indicar que está desabilitado
     });
-
-    button.disabled = true;
-    button.style.backgroundColor = '#75b88f';
 
     try {
         const formData = new FormData(form);
@@ -98,7 +97,6 @@ document.addEventListener("keydown", (event) => {
         toggleModal();
     }
 });
-
 
 
 // Configura eventos ao carregar o DOM
