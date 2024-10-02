@@ -5,13 +5,22 @@ async function lancarEstoque(event) {
     event.preventDefault();
     const form = document.querySelector('#lcto-estoque');
     const idProduto = selectedProductId;
-
+    const button = document.getElementById('btn-lcto-estoque');
     const type = document.getElementById('tipo');
+    const fields = document.querySelectorAll('#tipo, #custo-lcto, #quantidade, #price')
 
     if (type.value === '') {
         alert('Selecione o tipo do lançamento.');
         return;
     }
+
+    fields.forEach(field => {
+        field.readOnly = true;
+        field.style.backgroundColor = '#c2c2c277';  // Altera a cor do campo para indicar que está desabilitado
+    });
+
+    button.disabled = true;
+    button.style.backgroundColor = '#75b88f';
 
     try {
         const formData = new FormData(form);
@@ -39,8 +48,9 @@ async function lancarEstoque(event) {
             window.location.reload();
         } else {
             alert("Houve um problema no lançamento. O estoque não foi lançado.")
+            button.disabled = false;
         }
-        
+
     } catch (erro) {
 
     }
