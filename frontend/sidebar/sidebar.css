@@ -1,3 +1,19 @@
+:root {
+    --color-bg: #dfcdee50;
+    --color-text: #FFF;
+    --color-border: red;
+    --color-sidebar-bg: #6923b8c2;
+    --color-sidebar-border: #2f3336;
+    --color-button-text: #fafafa;
+    --transition-duration: 0.4s;
+    --sidebar-width: 240px;
+    --sidebar-narrow-width: 72px;
+    --button-height: 60px;
+    --button-padding: 0 16px 0 12px;
+    --button-radius: 24px;
+    --button-font-size: 16px;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -5,12 +21,12 @@
 body {
     margin: 0;
     font-family: sans-serif;
-    background-color: #424242;
-    color: #FFF;
+    background-color: var(--color-bg);
+    color: var(--color-text);
 }
 
 .border {
-    border: 1px solid red;
+    border: 1px solid var(--color-border);
 }
 
 .sidebar {
@@ -19,10 +35,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 240px;
+    width: var(--sidebar-width);
     height: 100%;
     padding: 40px 10px 30px 10px;
-    border-right: 1px solid #2f3336;
+    border-right: 1px solid var(--color-sidebar-border);
+    background-color: var(--color-sidebar-bg);
 }
 
 .sidebar-header {
@@ -35,7 +52,7 @@ body {
     min-height: 35px;
     border-radius: 50%;
     object-fit: cover;
-    transition: transform 0.4s;
+    transition: transform var(--transition-duration);
 }
 
 .logo-img:hover {
@@ -49,41 +66,42 @@ nav {
 }
 
 .sidebar button {
-    height: 60px;
+    height: var(--button-height);
     background-color: transparent;
     border: 0;
     font-family: inherit;
-    color: #FFF;
+    color: var(--color-button-text);
     cursor: pointer;
     text-align: left;
     padding: 0;
+    font-size: var(--button-font-size);
 }
 
-.sidebar button>span {
+.sidebar button > span {
     display: inline-flex;
     align-items: center;
     gap: 12px;
     height: 48px;
-    padding: 0 16px 0 12px;
-    border-radius: 24px;
+    padding: var(--button-padding);
+    border-radius: var(--button-radius);
     line-height: 1;
-    transition: all 0.4s;
+    transition: all var(--transition-duration);
 }
 
-.sidebar button:hover>span {
+.sidebar button:hover > span {
     background-color: rgba(255, 255, 255, 0.08);
 }
 
-@media (width < 920px) {
+@media (max-width: 920px) {
     .sidebar {
-        width: 72px;
+        width: var(--sidebar-narrow-width);
     }
 
-    .sidebar button>span {
+    .sidebar button > span {
         width: 50px;
     }
 
-    .sidebar button>span>span {
+    .sidebar button > span > span {
         opacity: 0;
         visibility: hidden;
     }

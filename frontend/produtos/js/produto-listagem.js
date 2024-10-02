@@ -39,11 +39,12 @@ async function listarProdutos() {
 
             tr.innerHTML = `
                 <td><input type="checkbox"></td>
+                <td><a href="produtos-edit.php?id=${produto.id}">${produto.codigo}</a></td>
                 <td><a href="produtos-edit.php?id=${produto.id}">${produto.name}</a></td>
                 <td>${produto.estoque}</td>
                 <td>
                     <div class="dropdown">
-                        <button class="dropbtn" onclick="toggleDropdown(event)"><ion-icon name="ellipsis-horizontal-outline"></ion-icon></button>
+                        <button class="dropbtn" onclick="toggleDropdown(event)"><ion-icon name="menu-outline"></ion-icon></button>
                         <div class="dropdown-content">
                             <a href="produtos-edit.php?id=${produto.id}">Editar</a>
                             <a href="#" data-id="${produto.id}" onclick="confirmDelete(event)">Excluir</a>

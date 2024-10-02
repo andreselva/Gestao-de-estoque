@@ -1,17 +1,24 @@
+:root {
+    --font-family: sans-serif;
+    --background-color: #121212;
+    --text-color: #FFF;
+    --border-color: #030303; /* Você pode querer usar esta variável se decidir adicionar bordas no futuro */
+}
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family: sans-serif;
-    background-color: #121212;
-    color: #FFF;
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 main {
     position: absolute;
-    border: solid 0px #030303;
+    border: solid 0px var(--border-color);
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
