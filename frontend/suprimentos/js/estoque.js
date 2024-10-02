@@ -59,7 +59,7 @@ function buscarLancamentosEstoque() {
 
     const params = new URLSearchParams({
         action: 'buscar-lancamentos',
-        idProduto: idProduto
+        id: idProduto
     });
 
     fetch(`../../src/index.php?${params.toString()}`)
