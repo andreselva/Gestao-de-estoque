@@ -31,14 +31,14 @@ require_once __DIR__ . '../../sidebar/sidebar.php';
                 </div>
                 <div class="group-action">
                     <div class="dropdown">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Filtrar
                         </a>
                         <div class="dropdown-menu p-3" style="width: 300px;">
                             <!-- Seção de Situação -->
                             <h6 class="dropdown-header">Situação</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="sitTodos">
+                                <input class="form-check-input" type="checkbox" value="T" id="sitTodos">
                                 <label class="form-check-label" for="sitTodos">Todos</label>
                             </div>
                             <div class="form-check">
