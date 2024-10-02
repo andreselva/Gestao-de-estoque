@@ -22,4 +22,19 @@ class DatabaseManager
     {
         return $this->connection;
     }
+
+    public function beginTransaction()
+    {
+        return $this->connection->beginTransaction();
+    }
+
+    public function commit()
+    {
+        return $this->connection->commit();
+    }
+
+    public function rollback()
+    {
+        return $this->connection->rollback();
+    }
 }

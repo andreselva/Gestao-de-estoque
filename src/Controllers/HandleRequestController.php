@@ -44,12 +44,31 @@ class HandleRequestController
         }
 
         $data = [];
-        if (isset($_GET['action']) && $_GET['action'] === 'buscar-produto') {
-            $idProduto = $_GET['id'] ?? null;
-            if ($idProduto) {
-                $data['idProduto'] = $idProduto;
-            } else {
-                $this->sendError('ID do produto não fornecido.');
+        if (isset($_GET['action'])) {
+            $action = $_GET['action'];
+
+            switch ($action) {
+                case 'buscar-produto':
+                case 'buscar-lancamentos':
+                    $idProduto = $_GET['id'] ?? null;
+                    if ($idProduto) {
+                        $data['idProduto'] = $idProduto;
+                    } else {
+                        $this->sendError('ID do produto não fornecido.');
+                    }
+                    break;
+                case 'dropdown-produtos':
+                    $searched = $_GET['search'] ?? null;
+                    if ($searched) {
+                        $data['searched'] = $searched;
+                    } else {
+                        $this->sendError('Nenhum valor fornecido para busca.');
+                    }
+                    break;
+                case 'listar-produtos':
+                    break;
+                default:
+                    $this->sendError('Nenhuma ação válida.');
             }
         }
 

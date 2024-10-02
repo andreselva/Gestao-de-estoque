@@ -10,4 +10,5 @@ interface ProductRepositoryInterface
     public function getAllProducts(): array;
     public function findProductById(string $id): array;
     public function saveProductEdit(Product $product): void;
+    public function getProductsDropdown(string $toSearch): array;
 }

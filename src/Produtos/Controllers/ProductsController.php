@@ -47,12 +47,22 @@ class ProductsController
         }
     }
 
-    public function editProduct($data): void {
+    public function editProduct($data): void
+    {
         try {
             $this->productService->sendProductForEdition($data);
             $this->sendJsonResponse(self::GOOD_REPONSE, 200);
         } catch (Exception $e) {
             $this->sendJsonResponse(['status' => 'error', 'errorMsg' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getProductsForDropdown(array $data)
+    {
+        try {
+            $result = $this->productService->searchProductsForDropdown($data);
+            $this->sendJsonResponse($result, 200);
+        } catch (Exception) {
         }
     }
 

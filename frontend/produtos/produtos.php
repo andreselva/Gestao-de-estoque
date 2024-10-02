@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '../../auth.php';
+require_once __DIR__ . '../../suprimentos/estoque-modal.php';
+require_once __DIR__ . '../../sidebar/sidebar.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,14 +11,13 @@ require_once __DIR__ . '../../auth.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
-    <link rel="stylesheet" href="../css/produtos.css">
+    <link rel="stylesheet" href="../produtos/css/produtos.css">
+    <link rel="stylesheet" href="../produtos/css/dropdown-produtos.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
 </head>
 
 <body>
-    <?php
-    require_once __DIR__ . '../../src/sidebar.php';
-    ?>
-
     <main>
         <form id="listagem-produto">
             <div id="btn-psq-cadastro">
@@ -35,19 +36,19 @@ require_once __DIR__ . '../../auth.php';
                     <thead>
                         <tr>
                             <th><input type="checkbox"></th>
-                            <th>Produto</th>
-                            <th>Estoque</th>
-                            <th>#</th>
+                            <th class="columns-th">Produto</th>
+                            <th class="columns-th">Estoque</th>
+                            <th class="columns-th">#</th>
                         </tr>
                     </thead>
                     <tbody id="produtos-list">
-                       
+
                     </tbody>
                 </table>
             </div>
         </form>
     </main>
-    <script src="../js/produto-listagem.js"></script>
+    <script src="../produtos/js/produto-listagem.js"></script>
 </body>
 
 </html>

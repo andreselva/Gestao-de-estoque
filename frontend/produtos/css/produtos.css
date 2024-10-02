@@ -6,14 +6,15 @@
     padding: 4em;
     width: 1400px;
     height: 100vh;
-    max-width: 1400px; 
+    max-width: 1400px;
     border: solid 0px #030303;
     top: 50%;
     left: 52.3%;
     transform: translate(-50%, -50%);
 }
 
-#cadastro-produto, #editar-produto {
+#cadastro-produto,
+#editar-produto {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -29,7 +30,7 @@
 
 #table-produtos table {
     width: 1200px;
-    border-collapse: collapse;  
+    border-collapse: collapse;
     background-color: #333;
     color: #fff;
     font-family: Arial, sans-serif;
@@ -38,26 +39,41 @@
 #table-produtos th,
 #table-produtos td {
     padding: 10px;
-    text-align: left;
     border: 1px solid #555;
 }
 
+/* Alinha o texto à esquerda na segunda coluna (nome do produto) */
+#table-produtos td:nth-child(2) {
+    text-align: left;
+}
+
+/* Centraliza o texto em todas as outras células */
+#table-produtos td {
+    text-align: center;
+}
+
+/* Estilo para o cabeçalho da tabela */
 #table-produtos th {
     background-color: #444;
     text-transform: uppercase;
+    text-align: center;
 }
 
+/* Estilo para as linhas pares da tabela */
 #table-produtos tr:nth-child(even) {
     background-color: #3d3d3d;
 }
 
+/* Estilo para a linha da tabela quando o mouse passa por cima */
 #table-produtos tr:hover {
     background-color: #555;
 }
 
+/* Estilo para o checkbox */
 #table-produtos input[type="checkbox"] {
     transform: scale(1.2);
 }
+
 
 #btn-psq-cadastro {
     width: 1200px;
@@ -67,35 +83,51 @@
 }
 
 .minimal-button {
-    background-color: #ffffff; /* Fundo branco */
-    color: #333333; /* Texto cinza escuro */
-    border: 1px solid #cccccc; /* Borda cinza clara */
-    padding: 10px 20px; /* Espaçamento interno */
-    font-size: 16px; /* Tamanho da fonte */
-    border-radius: 5px; /* Bordas arredondadas */
-    cursor: pointer; /* Cursor de ponteiro ao passar por cima */
+    background-color: #ffffff;
+    /* Fundo branco */
+    color: #333333;
+    /* Texto cinza escuro */
+    border: 1px solid #cccccc;
+    /* Borda cinza clara */
+    padding: 10px 20px;
+    /* Espaçamento interno */
+    font-size: 16px;
+    /* Tamanho da fonte */
+    border-radius: 5px;
+    /* Bordas arredondadas */
+    cursor: pointer;
+    /* Cursor de ponteiro ao passar por cima */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .minimal-button:hover {
-    background-color: #f0f0f0; /* Fundo levemente mais escuro ao passar o mouse */
-    color: #000000; /* Texto fica preto ao passar o mouse */
+    background-color: #f0f0f0;
+    /* Fundo levemente mais escuro ao passar o mouse */
+    color: #000000;
+    /* Texto fica preto ao passar o mouse */
 }
 
 
 .minimal-search {
-    width: 100%; /* Largura total */
-    padding: 10px 15px; /* Espaçamento interno */
-    font-size: 16px; /* Tamanho da fonte */
-    border: 1px solid #cccccc; /* Borda cinza clara */
-    border-radius: 5px; /* Bordas arredondadas */
-    outline: none; /* Remove o contorno ao focar */
+    width: 100%;
+    /* Largura total */
+    padding: 10px 15px;
+    /* Espaçamento interno */
+    font-size: 16px;
+    /* Tamanho da fonte */
+    border: 1px solid #cccccc;
+    /* Borda cinza clara */
+    border-radius: 5px;
+    /* Bordas arredondadas */
+    outline: none;
+    /* Remove o contorno ao focar */
     transition: border-color 0.3s ease;
     background-color: transparent;
 }
 
 .minimal-search:focus {
-    border-color: #999999; /* Cor da borda ao focar */
+    border-color: #999999;
+    /* Cor da borda ao focar */
 }
 
 
@@ -194,11 +226,12 @@ input::placeholder {
 a {
     text-decoration: none;
     color: inherit;
-  }
-  
+}
+
 
 /* Design responsivo para dispositivos menores */
 @media (max-width: 768px) {
+
     .small-input input,
     .medium-input input,
     .large-input input {
@@ -224,7 +257,7 @@ a {
         width: 80%;
         max-width: 900px;
     }
-}   
+}
 
 
 /* Telas grandes */

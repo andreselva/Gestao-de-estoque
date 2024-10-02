@@ -7,9 +7,7 @@ use InvalidArgumentException;
 
 class DataSanitizer
 {
-    public function __construct() {}
-
-    public function ProductSanitizer(array $data): array
+    public function productSanitizer(array $data): array
     {
         $sanitizedData = [
             'name' => $this->sanitizeName($data['name']),
@@ -72,4 +70,5 @@ class DataSanitizer
         // Retorna o valor como string, pois decimal pode ter alta precisão (mantém o formato)
         return number_format((float)$sanitizedData, 2, '.', '');
     }
+
 }

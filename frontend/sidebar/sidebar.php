@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./../css/sidebar.css">
+    <link rel="stylesheet" href="../sidebar/sidebar.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
 </head>
@@ -26,7 +26,7 @@
                 </span>
             </button>
 
-            <button>
+            <button onclick="goToStock(event)">
                 <span>
                     <i class="material-symbols-outlined"> inventory_2 </i>
                     <span>Suprimentos</span>
@@ -44,7 +44,7 @@
 
     </aside>
 
-    <script src="./../js/sidebar.js"></script>
+    <script src="./../sidebar/sidebar.js"></script>
 </body>
 
 </html>
