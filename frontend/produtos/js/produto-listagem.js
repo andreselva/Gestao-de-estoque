@@ -32,15 +32,11 @@ function getSelectedFilters() {
     return filters;
 }
 
-
-
 function getSelectedCheckboxValues(checkboxes) {
     return Array.from(checkboxes)
         .filter(checkbox => checkbox.checked)
         .map(checkbox => checkbox.value);
 }
-
-
 
 // Função assíncrona para listar produtos e atualizar a tabela
 async function listarProdutos(filters = {}) {
@@ -188,4 +184,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+});
+
+
+// Prevenir o fechamento do dropdown ao clicar em checkboxes
+const dropdownMenu = document.querySelector('.dropdown-menu');
+
+dropdownMenu.addEventListener('click', function (event) {
+    // Impede que o evento de clique propague e feche o dropdown
+    event.stopPropagation();
 });

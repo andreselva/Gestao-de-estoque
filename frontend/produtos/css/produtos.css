@@ -79,6 +79,11 @@ body {
     padding: 10px;
 }
 
+.dropdown-menu .form-check-label {
+    cursor: pointer;
+    /* Muda o cursor para mãozinha ao passar sobre o texto */
+}
+
 
 /* Estilos de botão */
 .minimal-button {
