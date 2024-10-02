@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '../../auth.php';
+require_once __DIR__ . '../../sidebar/sidebar.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,10 +14,6 @@ require_once __DIR__ . '../../auth.php';
 </head>
 
 <body>
-    <?php
-    require_once __DIR__ . '../../src/sidebar.php';
-    ?>
-
     <main>
         <span>
             Olá Fulaninho
