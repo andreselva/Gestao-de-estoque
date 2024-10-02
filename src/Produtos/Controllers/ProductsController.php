@@ -27,10 +27,10 @@ class ProductsController
         }
     }
 
-    public function getProducts(): void
+    public function getProducts($data): void
     {
         try {
-            $result = $this->productService->searchProducts();
+            $result = $this->productService->searchProducts($data);
             $this->sendJsonResponse($result, 200);
         } catch (Exception $e) {
             $this->sendJsonResponse(['status' => 'error', 'errorMsg' => $e->getMessage()], 500);

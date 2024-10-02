@@ -61,7 +61,7 @@ require_once __DIR__ . '../../sidebar/sidebar.php';
                             <h6 class="dropdown-header">Data de criação</h6>
                             <div class="form-check">
                                 <a>
-                                    <input class="form-check-input" type="checkbox" value="todas" id="dataTodas">
+                                    <input class="form-check-input" type="checkbox" value="allDates" id="dataTodas">
                                     <label class="form-check-label" for="dataTodas">Qualquer</label>
                                 </a>    
                             </div>

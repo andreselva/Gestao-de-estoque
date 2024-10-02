@@ -34,10 +34,26 @@ class ProductRepository implements ProductRepositoryInterface
         }
     }
 
-    public function getAllProducts(): array
+    public function getAllProducts(?array $data): array
     {
         try {
+            $situation = $data['situation'] ?? null;
+            $dataCreate = $data['dataCreate'] ?? null;
+
             $sql = "SELECT * FROM products";
+
+            if ($situation && !in_array('T', $situation)) {
+                if (!empty($situation)) {
+                    // Monta a string de situações específicas para a consulta
+                    $situationsList = implode("', '", $situation);
+                    $sql .= " AND situacao IN ('$situationsList')";
+                }
+            }
+
+            if ($dataCreate && !in_array('allDates', $dataCreate)) {
+            }
+
+
             $stmt =  $this->connection->prepare($sql);
 
             if ($stmt->execute()) {

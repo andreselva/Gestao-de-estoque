@@ -45,8 +45,8 @@ async function listarProdutos(filters = {}) {
         // Parâmetros de consulta para listar produtos
         const params = new URLSearchParams({
             action: 'listar-produtos',
-            situation: filters.situacao ? filters.situacao.join(', ') : null,
-            dataCriacao: filters.dataCriacao ? filters.dataCriacao.join(', ') : null
+            situation: filters.situacao ? filters.situacao.join(', ') : '',
+            dataCriacao: filters.dataCriacao ? filters.dataCriacao.join(', ') : ''
         });
 
         // Fazer uma requisição GET com parâmetros de consulta
