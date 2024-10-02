@@ -5,5 +5,5 @@ function goToProducts(event) {
 
 function goToStock(event) {
     event.preventDefault();
-    window.location.href = '../estoque/estoque.php';
+    window.location.href = '../suprimentos/estoque.php';
 }

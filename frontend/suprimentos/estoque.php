@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '../../auth.php';
-require_once __DIR__ . '../../src/sidebar.php';
+require_once __DIR__ . '../../sidebar/sidebar.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ require_once __DIR__ . '../../src/sidebar.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
-    <link rel="stylesheet" href="../estoque/css/estoque.css">
+    <link rel="stylesheet" href="../suprimentos/css/estoque.css">
 </head>
 
 <body>

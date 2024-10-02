@@ -9,12 +9,12 @@ require_once __DIR__ . '../../auth.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
-    <link rel="stylesheet" href="../css/produtos.css">
+    <link rel="stylesheet" href="../produtos/css/produtos.css">
 </head>
 
 <body>
     <?php
-    require_once __DIR__ . '../../src/sidebar.php';
+    require_once __DIR__ . '../../sidebar/sidebar.php';
     ?>
 
     <main>
@@ -71,7 +71,7 @@ require_once __DIR__ . '../../auth.php';
             </div>
         </form>
     </main>
-    <script src="../js/produto-cadastro.js"></script>
+    <script src="../produtos/js/produto-cadastro.js"></script>
 </body>
 
 </html>
