@@ -13,6 +13,7 @@ require_once __DIR__ . '../../sidebar/sidebar.php';
     <title>Produtos</title>
     <link rel="stylesheet" href="../produtos/css/produtos.css">
     <link rel="stylesheet" href="../produtos/css/dropdown-produtos.css">
+    <link rel="stylesheet" href="../produtos/css/table.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
 </head>
@@ -26,8 +27,8 @@ require_once __DIR__ . '../../sidebar/sidebar.php';
                         Cadastrar
                     </button>
                 </div>
-                <div id="search-field">
-                    <input type="text" class="minimal-search" placeholder="Pesquisar...">
+                <div id="search-field" class="form-group medium-input">
+                    <input type="text" placeholder="Pesquisar...">
                 </div>
             </div>
 

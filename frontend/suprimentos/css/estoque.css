@@ -1,13 +1,27 @@
+:root {
+    --cor-principal: #6911ced7;
+    --cor-secundaria: #6923b8;
+    --cor-fundo: #ffffff;
+    --cor-texto: #000000;
+    --cor-borda: #cccccc;
+    --cor-borda-foco: #6923b8c2;
+
+    --tamanho-font: 16px;
+    --espaco-padrao: 10px;
+    --max-width: 1300px;
+}
+
+/* Utilizando as variáveis definidas no :root */
 #estoque {
-    position: relative; /* Altere para relative para evitar problemas de responsividade */
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 1300px;
-    height: auto; /* Altere para auto para permitir altura dinâmica */
+    max-width: var(--max-width);
+    height: auto;
     padding: 2em;
-    border: solid 0px #030303;
-    margin: 0 auto; /* Centraliza o contêiner */
+    border: solid 0px var(--cor-principal);
+    margin: 0 auto;
 }
 
 #container {
@@ -17,27 +31,27 @@
 }
 
 .minimal-button {
-    background-color: #ffffff;
-    color: #333333;
-    border: 1px solid #cccccc;
-    padding: 10px 20px;
-    font-size: 12px;
+    background-color: var(--cor-principal);
+    color: var(--cor-fundo);
+    border: none;
+    padding: var(--espaco-padrao) 20px;
+    font-size: var(--tamanho-font);
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .minimal-button:hover {
-    background-color: #f0f0f0;
-    color: #000000;
+    background-color: rgba(105, 17, 206, 0.60);
+    color: var(--cor-texto);
 }
 
 .minimal-search {
     width: 100%;
-    padding: 10px 15px;
+    padding: var(--espaco-padrao) 15px;
     max-width: 400px;
-    font-size: 16px;
-    border: 1px solid #cccccc;
+    font-size: var(--tamanho-font);
+    border: 1px solid var(--cor-borda);
     border-radius: 5px;
     outline: none;
     transition: border-color 0.3s ease;
@@ -48,58 +62,79 @@
     border-color: #999999;
 }
 
+/* Estilo dos inputs */
+.form-group input {
+    width: 100%;
+    padding: var(--espaco-padrao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 4px;
+    font-size: var(--tamanho-font);
+    transition: border-color 0.3s;
+    background-color: transparent;
+}
+
+.form-group input:focus {
+    border-color: var(--cor-borda-foco);
+    outline: none;
+    box-shadow: 0 0 5px var(--cor-borda-foco);
+}
+
 #dropdownResultEstoque {
-    border: 1px solid #ccc;
+    border: 1px solid var(--cor-borda);
     max-height: 200px;
     overflow-y: auto;
     display: none;
     position: absolute;
-    background-color: #868282;
-    color:#000000;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
     width: 100%;
     max-width: 600px;
     z-index: 1000;
+    border-radius: 0 8px 8px 8px;
 }
 
 #dropdownResultEstoque div {
-    padding: 10px;
+    padding: var(--espaco-padrao);
     cursor: pointer;
 }
 
 #dropdownResultEstoque div:hover {
-    background-color: #f0f0f0;
+    background-color: rgba(105, 35, 184, 0.21);
 }
 
 #tabela-lancamentos {
-    width: 80%; /* Ajustado para 80% */
-    margin: 20px auto; /* Centraliza a tabela */
+    width: 80%;
+    margin: 20px auto;
     border-collapse: collapse;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    background-color: #a09c9c; /* Fundo para a tabela */
+    color: var(--cor-texto);
 }
 
 #lancamentosTable {
-    width: 100%; /* 100% para ocupar o espaço disponível */
+    width: 100%;
     border-collapse: collapse;
 }
 
 #lancamentosTable th,
 #lancamentosTable td {
-    padding: 10px;
+    padding: var(--espaco-padrao);
     text-align: left;
     border: 1px solid #ddd;
 }
 
 #lancamentosTable th {
-    background-color: #000000;
     font-weight: bold;
+    background-color: var(--cor-principal);
+    /* Adicione uma cor de fundo para o cabeçalho, se desejar */
+    color: var(--cor-fundo);
+    /* Cor do texto do cabeçalho */
 }
 
 #lancamentosTable tr:nth-child(even) {
-    background-color: #5e5d5d;
+    background-color: rgba(223, 205, 238, 0.22);
 }
 
 #lancamentosTable tr:hover {
-    background-color: #cecccc;
+    background-color: rgba(105, 35, 184, 0.61);
 }

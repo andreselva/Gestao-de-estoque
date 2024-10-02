@@ -4,7 +4,7 @@
 <div id="fade" class="hide"></div>
 <div id="modal" class="hide">
     <div class="modal-header">
-        <button id="close-modal">X</button>
+        <button id="close-modal"><ion-icon name="arrow-back-outline"></ion-icon></button>
         <h2>Incluir lançamento</h2>
     </div>
     <div class="modal-body">

@@ -1,16 +1,32 @@
+:root {
+    --font-family: sans-serif;
+    --background-color: #DDDDDD;
+    --form-background-color: #ffffff;
+    --border-color: #030303;
+    --input-border-color: #9e9e9e;
+    --input-focus-border-color: #1a73e8;
+    --button-background-color: hsla(261, 96%, 45%, 0.096);
+    --button-hover-background-color: hsl(261deg 80% 48%);
+    --button-active-background-color: hsl(261deg 80% 48%);
+    --button2-background-color: hsla(261, 96%, 45%, 0.096);
+    --button2-hover-background-color: hsl(244, 65%, 40%);
+    --text-color: #000000;
+    --label-color: #070707;
+}
+
 body {
-    font-family: sans-serif;
+    font-family: var(--font-family);
     line-height: 1.6;
-    background-color: #DDDDDD;
+    background-color: var(--background-color);
 }
 
 #form-login {
-    background-color: #ffffff;
+    background-color: var(--form-background-color);
     position: absolute;
     display: flex;
     width: 25rem;
     height: 40rem;
-    border: solid 0px #030303;
+    border: solid 0px var(--border-color);
     border-radius: 2%;
     align-items: center;
     justify-content: center;
@@ -50,19 +66,19 @@ body {
 
 .input {
     width: 15rem;
-    border: solid 1.5px #9e9e9e;
+    border: solid 1.5px var(--input-border-color);
     border-radius: 1rem;
     background: none;
     padding: 1rem;
     font-size: 1rem;
-    color: #000000;
+    color: var(--text-color);
     transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .user-label {
     position: absolute;
     left: 12px;
-    color: #070707;
+    color: var(--label-color);
     pointer-events: none;
     transform: translateY(1rem);
     transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -71,25 +87,24 @@ body {
 .input:focus,
 input:valid {
     outline: none;
-    border: 1.5px solid #1a73e8;
+    border: 1.5px solid var(--input-focus-border-color);
 }
 
-.input:focus~label,
-input:valid~label {
+.input:focus ~ label,
+input:valid ~ label {
     transform: translateY(-50%) scale(0.8);
-    background-color: #ffffff;
+    background-color: var(--form-background-color);
     padding: 0 .2em;
-    color: #000000;
+    color: var(--text-color);
 }
-
 
 .buttons {
-    font-family: sans-serif;
+    font-family: var(--font-family);
     padding: 17px 40px;
     border-radius: 50px;
     cursor: pointer;
     border: 0;
-    background-color: hsla(261, 96%, 45%, 0.096);
+    background-color: var(--button-background-color);
     box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -99,28 +114,27 @@ input:valid~label {
 
 .buttons:hover {
     letter-spacing: 3px;
-    background-color: hsl(261deg 80% 48%);
+    background-color: var(--button-hover-background-color);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
 }
 
 .buttons:active {
     letter-spacing: 3px;
-    background-color: hsl(261deg 80% 48%);
+    background-color: var(--button-active-background-color);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
     transform: translateY(10px);
     transition: 100ms;
 }
 
-
 .buttons2 {
-    font-family: sans-serif;
+    font-family: var(--font-family);
     padding: 17px 16px;
     border-radius: 50px;
     cursor: pointer;
     border: 0;
-    background-color: hsla(261, 96%, 45%, 0.096);
+    background-color: var(--button2-background-color);
     box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -130,14 +144,14 @@ input:valid~label {
 
 .buttons2:hover {
     letter-spacing: 3px;
-    background-color: hsl(244, 65%, 40%);
+    background-color: var(--button2-hover-background-color);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
 }
 
 .buttons2:active {
     letter-spacing: 3px;
-    background-color: hsl(261deg 80% 48%);
+    background-color: var(--button-active-background-color);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
     transform: translateY(10px);

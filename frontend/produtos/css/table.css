@@ -1,0 +1,64 @@
+:root {
+    --table-width: 1200px;
+    --border-color: #f5f5f5;
+    --even-row-bg: #dfcdee38;
+    --hover-bg: #6923b863;
+    --font-family: Arial, sans-serif;
+    --text-color: #000000;
+    --header-bg: #7e57aa63;
+}
+
+#table-produtos table {
+    width: var(--table-width);
+    border-collapse: separate; /* Isso permite que o border-radius funcione */
+    border-spacing: 0; /* Remove o espaço entre as células */
+    color: var(--text-color);
+    font-family: var(--font-family);
+}
+
+#table-produtos th,
+#table-produtos td {
+    padding: 10px;
+    border: 0.2px solid var(--border-color);
+    position: relative;
+}
+
+#table-produtos th:first-child {
+    border-top-left-radius: 4px;
+}
+
+#table-produtos th:last-child {
+    border-top-right-radius: 4px;
+}
+
+/* Alinha o texto à esquerda na segunda coluna (nome do produto) */
+#table-produtos td:nth-child(2) {
+    text-align: left;
+}
+
+/* Centraliza o texto em todas as outras células */
+#table-produtos td {
+    text-align: center;
+}
+
+/* Estilo para o cabeçalho da tabela */
+#table-produtos th {
+    background-color: var(--header-bg); /* Descomente se quiser usar */
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* Estilo para as linhas pares da tabela */
+#table-produtos tr:nth-child(even) {
+    background-color: var(--even-row-bg);
+}
+
+/* Estilo para a linha da tabela quando o mouse passa por cima */
+#table-produtos tr:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Estilo para o checkbox */
+#table-produtos input[type="checkbox"] {
+    transform: scale(1.2);
+}

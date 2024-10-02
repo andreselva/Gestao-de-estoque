@@ -9,7 +9,7 @@ require_once __DIR__ . '../../sidebar/sidebar.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos</title>
+    <title>Suprimentos</title>
     <link rel="stylesheet" href="../suprimentos/css/estoque.css">
 </head>
 
@@ -24,7 +24,7 @@ require_once __DIR__ . '../../sidebar/sidebar.php';
                         Incluir lançamento
                     </button>
                 </div>
-                <div id="search-field">
+                <div id="search-field" class="form-group medium-input">
                     <input type="text" class="minimal-search" id="search-input" placeholder="Pesquisar...">
                     <div id="dropdownResultEstoque"></div>
                 </div>

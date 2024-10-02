@@ -1,9 +1,32 @@
+:root {
+    --main-bg-color: #f9f9f9;
+    --primary-color: #6911ced7;
+    --primary-color-hover: #6911ce60;
+    --focus-border-color: #6923b8c2;
+    --input-border-color: #ccc;
+    --input-placeholder-color: #aaa;
+    --font-family: Arial, sans-serif;
+
+    /* Tamanhos */
+    --padding-large: 4em;
+    --padding-medium: 3em;
+    --padding-small: 2em;
+    --input-small-width: 30%;
+    --input-medium-width: 50%;
+    --input-large-width: 100%;
+}
+
+body {
+    font-family: var(--font-family);
+}
+
+/* Estilos principais */
 #listagem-produto {
     position: absolute;
     display: flex;
     flex-direction: column;
     gap: 2em;
-    padding: 4em;
+    padding: var(--padding-large);
     width: 1400px;
     height: 100vh;
     max-width: 1400px;
@@ -28,53 +51,6 @@
     transform: translate(-50%, -50%);
 }
 
-#table-produtos table {
-    width: 1200px;
-    border-collapse: collapse;
-    background-color: #333;
-    color: #fff;
-    font-family: Arial, sans-serif;
-}
-
-#table-produtos th,
-#table-produtos td {
-    padding: 10px;
-    border: 1px solid #555;
-}
-
-/* Alinha o texto à esquerda na segunda coluna (nome do produto) */
-#table-produtos td:nth-child(2) {
-    text-align: left;
-}
-
-/* Centraliza o texto em todas as outras células */
-#table-produtos td {
-    text-align: center;
-}
-
-/* Estilo para o cabeçalho da tabela */
-#table-produtos th {
-    background-color: #444;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-/* Estilo para as linhas pares da tabela */
-#table-produtos tr:nth-child(even) {
-    background-color: #3d3d3d;
-}
-
-/* Estilo para a linha da tabela quando o mouse passa por cima */
-#table-produtos tr:hover {
-    background-color: #555;
-}
-
-/* Estilo para o checkbox */
-#table-produtos input[type="checkbox"] {
-    transform: scale(1.2);
-}
-
-
 #btn-psq-cadastro {
     width: 1200px;
     display: flex;
@@ -82,86 +58,41 @@
     justify-content: space-between;
 }
 
+/* Estilos de botão */
 .minimal-button {
-    background-color: #ffffff;
-    /* Fundo branco */
-    color: #333333;
-    /* Texto cinza escuro */
-    border: 1px solid #cccccc;
-    /* Borda cinza clara */
+    background-color: var(--primary-color);
     padding: 10px 20px;
-    /* Espaçamento interno */
     font-size: 16px;
-    /* Tamanho da fonte */
     border-radius: 5px;
-    /* Bordas arredondadas */
     cursor: pointer;
-    /* Cursor de ponteiro ao passar por cima */
     transition: background-color 0.3s ease, color 0.3s ease;
+    color: #fff;
+    border: none;
 }
 
 .minimal-button:hover {
-    background-color: #f0f0f0;
-    /* Fundo levemente mais escuro ao passar o mouse */
+    background-color: var(--primary-color-hover);
     color: #000000;
-    /* Texto fica preto ao passar o mouse */
 }
 
-
+/* Estilos de busca */
 .minimal-search {
     width: 100%;
-    /* Largura total */
     padding: 10px 15px;
-    /* Espaçamento interno */
     font-size: 16px;
-    /* Tamanho da fonte */
-    border: 1px solid #cccccc;
-    /* Borda cinza clara */
     border-radius: 5px;
-    /* Bordas arredondadas */
     outline: none;
-    /* Remove o contorno ao focar */
     transition: border-color 0.3s ease;
     background-color: transparent;
-}
-
-.minimal-search:focus {
-    border-color: #999999;
-    /* Cor da borda ao focar */
-}
-
-
-/* Definindo as larguras dos inputs */
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.small-input input {
-    width: 30%;
-}
-
-.medium-input input {
-    width: 50%;
-}
-
-.large-input input {
-    width: 100%;
 }
 
 /* Estilização geral do formulário */
 .styled-form {
     max-width: 800px;
     margin: 0 auto;
-    background-color: #f9f9f9;
+    background-color: var(--main-bg-color);
     padding: 20px;
     border-radius: 8px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-    font-family: Arial, sans-serif;
 }
 
 /* Estilo dos grupos de inputs */
@@ -169,19 +100,18 @@
     margin-bottom: 20px;
 }
 
-/* Estilo dos labels */
 .form-group label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #fff;
+    color: #000000;
 }
 
 /* Estilo dos inputs */
 .form-group input {
-    width: 100%;
+    width: var(--input-large-width);
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border-color);
     border-radius: 4px;
     font-size: 16px;
     transition: border-color 0.3s;
@@ -189,29 +119,32 @@
 }
 
 .form-group input:focus {
-    border-color: #007BFF;
+    border-color: var(--focus-border-color);
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 5px var(--focus-border-color);
 }
 
-/* Estilo para diferentes tamanhos de inputs */
+/* Estilos para tamanhos de inputs */
 .small-input input {
-    width: 30%;
+    width: var(--input-small-width);
 }
 
 .medium-input input {
     width: 15rem;
+    /* Ajuste conforme necessário */
 }
 
 .large-input input {
     width: 30rem;
+    /* Ajuste conforme necessário */
 }
 
 /* Placeholder */
 input::placeholder {
-    color: #aaa;
+    color: var(--input-placeholder-color);
 }
 
+/* Estilo do grupo de inputs */
 #input-group-1 {
     display: flex;
     flex-direction: row;
@@ -228,7 +161,6 @@ a {
     color: inherit;
 }
 
-
 /* Design responsivo para dispositivos menores */
 @media (max-width: 768px) {
 
@@ -242,7 +174,7 @@ a {
 /* Telas pequenas */
 @media (max-width: 600px) {
     #listagem-produto {
-        padding: 2em;
+        padding: var(--padding-small);
         width: 90%;
         top: 50%;
         left: 50%;
@@ -253,17 +185,16 @@ a {
 /* Telas médias */
 @media (min-width: 601px) and (max-width: 1024px) {
     #listagem-produto {
-        padding: 3em;
+        padding: var(--padding-medium);
         width: 80%;
         max-width: 900px;
     }
 }
 
-
 /* Telas grandes */
 @media (min-width: 1025px) {
     #listagem-produto {
-        padding: 4em;
+        padding: var(--padding-large);
         width: 70%;
         max-width: 1200px;
     }
