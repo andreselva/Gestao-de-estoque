@@ -39,6 +39,7 @@ async function listarProdutos() {
 
             tr.innerHTML = `
                 <td><input type="checkbox"></td>
+                <td><a href="produtos-edit.php?id=${produto.id}">${produto.codigo}</a></td>
                 <td><a href="produtos-edit.php?id=${produto.id}">${produto.name}</a></td>
                 <td>${produto.estoque}</td>
                 <td>

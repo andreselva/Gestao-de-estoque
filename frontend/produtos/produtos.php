@@ -36,6 +36,7 @@ require_once __DIR__ . '../../sidebar/sidebar.php';
                     <thead>
                         <tr>
                             <th><input type="checkbox"></th>
+                            <th class="columns-th">Código</th>
                             <th class="columns-th">Produto</th>
                             <th class="columns-th">Estoque</th>
                             <th class="columns-th">#</th>
