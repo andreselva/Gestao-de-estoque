@@ -33,7 +33,7 @@ class CostServiceCalculator implements CostServiceCalculatorInterface
     {
         $lastDateBalance = $this->stockBalance->getLastDateBalance($idProduct);
         $balanceValue = $this->stockBalance->getBalanceValue($idProduct);
-        $allEntries = $this->stockEntries->getAllEntries($idProduct, $lastDateBalance) + $balanceValue;
+        $allEntries = $this->stockEntries->getEntriesValue($idProduct, $lastDateBalance) + $balanceValue;
         $allCosts = $this->costRepository->getAllCosts($idProduct, $lastDateBalance);
         $newCost = $this->calculate($allEntries, $allCosts);
         $this->costRepository->update($idProduct, $newCost);

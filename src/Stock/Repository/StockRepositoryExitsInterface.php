@@ -7,5 +7,6 @@ use Andre\GestaoDeEstoque\Stock\Entity\Stock;
 interface StockRepositoryExitsInterface
 {
     public function addExit(Stock $stockMovement): void;
-    public function getAllExits(int $idProduct, string $dataBalance = null);
+    public function getExitsValue(int $idProduct, string $dataBalance = null);
+    public function getAllExits($idProduct): array;
 }

@@ -30,7 +30,7 @@ class StockRepositoryExits implements StockRepositoryExitsInterface
         $stmt->execute();
     }
 
-    public function getAllExits(int $idProduct, ?string $dataBalance = null)
+    public function getExitsValue(int $idProduct, ?string $dataBalance = null)
     {
         try {
             $allExits = 0;
@@ -56,6 +56,25 @@ class StockRepositoryExits implements StockRepositoryExitsInterface
             }
 
             return $allExits;
+        } catch (Exception $e) {
+        }
+    }
+
+    public function getAllExits($idProduct): array
+    {
+        try {
+            $exits = [];
+            $sql = "SELECT * FROM stock WHERE idProduto = :idProduct AND type = 'S'";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(':idProduct', $idProduct);
+
+            if ($stmt->execute()) {
+                $exits[] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                return $exits;
+            }
+
+            return $exits;
+
         } catch (Exception $e) {
         }
     }

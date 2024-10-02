@@ -30,8 +30,8 @@ class StockServiceCalculator implements StockServiceCalculatorInterface
     {
         $lastDateBalance = $this->stockBalances->getLastDateBalance($idProduct);
         $balance = $this->stockBalances->getBalanceValue($idProduct, $lastDateBalance);
-        $entries = $this->stockEntries->getAllEntries($idProduct, $lastDateBalance);
-        $exits = $this->stockExits->getAllExits($idProduct, $lastDateBalance);
+        $entries = $this->stockEntries->getEntriesValue($idProduct, $lastDateBalance);
+        $exits = $this->stockExits->getExitsValue($idProduct, $lastDateBalance);
 
         $newStock = $this->calculate($balance, $entries, $exits);
         $this->stockRepositoryUpdater->update($idProduct, $newStock);

@@ -27,7 +27,7 @@ class StockRepositoryEntries implements StockRepositoryEntriesInterface
         $stmt->execute();
     }
 
-    public function getAllEntries(int $idProduct, ?string $dataBalance = null)
+    public function getEntriesValue(int $idProduct, ?string $dataBalance = null)
     {
         try {
             $allEntries = 0;
@@ -51,9 +51,28 @@ class StockRepositoryEntries implements StockRepositoryEntriesInterface
             }
 
             return $allEntries;
-            
         } catch (Exception $e) {
             throw new Exception('An error occurred while getting all entries');
+        }
+    }
+
+    public function getAllEntries($idProduct): array
+    {
+        try {
+            $entries = [];
+
+            $sql = "SELECT * FROM stock WHERE idProduto = :idProduct AND type = 'E'";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(':idProduct', $idProduct);
+
+            if ($stmt->execute()) {
+                $entries[] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                return $entries;
+            }
+
+            return $entries;
+
+        } catch (Exception $e) {
         }
     }
 }

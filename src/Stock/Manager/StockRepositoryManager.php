@@ -2,7 +2,6 @@
 
 namespace Andre\GestaoDeEstoque\Stock\Manager;
 
-use Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryInterface;
 use Exception;
 
 class StockRepositoryManager
@@ -31,7 +30,7 @@ class StockRepositoryManager
             throw $e; // Lançar exceção novamente para ser tratada na camada superior
         }
     }
-    
+
     public function executeSearch(int $idProduto): array
     {
         return $this->connection->searchMovements($idProduto);

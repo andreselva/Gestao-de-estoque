@@ -3,6 +3,7 @@
 namespace Andre\GestaoDeEstoque\Stock\Repository;
 
 use Andre\GestaoDeEstoque\Stock\Entity\Stock;
+use Exception;
 
 class StockRepositoryBalance implements StockRepositoryBalanceInterface
 {
@@ -62,5 +63,24 @@ class StockRepositoryBalance implements StockRepositoryBalanceInterface
         }
 
         return $dataBalance;
+    }
+
+    public function getAllBalances(?int $idProduct = null)
+    {
+        $balances = [];
+        try {
+
+            $sql = "SELECT * FROM stock WHERE type = 'B' AND idProduto = :idProduct";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(':idProduct', $idProduct);
+
+            if ($stmt->execute()) {
+                $balances[] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                return $balances;
+            }
+
+            return $balances;
+        } catch (Exception $e) {
+        }
     }
 }

@@ -245,11 +245,7 @@ class ServiceContainer
             );
         };
 
-        $this->services['StockRepository'] = function () {
-            return new \Andre\GestaoDeEstoque\Stock\Repository\StockRepository(
-                $this->get('DatabaseManager')
-            );
-        };
+       
     }
 
     public function register($name, $callback)

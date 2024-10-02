@@ -8,6 +8,7 @@ use Andre\GestaoDeEstoque\Stock\Factorys\StockFactory;
 use Andre\GestaoDeEstoque\Stock\Manager\StockRepositoryManager;
 use Andre\GestaoDeEstoque\Parameters\ParametersRepositoryInterface;
 use Andre\GestaoDeEstoque\Stock\CostCalculator\Services\CostServiceCalculatorInterface;
+use Andre\GestaoDeEstoque\Stock\Recovery\StockMovementRecovery;
 use Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryExitsInterface;
 use Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryBalanceInterface;
 use Andre\GestaoDeEstoque\Stock\Repository\StockRepositoryEntriesInterface;
@@ -65,7 +66,6 @@ class StockService implements StockServiceInterface
                     if ($paramCost == 1) {
                         $this->costCalculator->calculateTheNewProductCost($StockMovement->getId());
                     }
-                    
                 } else if ($StockMovement->getType() === self::MOV_EXIT) {
                     $this->stockExit->addExit($StockMovement);
                 } else if ($StockMovement->getType() === self::MOV_BALANCE) {
@@ -84,7 +84,8 @@ class StockService implements StockServiceInterface
     public function searchMovements($idProduto)
     {
         try {
-            return $this->manager->executeSearch($idProduto);
+            $recovery = new StockMovementRecovery($this->stockEntry, $this->stockExit, $this->stockBalance);
+            return $recovery->getAllMovements($idProduto);
         } catch (\InvalidArgumentException $e) {
             throw new InvalidArgumentException('An error ocurred', 0, $e);
         }
