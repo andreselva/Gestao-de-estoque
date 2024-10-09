@@ -66,6 +66,15 @@ class HandleRequestController
                     }
                     break;
                 case 'listar-produtos':
+                    if (isset($_GET['situation']) && $_GET['situation'] !== null && $_GET['situation'] !== '') {
+                        $situation = explode(', ', $_GET['situation']); // Divide a string em um array
+                        $data['situation'] = $situation; // Atribui o array à variável de dados
+                    }
+
+                    if (isset($_GET['dataCriacao']) && $_GET['dataCriacao'] !== null && $_GET['dataCriacao'] !== '') {
+                        $dataCreate = explode(', ', $_GET['dataCriacao']);
+                        $data['dateCreate'] = $dataCreate;
+                    }
                     break;
                 default:
                     $this->sendError('Nenhuma ação válida.');

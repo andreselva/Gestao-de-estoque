@@ -12,12 +12,41 @@ function goToEdit(event) {
     window.location.href = `produtos-edit.php?id=${id}`;
 }
 
+function getSelectedFilters() {
+    const filters = {};
+
+    // Capturar filtros de "Situação"
+    const situacaoCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="sit"]');
+    const situacoesSelecionadas = getSelectedCheckboxValues(situacaoCheckboxes);
+    if (situacoesSelecionadas.length > 0) {
+        filters.situacao = situacoesSelecionadas;
+    }
+
+    // Capturar filtros de "Data de Criação"
+    const dataCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="data"]');
+    const datasSelecionadas = getSelectedCheckboxValues(dataCheckboxes);
+    if (datasSelecionadas.length > 0) {
+        filters.dataCriacao = datasSelecionadas;
+    }
+
+    return filters;
+}
+
+function getSelectedCheckboxValues(checkboxes) {
+    return Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value);
+}
+
 // Função assíncrona para listar produtos e atualizar a tabela
-async function listarProdutos() {
+async function listarProdutos(filters = {}) {
     try {
+
         // Parâmetros de consulta para listar produtos
         const params = new URLSearchParams({
-            action: 'listar-produtos'
+            action: 'listar-produtos',
+            situation: filters.situacao ? filters.situacao.join(', ') : '',
+            dataCriacao: filters.dataCriacao ? filters.dataCriacao.join(', ') : ''
         });
 
         // Fazer uma requisição GET com parâmetros de consulta
@@ -43,7 +72,7 @@ async function listarProdutos() {
                 <td><a href="produtos-edit.php?id=${produto.id}">${produto.name}</a></td>
                 <td>${produto.estoque}</td>
                 <td>
-                    <div class="dropdown">
+                    <div class="dropdown-action">
                         <button class="dropbtn" onclick="toggleDropdown(event)"><ion-icon name="menu-outline"></ion-icon></button>
                         <div class="dropdown-content">
                             <a href="produtos-edit.php?id=${produto.id}">Editar</a>
@@ -59,6 +88,61 @@ async function listarProdutos() {
         console.error('Erro ao listar produtos:', error);
     }
 }
+
+
+document.getElementById('applyFilters').addEventListener('click', async (event) => {
+    event.preventDefault();
+    const selectedFilters = getSelectedFilters();
+    await listarProdutos(selectedFilters);
+});
+
+
+
+// Gerencia checkboxes para a seção "Situação"
+document.getElementById('sitTodos').addEventListener('click', function () {
+    // Seleciona todos os checkboxes de situação
+    const situacaoCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="sit"]:not(#sitTodos)');
+
+    // Marca/desmarca os checkboxes com base no estado de "Todos"
+    situacaoCheckboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+    });
+});
+
+// Adiciona evento de clique para os checkboxes de situação
+const situacaoCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="sit"]:not(#sitTodos)');
+situacaoCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('click', function () {
+        // Se qualquer checkbox de situação for desmarcado, desmarque o checkbox "Todos"
+        if (!this.checked) {
+            document.getElementById('sitTodos').checked = false;
+        }
+    });
+});
+
+// Gerencia checkboxes para a seção "Data de Criação"
+document.getElementById('dataTodas').addEventListener('click', function () {
+    const dataCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="data"]:not(#dataTodas)');
+
+    // Marca/desmarca os checkboxes com base no estado de "Todos"
+    dataCheckboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+    });
+});
+
+// Adiciona evento de clique para os checkboxes de data
+const dataCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="data"]:not(#dataTodas)');
+dataCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('click', function () {
+        // Se qualquer checkbox de data for desmarcado, desmarque o checkbox "Todos"
+        if (!this.checked) {
+            document.getElementById('dataTodas').checked = false;
+        }
+    });
+});
+
+
+// DROPDOWN
 
 // Função para alternar a visibilidade do dropdown
 function toggleDropdown(event) {
@@ -89,8 +173,8 @@ window.addEventListener('click', (event) => {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    listarProdutos();
+document.addEventListener('DOMContentLoaded', async () => {
+    await listarProdutos();
 
     // Delegação de eventos para links que abrem e fecham o modal
     document.querySelector('#produtos-list').addEventListener('click', (event) => {
@@ -101,4 +185,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+});
+
+
+// Prevenir o fechamento do dropdown ao clicar em checkboxes
+const dropdownMenu = document.querySelector('.dropdown-menu');
+
+dropdownMenu.addEventListener('click', function (event) {
+    // Impede que o evento de clique propague e feche o dropdown
+    event.stopPropagation();
 });

@@ -36,9 +36,9 @@ class ProductService implements ProductServiceInterface
         $this->productRepository->saveProduct($product);
     }
 
-    public function searchProducts(): array
+    public function searchProducts($data): array
     {
-        $result = $this->productRepository->getAllProducts();
+        $result = $this->productRepository->getAllProducts($data);
         return $result;
     }
 

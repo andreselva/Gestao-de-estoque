@@ -17,11 +17,11 @@ class ListarProdutosAction implements ActionInterface
 
     public function execute(?array $data)
     {
-        return $this->searchData();
+        return $this->searchData($data);
     }
 
-    private function searchData()
+    private function searchData($data)
     {
-        return $this->productController->getProducts();
+        return $this->productController->getProducts($data);
     }
 }
