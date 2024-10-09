@@ -40,7 +40,6 @@ html {
 }
 
 
-
 /* Estilos principais */
 #main-content {
     margin-left: 250px;
@@ -131,20 +130,18 @@ html {
     width: 200px !important;
 }
 
-.group-1 {
+.group-1,
+.group-2,
+.group-3 {
     display: flex;
     gap: 1em;
 }
 
 
-.dados-destinatario {
+.dados-destinatario,
+.outro-endereco {
     display: flex;
     flex-direction: column;
-    gap: 1em;
-}
-
-.group-2 {
-    display: flex;
     gap: 1em;
 }
 

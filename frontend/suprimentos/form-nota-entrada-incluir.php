@@ -61,7 +61,7 @@ require_once __DIR__ . '../../auth.php';
                         </div>
                     </div>
 
-                    <hr class="dropdown-divider">
+                    <hr class="my-4">
 
                     <div class="dados-destinatario">
                         <div>
@@ -150,14 +150,76 @@ require_once __DIR__ . '../../auth.php';
                                     </div>
                                 </div>
                             </div>
+
+
                             <div class="row">
                                 <div class="col-3">
                                     <label for="email" class="form-label">E-mail</label>
                                     <input type="email" class="form-control" id="email" name="email">
                                 </div>
-                            </div>                       
+                            </div>
 
                         </div>
+
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="outro-endereco">
+                        <div>
+                            <h5>Outro endereço</h5>
+                        </div>
+                        <div class="row group-3">
+                            <div class="col-4">
+                                <label for="outro-dest" class="form-label">Destinatário</label>
+                                <input type="text" class="form-control" id="outro-dest" name="outro-dest">
+                            </div>
+                            <div class="col-2 type-cep">
+                                <label for="outro-cep" class="form-label">CEP</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control inpt-cep" id="outro-cep" name="outro-cep">
+                                    <button class="btn btn-outline-secondary btn-cep" type="button" id="button-addon1">
+                                        <ion-icon class="icon" name="location-outline"></ion-icon>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row group-3">
+                            <div class="col-4">
+                                <label for="outro-endereco" class="form-label">Endereço</label>
+                                <input type="text" class="form-control" id="outro-endereco" name="outro-endereco">
+                            </div>
+                            <div class="col-1">
+                                <label for="outro-numero-endereco" class="form-label">Número</label>
+                                <input type="text" class="form-control" id="outro-numero-endereco" name="outro-numero-endereco">
+                            </div>
+                            <div class="col-2">
+                                <label for="outro-complemento" class="form-label">Complemento</label>
+                                <input type="text" class="form-control" id="outro-complemento" name="outro-complemento">
+                            </div>
+                            <div class="row">
+                                <div class="col-2">
+                                    <label for="outro-bairro" class="form-label">Bairro</label>
+                                    <input type="text" class="form-control" id="outro-bairro" name="outro-bairro">
+                                </div>
+                                <div class="col-3">
+                                    <label for="outra-cidade" class="form-label">Cidade</label>
+                                    <input type="text" class="form-control" id="outra-cidade" name="outra-cidade">
+                                </div>
+                                <div class="col-1 uf">
+                                    <label for="outra-uf" class="form-label">UF</label>
+                                    <select class="form-select" id="outra-uf">
+                                        <option selected disabled value="">Selecione...</option>
+                                        <option value="RS">RS</option>
+                                        <option value="SC">SC</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itens-nota">
 
                     </div>
 
