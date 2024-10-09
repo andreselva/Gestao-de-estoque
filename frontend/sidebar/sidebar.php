@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../sidebar/sidebar.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
@@ -25,12 +25,18 @@
                 </span>
             </button>
 
-            <button onclick="goToStock(event)">
-                <span>
-                    <i class="material-symbols-outlined"> inventory_2 </i>
-                    <span>Suprimentos</span>
-                </span>
-            </button>
+            <div>
+                <button onclick="toggleStockMenu(event)">
+                    <span>
+                        <i class="material-symbols-outlined"> inventory_2 </i>
+                        <span>Suprimentos</span>
+                    </span>
+                </button>
+                <div class="collapse-menu">
+                    <button onclick="goToStock(event)">Estoque</button>
+                    <button onclick="goToAnotherOption(event)">Notas de entrada</button>
+                </div>
+            </div>
 
             <button>
                 <span>
@@ -38,8 +44,8 @@
                     <span>Settings</span>
                 </span>
             </button>
-
         </nav>
+
 
     </aside>
 

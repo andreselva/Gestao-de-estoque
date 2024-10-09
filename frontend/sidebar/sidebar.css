@@ -21,7 +21,7 @@
 body {
     margin: 0;
     font-family: sans-serif;
-    background-color: var(--color-bg);
+    /* background-color: var(--color-bg); */
     color: var(--color-text);
 }
 
@@ -66,21 +66,23 @@ nav {
 }
 
 .sidebar button {
+    display: flex;
+    align-items: flex-start;
+    /* text-align: center; */
     height: var(--button-height);
     background-color: transparent;
     border: 0;
     font-family: inherit;
     color: var(--color-button-text);
     cursor: pointer;
-    text-align: left;
     padding: 0;
     font-size: var(--button-font-size);
 }
 
-.sidebar button > span {
+.sidebar button>span {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     height: 48px;
     padding: var(--button-padding);
     border-radius: var(--button-radius);
@@ -88,20 +90,49 @@ nav {
     transition: all var(--transition-duration);
 }
 
-.sidebar button:hover > span {
+.sidebar button:hover>span {
     background-color: rgba(255, 255, 255, 0.08);
 }
+
+.collapse-menu {
+    overflow: hidden; /* Para esconder o conteúdo que excede a altura do menu */
+    height: 0; /* Começa com altura zero */
+    opacity: 0; /* Começa invisível */
+    transition: height 0.3s ease, opacity 0.3s ease; /* Transição suave para a altura e opacidade */
+    display: flex; /* Usa flexbox para alinhar os itens */
+    flex-direction: column; /* Coloca os botões em coluna */
+    align-items: center; /* Centraliza os itens na horizontal */
+}
+
+.collapse-menu.show {
+    height: auto; /* Permite que a altura se ajuste automaticamente */
+    opacity: 1; /* Torna o submenu visível */
+}
+
+.collapse-menu button {
+    display: flex; /* Permite a centralização */
+    justify-content: flex-start; /* Alinha o texto à esquerda */
+    width: 100%; /* Ajusta todos os botões para a mesma largura */
+    max-width: 200px; /* Define uma largura máxima para os botões */
+    padding: 10px 15px; /* Adiciona um pouco de espaçamento interno */
+    margin: 5px 0; /* Espaço entre os botões */
+}
+
+.collapse-menu button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
 
 @media (max-width: 920px) {
     .sidebar {
         width: var(--sidebar-narrow-width);
     }
 
-    .sidebar button > span {
+    .sidebar button>span {
         width: 50px;
     }
 
-    .sidebar button > span > span {
+    .sidebar button>span>span {
         opacity: 0;
         visibility: hidden;
     }
