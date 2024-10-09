@@ -34,7 +34,7 @@
                 </button>
                 <div class="collapse-menu">
                     <button onclick="goToStock(event)">Estoque</button>
-                    <button onclick="goToAnotherOption(event)">Notas de entrada</button>
+                    <button onclick="goToEntryNotes(event)">Notas de entrada</button>
                 </div>
             </div>
 

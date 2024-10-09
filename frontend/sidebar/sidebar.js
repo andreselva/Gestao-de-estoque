@@ -8,6 +8,11 @@ function goToStock(event) {
     window.location.href = '../suprimentos/estoque.php';
 }
 
+function goToEntryNotes(event) {
+    event.preventDefault();
+    window.location.href = '../suprimentos/form-nota-entrada.php';
+}
+
 function toggleStockMenu(event) {
     const menu = event.currentTarget.nextElementSibling; // Seleciona o submenu
     const isVisible = menu.classList.contains('show'); // Verifica se o submenu está visível

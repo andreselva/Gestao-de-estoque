@@ -1,0 +1,102 @@
+:root {
+    --cor-principal: #6911ced7;
+    --cor-secundaria: #6923b8;
+    --cor-fundo: #ffffff;
+    --cor-texto: #000000;
+    --cor-borda: #cccccc;
+    --cor-borda-foco: #6923b8c2;
+
+    --tamanho-font: 16px;
+    --espaco-padrao: 10px;
+    --max-width: 1300px;
+}
+
+
+/* Estilos principais */
+#main-content {
+    margin-left: 250px;
+    /* Ajusta com base na largura da sidebar */
+    padding: 50px;
+    box-sizing: border-box;
+    /* Inclui padding e border no width/height */
+}
+
+/* Seção de notas */
+#section-nota {
+    width: 100%;
+    padding: 20px;
+    margin: 0 0 20px 0;
+    /* Margem superior zero, inferior de 20px */
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    /* Adiciona bordas arredondadas para melhorar o design */
+    box-sizing: border-box;
+    /* Garante que padding e border não afetem o tamanho total */
+}
+
+/* Container flexível para botões e campo de pesquisa */
+#container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    /* Faz com que o conteúdo se ajuste em telas menores */
+    align-items: center;
+    /* Centraliza verticalmente o conteúdo */
+}
+
+.nota-entrada {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+
+.dados-destinatario {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+
+.minimal-button {
+    background-color: var(--cor-principal);
+    color: var(--cor-fundo);
+    border: none;
+    padding: var(--espaco-padrao) 20px;
+    font-size: var(--tamanho-font);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.minimal-button:hover {
+    background-color: rgba(105, 17, 206, 0.60);
+    color: var(--cor-texto);
+}
+
+.minimal-search {
+    width: 100%;
+    padding: var(--espaco-padrao) 15px;
+    max-width: 400px;
+    font-size: var(--tamanho-font);
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    background-color: transparent;
+}
+
+.minimal-search:focus {
+    border-color: #999999;
+}
+
+.col-date,
+.col-type {
+    width: 200px !important;
+}
+
+.group-1 {
+    display: flex;
+    gap: 1em;
+}
