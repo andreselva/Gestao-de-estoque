@@ -90,9 +90,10 @@ async function listarProdutos(filters = {}) {
 }
 
 
-document.getElementById('applyFilters').addEventListener('click', () => {
+document.getElementById('applyFilters').addEventListener('click', async (event) => {
+    event.preventDefault();
     const selectedFilters = getSelectedFilters();
-    listarProdutos(selectedFilters);
+    await listarProdutos(selectedFilters);
 });
 
 
@@ -172,8 +173,8 @@ window.addEventListener('click', (event) => {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    listarProdutos();
+document.addEventListener('DOMContentLoaded', async () => {
+    await listarProdutos();
 
     // Delegação de eventos para links que abrem e fecham o modal
     document.querySelector('#produtos-list').addEventListener('click', (event) => {

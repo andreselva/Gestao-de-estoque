@@ -38,9 +38,9 @@ class ProductRepository implements ProductRepositoryInterface
     {
         try {
             $situation = $data['situation'] ?? null;
-            $dataCreate = $data['dataCreate'] ?? null;
+            $dateCreate = $data['dateCreate'] ?? null;
 
-            $sql = "SELECT * FROM products";
+            $sql = "SELECT * FROM products WHERE 1=1";
 
             if ($situation && !in_array('T', $situation)) {
                 if (!empty($situation)) {
@@ -50,20 +50,31 @@ class ProductRepository implements ProductRepositoryInterface
                 }
             }
 
-            if ($dataCreate && !in_array('allDates', $dataCreate)) {
-            }
+            if ($dateCreate && !in_array('allDates', $dateCreate)) {
 
+                $dateFilter = [
+                    'lastyear' => "dataCriacao >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)",
+                    'lastmonth' => "dataCriacao >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)",
+                    'lastweek' => "dataCriacao >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)"
+                ];
+
+                foreach ($dateFilter as $key => $condition) {
+                    if (in_array($key, $dateCreate)) {
+                        $sql .= " AND " . $condition;
+                        break;
+                    }
+                }
+            }
 
             $stmt =  $this->connection->prepare($sql);
 
             if ($stmt->execute()) {
-                // Busque todos os resultados em um array associativo
                 $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
                 return $results;
             } else {
-                // Em caso de erro, você pode lidar com isso aqui
                 return [];
             }
+            
         } catch (Exception $e) {
             throw new Exception("An error ocurred " . $e->getMessage());
         }

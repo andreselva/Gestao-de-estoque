@@ -72,7 +72,7 @@ class HandleRequestController
                     }
 
                     if (isset($_GET['dataCriacao']) && $_GET['dataCriacao'] !== null && $_GET['dataCriacao'] !== '') {
-                        $dataCreate[] = $_GET['dataCriacao'];
+                        $dataCreate = explode(', ', $_GET['dataCriacao']);
                         $data['dateCreate'] = $dataCreate;
                     }
                     break;
