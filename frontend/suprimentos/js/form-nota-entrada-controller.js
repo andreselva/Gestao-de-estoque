@@ -41,3 +41,16 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+document.getElementById('check-outro-endereco').addEventListener('change', function () {
+    const enderecoAdicional = document.getElementById('endereco-adicional');
+    const enderecoAdicional2 = document.getElementById('endereco-adicional-2');
+
+    // Verifica se o checkbox está marcado
+    if (this.checked) {
+        enderecoAdicional.style.removeProperty('display');  // Mostra os campos
+        enderecoAdicional2.style.removeProperty('display');
+    } else {
+        enderecoAdicional.style.display = 'none';    // Esconde os campos
+        enderecoAdicional2.style.display = 'none';
+    }
+});

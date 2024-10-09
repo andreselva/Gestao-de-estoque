@@ -167,9 +167,17 @@ require_once __DIR__ . '../../auth.php';
 
                     <div class="outro-endereco">
                         <div>
-                            <h5>Outro endereço</h5>
+                            <h5>Endereço de entrega</h5>
                         </div>
-                        <div class="row group-3">
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="check-outro-endereco">
+                            <label class="form-check-label" for="check-outro-endereco">
+                                Usar outro endereço para entrega
+                            </label>
+                        </div>
+
+                        <div class="row group-3" style="display: none" id="endereco-adicional">
                             <div class="col-4">
                                 <label for="outro-dest" class="form-label">Destinatário</label>
                                 <input type="text" class="form-control" id="outro-dest" name="outro-dest">
@@ -183,9 +191,8 @@ require_once __DIR__ . '../../auth.php';
                                     </button>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="row group-3">
+                        <div class="row group-3" style="display: none" id="endereco-adicional-2">
                             <div class="col-4">
                                 <label for="outro-endereco" class="form-label">Endereço</label>
                                 <input type="text" class="form-control" id="outro-endereco" name="outro-endereco">
@@ -222,6 +229,7 @@ require_once __DIR__ . '../../auth.php';
                     <div class="itens-nota">
 
                     </div>
+
 
                 </form>
 

@@ -90,6 +90,14 @@ html {
     background-color: var(--cor-btn-cep) !important;
 }
 
+
+.icon {
+    width: 19px;
+    height: 19px;
+    color: #fff;
+}
+
+
 .minimal-button {
     background-color: var(--cor-principal);
     color: var(--cor-fundo);
@@ -143,10 +151,4 @@ html {
     display: flex;
     flex-direction: column;
     gap: 1em;
-}
-
-.icon {
-    width: 19px;
-    height: 19px;
-    color: #fff;
 }
