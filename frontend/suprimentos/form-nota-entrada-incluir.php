@@ -138,7 +138,7 @@ require_once __DIR__ . '../../auth.php';
                                     </div>
                                     <div class="col-1 uf">
                                         <label for="uf" class="form-label">UF</label>
-                                        <select class="form-select" id="uf">
+                                        <select class="form-select" id="uf" name="uf-dest">
                                             <option selected disabled value="">Selecione...</option>
                                             <option value="RS">RS</option>
                                             <option value="SC">SC</option>
@@ -216,7 +216,7 @@ require_once __DIR__ . '../../auth.php';
                                 </div>
                                 <div class="col-1 uf">
                                     <label for="outra-uf" class="form-label">UF</label>
-                                    <select class="form-select" id="outra-uf">
+                                    <select class="form-select" id="outra-uf" name="outra-uf-dest">
                                         <option selected disabled value="">Selecione...</option>
                                         <option value="RS">RS</option>
                                         <option value="SC">SC</option>
@@ -311,21 +311,19 @@ require_once __DIR__ . '../../auth.php';
                             </div>
                             <div class="col-1 uf">
                                 <label for="uf-transp" class="form-label">UF</label>
-                                <select class="form-select" id="uf-transp">
+                                <select class="form-select" id="uf-transp" name="uf-transp">
                                     <option selected disabled value="">Selecione...</option>
                                     <option value="RS">RS</option>
                                     <option value="SC">SC</option>
                                 </select>
                             </div>
-
-
                         </div>
 
                     </div>
 
                     <div class="row justify-content-end">
                         <div class="col-auto">
-                            <button type="submit" class="btn btn-pri">Salvar</button>
+                            <button type="submit" class="btn btn-pri" onclick="salvarNotaFiscal(event)">Salvar</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </div>

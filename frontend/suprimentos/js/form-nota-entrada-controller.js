@@ -3,6 +3,7 @@ let idProduto;  // Armazena o ID do produto selecionado
 let searchTimeout;  // Armazena o timeout para a busca dos produtos
 let estoqueDisponivel; // Armazena o estoque disponível do produto
 // let paramPermiteEstNegativo; // Armazena o valor do parâmetro, se permite estoque negativo.
+let produtos = []; // Array para armazenar os produtos
 
 // Função para redirecionar para a página de inclusão de nota de entrada
 function goToAddEntryNote(event) {
@@ -143,6 +144,7 @@ document.getElementById('check-outro-endereco').addEventListener('change', funct
     }
 });
 
+
 // Evento para adicionar itens à tabela
 document.getElementById('adicionar-item').addEventListener('click', function () {
     // Captura os valores dos campos
@@ -193,11 +195,18 @@ document.getElementById('adicionar-item').addEventListener('click', function () 
                 const novoTotal = (novaQuantidade * preco).toFixed(2);
                 tdTotal.textContent = novoTotal;
 
+                // Atualiza o array de produtos
+                const produtoIndex = produtos.findIndex(p => p.nome === produto);
+                if (produtoIndex !== -1) {
+                    produtos[produtoIndex].quantidade = novaQuantidade; // Atualiza a quantidade
+                    produtos[produtoIndex].total = novoTotal; // Atualiza o total
+                }
+
                 produtoExistente = true; // Indica que o produto já existe
             }
         });
 
-        // Se o produto não existe, adiciona uma nova linha
+        // Se o produto não existe, adiciona uma nova linha e adiciona ao array
         if (!produtoExistente) {
             const novaLinha = `
                 <tr idProduto="${idProduto}">
@@ -210,16 +219,27 @@ document.getElementById('adicionar-item').addEventListener('click', function () 
 
             // Insere a nova linha no corpo da tabela
             document.getElementById('corpo-tabela-itens').insertAdjacentHTML('beforeend', novaLinha);
+
+            // Adiciona o produto ao array
+            produtos.push({
+                idProduto: idProduto,
+                nome: produto,
+                quantidade: Number(quantidade),
+                preco: Number(preco),
+                total: total
+            });
         }
 
-        // Limpa os campos após adicionar o item
+        // Limpa os campos após adicionar o item e seta o idProduto como 0
         document.getElementById('produto').value = '';
         document.getElementById('quantidade').value = '';
         document.getElementById('preco').value = '';
+        idProduto = 0;
     } else {
         alert('Preencha todos os campos antes de adicionar um item!');
     }
 });
+
 
 
 // Evento para remover itens da tabela
@@ -239,3 +259,36 @@ document.getElementById('tabela-itens').addEventListener('click', function (e) {
     }
 });
 
+
+async function salvarNotaFiscal(event) {
+    event.preventDefault();
+
+    const form = document.getElementById('form-nota-entrada');
+
+    try {
+        const formData = new FormData(form);
+        formData.append('action', 'cadastrar-nota-entrada');
+
+        // Adiciona os produtos ao formData
+        formData.append('produtos', JSON.stringify(produtos)); // Converte o array para string
+
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        const response = await fetch('../../src/index.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const responseData = await response.json();
+        console.log(responseData); // Você pode manipular a resposta como necessário
+
+    } catch (error) {
+        console.error('Erro ao salvar nota fiscal:', error);
+    }
+}
