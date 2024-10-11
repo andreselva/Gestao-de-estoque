@@ -226,9 +226,51 @@ require_once __DIR__ . '../../auth.php';
                         </div>
                     </div>
 
-                    <div class="itens-nota">
+                    <hr class="my-4">
 
+                    <div class="itens-nota">
+                        <div>
+                            <h5>Itens</h5>
+                        </div>
+
+                        <!-- Formulário de Adicionar Itens -->
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="produto" class="form-label">Produto</label>
+                                <input type="text" class="form-control" id="produto" placeholder="Nome ou código do produto">
+                                <div id="dropdownResultEstoque"></div>
+                            </div>
+                            <div class="col-2">
+                                <label for="quantidade" class="form-label">Quantidade</label>
+                                <input type="number" class="form-control" id="quantidade" placeholder="Quantidade">
+                            </div>
+                            <div class="col-2">
+                                <label for="preco" class="form-label">Preço unitário</label>
+                                <input type="text" class="form-control" id="preco" placeholder="Preço unitário">
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary mt-4" id="adicionar-item">Adicionar Item</button>
+                            </div>
+                        </div>
+
+                        <!-- Tabela para Mostrar os Itens -->
+                        <div>
+                            <table class="table table-bordered" id="tabela-itens">
+
+                                </thead>
+                                <tbody id="corpo-tabela-itens">
+                                    <!-- Linhas de itens serão inseridas aqui -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
+                    <hr class="my-4">
+
+                    <div class="transportador-nota">
+                        <h5>Transportador</h5>
+                    </div>
+
 
 
                 </form>

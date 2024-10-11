@@ -75,6 +75,31 @@ html {
     /* Centraliza verticalmente o conteúdo */
 }
 
+
+#dropdownResultEstoque {
+    border: 1px solid var(--cor-borda);
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    position: absolute;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    width: 100%;
+    max-width: 600px;
+    z-index: 1000;
+    border-radius: 0 8px 8px 8px;
+}
+
+#dropdownResultEstoque div {
+    padding: var(--espaco-padrao);
+    cursor: pointer;
+}
+
+#dropdownResultEstoque div:hover {
+    background-color: rgba(105, 35, 184, 0.21);
+}
+
+
 .nota-entrada {
     display: flex;
     flex-direction: column;
