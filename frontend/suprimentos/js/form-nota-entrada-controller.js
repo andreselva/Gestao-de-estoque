@@ -1,12 +1,42 @@
 // Variáveis globais
 let idProduto;  // Armazena o ID do produto selecionado
 let searchTimeout;  // Armazena o timeout para a busca dos produtos
+let estoqueDisponivel; // Armazena o estoque disponível do produto
+// let paramPermiteEstNegativo; // Armazena o valor do parâmetro, se permite estoque negativo.
 
 // Função para redirecionar para a página de inclusão de nota de entrada
 function goToAddEntryNote(event) {
     event.preventDefault();
     window.location.href = "../suprimentos/form-nota-entrada-incluir.php";
 }
+
+
+// async function getParamValue() {
+//     const params = new URLSearchParams({
+//         action: 'getParamValue',
+//         search: 'permiteEstoqueNegativo'
+//     });
+
+//     try {
+//         const response = await fetch(`../../src/index.php?${params.toString()}`);
+//         const data = await response.json();
+//         return data.param; // Retorna o valor do parâmetro
+//     } catch (error) {
+//         console.error('Erro ao buscar o valor do parâmetro:', error);
+//         return null; // Valor padrão em caso de erro
+//     }
+// }
+
+// // Função para carregar o parâmetro ao abrir a página
+// async function carregarParametro() {
+//     paramPermiteEstNegativo = await getParamValue(); // Armazena o valor na variável global
+//     console.log('Parâmetro carregado:', paramPermiteEstNegativo);
+// }
+
+// // Carrega o parâmetro assim que a página for aberta
+// document.addEventListener('DOMContentLoaded', carregarParametro);
+
+
 
 // Evento de input para busca de produtos no dropdown
 document.getElementById('produto').addEventListener('input', function () {
@@ -47,6 +77,7 @@ document.getElementById('produto').addEventListener('input', function () {
                     div.textContent = `${product.codigo} - ${product.name}`;
                     div.addEventListener('click', function () {
                         document.getElementById('produto').value = `${product.codigo} - ${product.name}`;
+                        estoqueDisponivel = Number(product.estoque);
                         idProduto = `${product.id}`; // Guarda o ID do produto
                         dropdown.style.display = 'none'; // Oculta o dropdown
                     });
@@ -142,18 +173,44 @@ document.getElementById('adicionar-item').addEventListener('click', function () 
         // Calcula o total (quantidade * preço)
         const total = (quantidade * preco).toFixed(2);
 
-        // Cria uma nova linha na tabela
-        const novaLinha = `
-            <tr idProduto="${idProduto}">
-                <td>${produto}</td>
-                <td>${quantidade}</td>
-                <td>${preco}</td>
-                <td>${total}</td>
-                <td><button class="btn btn-danger btn-sm remover-item">Remover</button></td>
-            </tr>`;
+        // Verifica se o produto já existe na tabela
+        const linhas = document.querySelectorAll('#corpo-tabela-itens tr');
+        let produtoExistente = false;
 
-        // Insere a nova linha no corpo da tabela
-        document.getElementById('corpo-tabela-itens').insertAdjacentHTML('beforeend', novaLinha);
+        linhas.forEach(linha => {
+            const tdProduto = linha.querySelector('td:first-child').textContent;
+
+            // Se o produto já existe, soma a quantidade
+            if (tdProduto === produto) {
+                const tdQuantidade = linha.querySelector('td:nth-child(2)');
+                const tdTotal = linha.querySelector('td:nth-child(4)');
+
+                // Atualiza a quantidade
+                const novaQuantidade = Number(tdQuantidade.textContent) + Number(quantidade);
+                tdQuantidade.textContent = novaQuantidade;
+
+                // Atualiza o total
+                const novoTotal = (novaQuantidade * preco).toFixed(2);
+                tdTotal.textContent = novoTotal;
+
+                produtoExistente = true; // Indica que o produto já existe
+            }
+        });
+
+        // Se o produto não existe, adiciona uma nova linha
+        if (!produtoExistente) {
+            const novaLinha = `
+                <tr idProduto="${idProduto}">
+                    <td>${produto}</td>
+                    <td>${quantidade}</td>
+                    <td>${preco}</td>
+                    <td>${total}</td>
+                    <td><button class="btn btn-danger btn-sm remover-item">Remover</button></td>
+                </tr>`;
+
+            // Insere a nova linha no corpo da tabela
+            document.getElementById('corpo-tabela-itens').insertAdjacentHTML('beforeend', novaLinha);
+        }
 
         // Limpa os campos após adicionar o item
         document.getElementById('produto').value = '';
@@ -163,6 +220,7 @@ document.getElementById('adicionar-item').addEventListener('click', function () 
         alert('Preencha todos os campos antes de adicionar um item!');
     }
 });
+
 
 // Evento para remover itens da tabela
 document.getElementById('tabela-itens').addEventListener('click', function (e) {
@@ -180,3 +238,4 @@ document.getElementById('tabela-itens').addEventListener('click', function (e) {
         }
     }
 });
+

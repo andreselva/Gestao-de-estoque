@@ -106,12 +106,12 @@ html {
     gap: 3em;
 }
 
-.btn-cep {
+.btn-pri {
     background-color: var(--cor-principal) !important;
-    /* APLICADO AO BOTÃO DO CEP */
+    color: #fff !important;
 }
 
-.btn-cep:hover {
+.btn-pri:hover {
     background-color: var(--cor-btn-cep) !important;
 }
 
@@ -172,7 +172,9 @@ html {
 
 
 .dados-destinatario,
-.outro-endereco {
+.outro-endereco,
+.itens-nota,
+.transportador-nota {
     display: flex;
     flex-direction: column;
     gap: 1em;

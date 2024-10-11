@@ -110,7 +110,7 @@ require_once __DIR__ . '../../auth.php';
                                     <label for="cep" class="form-label">CEP</label>
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control inpt-cep" id="cep" name="cep">
-                                        <button class="btn btn-outline-secondary btn-cep" type="button" id="button-addon1">
+                                        <button class="btn btn-outline-secondary btn-pri" type="button" id="button-addon1">
                                             <ion-icon class="icon" name="location-outline"></ion-icon>
                                         </button>
                                     </div>
@@ -186,7 +186,7 @@ require_once __DIR__ . '../../auth.php';
                                 <label for="outro-cep" class="form-label">CEP</label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control inpt-cep" id="outro-cep" name="outro-cep">
-                                    <button class="btn btn-outline-secondary btn-cep" type="button" id="button-addon1">
+                                    <button class="btn btn-outline-secondary btn-pri" type="button" id="button-addon1">
                                         <ion-icon class="icon" name="location-outline"></ion-icon>
                                     </button>
                                 </div>
@@ -248,8 +248,8 @@ require_once __DIR__ . '../../auth.php';
                                 <label for="preco" class="form-label">Preço unitário</label>
                                 <input type="text" class="form-control" id="preco" placeholder="Preço unitário">
                             </div>
-                            <div class="col-2">
-                                <button type="button" class="btn btn-primary mt-4" id="adicionar-item">Adicionar Item</button>
+                            <div class="col-2 d-flex align-items-end">
+                                <button type="button" class="btn btn-pri mt-2" id="adicionar-item">Adicionar Item</button>
                             </div>
                         </div>
 
@@ -257,7 +257,8 @@ require_once __DIR__ . '../../auth.php';
                         <div>
                             <table class="table table-bordered" id="tabela-itens">
 
-                                </thead>
+                                <!-- thead inserido via js -->
+
                                 <tbody id="corpo-tabela-itens">
                                     <!-- Linhas de itens serão inseridas aqui -->
                                 </tbody>
@@ -269,9 +270,65 @@ require_once __DIR__ . '../../auth.php';
 
                     <div class="transportador-nota">
                         <h5>Transportador</h5>
+
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="nome-transp" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome-transp" name="nome-transp">
+                            </div>
+                            <div class="col-2">
+                                <label for="cnpjTransp" class="form-label" id="documentLabel">CNPJ</label>
+                                <input type="text" class="form-control" id="cnpjTransp" name="cnpjTransp" placeholder="Insira o CNPJ" maxlength="18">
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="endereco-transp" class="form-label">Endereço</label>
+                                <input type="text" class="form-control" id="endereco-transp" name="endereco-transp">
+                            </div>
+                            <div class="col-1">
+                                <label for="numero-endereco-transp" class="form-label">Número</label>
+                                <input type="text" class="form-control" id="numero-endereco-transp" name="numero-endereco-transp">
+                            </div>
+                            <div class="col-2">
+                                <label for="complemento-transp" class="form-label">Complemento</label>
+                                <input type="text" class="form-control" id="complemento-transp" name="complemento-transp">
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-2">
+                                <label for="bairro-transp" class="form-label">Bairro</label>
+                                <input type="text" class="form-control" id="bairro-transp" name="bairro-transp">
+                            </div>
+                            <div class="col-3">
+                                <label for="cidade-transp" class="form-label">Cidade</label>
+                                <input type="text" class="form-control" id="cidade-transp" name="cidade-transp">
+                            </div>
+                            <div class="col-1 uf">
+                                <label for="uf-transp" class="form-label">UF</label>
+                                <select class="form-select" id="uf-transp">
+                                    <option selected disabled value="">Selecione...</option>
+                                    <option value="RS">RS</option>
+                                    <option value="SC">SC</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+
                     </div>
 
-
+                    <div class="row justify-content-end">
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-pri">Salvar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
 
                 </form>
 
