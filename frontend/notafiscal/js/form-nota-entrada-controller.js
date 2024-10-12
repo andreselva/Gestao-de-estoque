@@ -8,7 +8,7 @@ let produtos = []; // Array para armazenar os produtos
 // Função para redirecionar para a página de inclusão de nota de entrada
 function goToAddEntryNote(event) {
     event.preventDefault();
-    window.location.href = "../suprimentos/form-nota-entrada-incluir.php";
+    window.location.href = "../notafiscal/form-nota-entrada-incluir.php";
 }
 
 

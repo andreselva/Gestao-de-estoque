@@ -10,7 +10,7 @@ require_once __DIR__ . '../../sidebar/sidebar.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suprimentos</title>
-    <link rel="stylesheet" href="../suprimentos/css/nota-entrada.css">
+    <link rel="stylesheet" href="../notafiscal/css/nota-entrada.css">
 </head>
 
 <body>

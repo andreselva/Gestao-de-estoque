@@ -10,7 +10,7 @@ function goToStock(event) {
 
 function goToEntryNotes(event) {
     event.preventDefault();
-    window.location.href = '../suprimentos/form-nota-entrada.php';
+    window.location.href = '../notafiscal/form-nota-entrada.php';
 }
 
 function toggleStockMenu(event) {
