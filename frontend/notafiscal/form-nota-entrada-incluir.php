@@ -27,13 +27,13 @@ require_once __DIR__ . '../../auth.php';
 
                         <div class="col-2 col-date">
                             <label for="dataEntrada" class="form-label">Data de entrada</label>
-                            <input type="date" class="form-control date-input" name="data-entrada">
+                            <input type="date" class="form-control date-input" id="data-entrada" name="data-entrada">
                         </div>
 
                         <div class="col-2 col-type">
-                            <label for="validationDefault04" class="form-label">Tipo</label>
-                            <select class="form-select select-input" id="validationDefault04" required>
-                                <option selected disabled value="">Selecione...</option>
+                            <label for="tipo-entrada" class="form-label">Tipo de entrada</label>
+                            <select class="form-select select-input" id="tipo-entrada" name="tipo-entrada" required>
+                                <option selected disabled>Selecione...</option>
                                 <option value="Entrada">Entrada</option>
                                 <option value="Devolucao">Devolução</option>
                             </select>
@@ -55,7 +55,7 @@ require_once __DIR__ . '../../auth.php';
                             </div>
                             <div class="col-1">
                                 <label for="numero-nota" class="form-label">Série</label>
-                                <input type="text" class="form-control" id="numero-nota" name="numero-nota">
+                                <input type="text" class="form-control" id="serie-nota" name="serie-nota">
                             </div>
 
                         </div>
@@ -77,7 +77,7 @@ require_once __DIR__ . '../../auth.php';
                                 </div>
                                 <div class="col-2 col-type">
                                     <label for="pessoaTipo" class="form-label">Pessoa</label>
-                                    <select class="form-select select-input" id="pessoaTipo">
+                                    <select class="form-select select-input" id="pessoaTipo" name="pessoa-tipo">
                                         <option selected value="p-fisica">Física</option>
                                         <option value="p-juridica">Jurídica</option>
                                     </select>
@@ -96,7 +96,7 @@ require_once __DIR__ . '../../auth.php';
                                 </div>
                                 <div class="col-2" id="contribuinteField" style="display: none">
                                     <label for="identificadorField" class="form-label">Identificador</label>
-                                    <select class="form-select" id="identificadorField">
+                                    <select class="form-select" id="identificadorField" name="identificador-ie">
                                         <option selected disabled value="">Selecione...</option>
                                         <option value="contribuinte">Contribuinte</option>
                                         <option value="nao-contribuinte">Não Contribuinte</option>
@@ -146,7 +146,7 @@ require_once __DIR__ . '../../auth.php';
                                     </div>
                                     <div class="col-2">
                                         <label for="phone" class="form-label">Telefone</label>
-                                        <input type="text" class="form-control" id="phone" name="phone">
+                                        <input type="text" class="form-control" id="telefone" name="telefone">
                                     </div>
                                 </div>
                             </div>
@@ -217,7 +217,7 @@ require_once __DIR__ . '../../auth.php';
                                 <div class="col-1 uf">
                                     <label for="outra-uf" class="form-label">UF</label>
                                     <select class="form-select" id="outra-uf" name="outra-uf-dest">
-                                        <option selected disabled value="">Selecione...</option>
+                                        <option selected disabled>Selecione...</option>
                                         <option value="RS">RS</option>
                                         <option value="SC">SC</option>
                                     </select>
@@ -279,7 +279,7 @@ require_once __DIR__ . '../../auth.php';
                             </div>
                             <div class="col-2">
                                 <label for="cnpjTransp" class="form-label" id="documentLabel">CNPJ</label>
-                                <input type="text" class="form-control" id="cnpjTransp" name="cnpjTransp" placeholder="Insira o CNPJ" maxlength="18">
+                                <input type="text" class="form-control" id="cnpjTransp" name="cnpj-transp   " placeholder="Insira o CNPJ" maxlength="18">
                             </div>
                         </div>
 
@@ -310,9 +310,9 @@ require_once __DIR__ . '../../auth.php';
                                 <input type="text" class="form-control" id="cidade-transp" name="cidade-transp">
                             </div>
                             <div class="col-1 uf">
-                                <label for="uf-transp" class="form-label">UF</label>
+                                <label for="uf-transp" class="form-label">UF Transportador</label>
                                 <select class="form-select" id="uf-transp" name="uf-transp">
-                                    <option selected disabled value="">Selecione...</option>
+                                    <option selected disabled>Selecione...</option>
                                     <option value="RS">RS</option>
                                     <option value="SC">SC</option>
                                 </select>

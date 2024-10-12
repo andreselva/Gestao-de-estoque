@@ -263,6 +263,8 @@ document.getElementById('tabela-itens').addEventListener('click', function (e) {
 async function salvarNotaFiscal(event) {
     event.preventDefault();
 
+    if (!verificaCampos()) return;
+
     const form = document.getElementById('form-nota-entrada');
 
     try {
@@ -291,4 +293,58 @@ async function salvarNotaFiscal(event) {
     } catch (error) {
         console.error('Erro ao salvar nota fiscal:', error);
     }
+}
+
+function verificaCampos() {
+    const checkbox = document.getElementById('check-outro-endereco');
+
+    const validarCampos = (campos) => {
+        for (let campo of campos) {
+            const elemento = document.getElementById(campo);
+            if (!elemento || elemento.value.trim() === '' || elemento.value === 'Selecione...') { // Verifica se o elemento existe
+                const label = document.querySelector(`label[for="${campo}"]`);
+                const nomeCampo = label ? label.textContent : campo;
+                alert(`Verifique o campo '${nomeCampo}'`); // Mensagem de erro
+                return false;
+            }
+        }
+        return true; // Todos os campos estão preenchidos
+    }
+
+    // Verifica campos condicionais se o checkbox estiver marcado
+    if (checkbox.checked && !validarCampos([
+        'outro-dest',
+        'outro-cep',
+        'outro-endereco',
+        'outro-numero-endereco',
+        'outro-complemento',
+        'outro-bairro',
+        'outra-cidade',
+        'outra-uf-dest'
+    ])) {
+        return false; // Se os campos condicionais não estiverem preenchidos, retorna false
+    }
+
+    // Verifica campos gerais
+    return validarCampos([
+        'tipo-entrada',
+        'numero-nota',
+        'nome-empresa',
+        'nat-oper',
+        'serie-nota',
+        'nome-dest',
+        'pessoaTipo',
+        'cpf-cnpj',
+        'ieField',
+        'identificador-ie',
+        'cep',
+        'endereco',
+        'numero-endereco',
+        'complemento',
+        'bairro',
+        'cidade',
+        'uf-dest',
+        'telefone',
+        'email',
+    ]);
 }
