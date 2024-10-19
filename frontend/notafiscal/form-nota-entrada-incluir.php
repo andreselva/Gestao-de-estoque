@@ -92,7 +92,7 @@ require_once __DIR__ . '../../auth.php';
                                 </div>
                                 <div class="col-2" id="ieField" style="display: none">
                                     <label for="ieField" class="form-label">Inscrição Estadual</label>
-                                    <input type="text" class="form-control" id="ieField" placeholder="Digite a IE">
+                                    <input type="text" class="form-control" id="ieField" name="ie" placeholder="Digite a IE">
                                 </div>
                                 <div class="col-2" id="contribuinteField" style="display: none">
                                     <label for="identificadorField" class="form-label">Identificador</label>
