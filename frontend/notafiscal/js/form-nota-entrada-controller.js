@@ -11,6 +11,11 @@ function goToAddEntryNote(event) {
     window.location.href = "../notafiscal/form-nota-entrada-incluir.php";
 }
 
+function cancelar(event) {
+    event.preventDefault();
+    window.location.href = "../notafiscal/form-nota-entrada.php";
+}
+
 
 // async function getParamValue() {
 //     const params = new URLSearchParams({
@@ -291,4 +296,3 @@ async function salvarNotaFiscal(event) {
         console.error('Erro ao salvar nota fiscal:', error);
     }
 }
-

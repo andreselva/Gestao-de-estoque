@@ -324,7 +324,7 @@ require_once __DIR__ . '../../auth.php';
                     <div class="row justify-content-end">
                         <div class="col-auto">
                             <button type="submit" class="btn btn-pri" onclick="salvarNotaFiscal(event)">Salvar</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-secondary" onclick="cancelar(event)" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
 
