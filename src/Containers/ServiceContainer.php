@@ -245,7 +245,22 @@ class ServiceContainer
             );
         };
 
-       
+        $this->services['cadastrar-nota-entrada'] = function () {
+            return new \Andre\GestaoDeEstoque\Actions\IncluirNotaEntradaAction(
+                $this,
+                $this->get('IncluirNotaEntradaController')
+            );
+        };
+
+        $this->services['IncluirNotaEntradaController'] = function () {
+            return new \Andre\GestaoDeEstoque\NotasFiscais\IncluirNota\Controllers\IncluirNotaEntradaController(
+                $this->get('IncluirNotaEntradaService')
+            );
+        };
+
+        $this->services['IncluirNotaEntradaService'] = function () {
+            return new \Andre\GestaoDeEstoque\NotasFiscais\IncluirNota\Services\IncluirNotaEntradaService();
+        };
     }
 
     public function register($name, $callback)
